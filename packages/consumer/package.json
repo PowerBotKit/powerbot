@@ -1,0 +1,19 @@
+{
+  "name": "@powerbotkit/consumer",
+  "version": "0.0.0",
+  "description": "> TODO: description",
+  "author": "Arthur Ming <guobin.ming@pwc.com>",
+  "homepage": "",
+  "license": "MIT",
+  "main": "lib/consumer.js",
+  "directories": {
+    "lib": "lib",
+    "test": "__tests__"
+  },
+  "files": [
+    "lib"
+  ],
+  "scripts": {
+    "test": "echo \"Error: run tests from root\" && exit 1"
+  }
+}

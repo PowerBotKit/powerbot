@@ -1,0 +1,25 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "target": "es6",
+    "lib": ["es6", "esnext", "dom"],
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "sourceMap": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "declaration": false,
+    "outDir": "dist",
+    // "typeRoots": ["node_modules/@types"],
+    "types": ["node", "jest"],
+    "allowSyntheticDefaultImports": true,
+    "resolveJsonModule": true,
+    "paths": {
+      "lib/*": ["lib/*"],
+      "test/*": ["test/*"]
+    }
+  },
+  "files": ["lib/index.ts"],
+  "exclude": ["node_modules"]
+}
