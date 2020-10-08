@@ -1,0 +1,6 @@
+ls:
+  packages/*/{src,__tests__}:
+    .js: kebab-case
+    .ts: kebab-case
+    .d.ts: camelCase
+    .spec.ts: kebab-case
