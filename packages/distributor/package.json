@@ -1,0 +1,40 @@
+{
+  "name": "@powerbotkit/distributor",
+  "version": "0.0.0",
+  "description": "powerbot-distributor",
+  "keywords": [
+    "bot",
+    "framework"
+  ],
+  "author": "Arthur Ming <guobin.ming@pwc.com>",
+  "homepage": "",
+  "license": "MIT",
+  "main": "lib/distributor.js",
+  "directories": {
+    "lib": "lib",
+    "test": "__tests__"
+  },
+  "files": [
+    "lib"
+  ],
+  "scripts": {
+    "build": "tsc --build",
+    "test": "echo \"Error: run tests from root\" && exit 1"
+  },
+  "dependencies": {
+    "@powerbotkit/core": "0.0.0",
+    "botbuilder": "^4.10.3",
+    "dotenv": "^8.2.0",
+    "lodash": "^4.17.20",
+    "lowdb": "^1.0.0",
+    "redis": "^3.0.2",
+    "replace": "^1.2.0",
+    "restify": "^8.5.1",
+    "serialize-instance": "^1.0.5",
+    "winston": "^3.3.3"
+  },
+  "devDependencies": {
+    "@types/restify": "^8.4.2",
+    "nodemon": "^2.0.4"
+  }
+}
