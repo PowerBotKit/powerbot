@@ -24,7 +24,10 @@ export class PowerBotActivityHandlerBase extends ActivityHandler {
 
 	public async publish(context: TurnContext, topic?: string) {
 		const { dialogKey, dialog } = await this.setupCustomizedDialog(context);
-		this.publisher.publish(dialog.worker.topic || 'inbound', dialogKey);
+		this.publisher.publish(
+			dialog.worker.topic || 'inbound',
+			JSON.stringify(dialog)
+		);
 	}
 
 	public async handleMemberAdded(context: TurnContext) {
@@ -32,6 +35,10 @@ export class PowerBotActivityHandlerBase extends ActivityHandler {
 		const welcomeText = 'Hello and welcome!';
 		for (const member of membersAdded) {
 			if (member.id !== context.activity.recipient.id) {
+				const dialogKey = DialogUtil.getDialogKey(
+					context.activity.recipient.id
+				);
+				await this.cache.delete(dialogKey);
 				const userInfo: TeamsChannelAccount = await DialogUtil.getUserInfo(
 					context
 				);
