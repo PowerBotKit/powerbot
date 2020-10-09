@@ -3,15 +3,13 @@ import { BotFrameworkAdapter } from 'botbuilder';
 import logger from '../utils/logger';
 import { IDataPersist } from '../models';
 import { LowDBDataPersist } from '../models/low-db-model';
-import { TeamsBot } from '../bots/index';
+import { PowerBotActivityHandler } from '../activity/index';
 import { OutBound } from '../entrance/outbound';
-import { IMQ } from '../mq'
-import { ICache } from '../cache'
-import { RedisMQ } from '../mq/redis-mq'
-import { RedisCache } from '../cache/redis-cache'
-import { BotInstance, IBotConfig, IMiddlewareConfig, IBotServer} from '.'
-
-
+import { IMQ } from '../mq';
+import { ICache } from '../cache';
+import { RedisMQ } from '../mq/redis-mq';
+import { RedisCache } from '../cache/redis-cache';
+import { BotInstance, IBotConfig, IMiddlewareConfig, IBotServer } from '.';
 
 export class BotServer {
 	// operation conversion saving
@@ -22,27 +20,30 @@ export class BotServer {
 	public app?: restify.Server;
 	public botInstance: BotInstance;
 
-	public async setUpBotServer(botConfig: IBotConfig, middlewareConfig?: IMiddlewareConfig) {
+	public async setUpBotServer(
+		botConfig: IBotConfig,
+		middlewareConfig?: IMiddlewareConfig
+	) {
 		// below 3 steps need be configurable
-		if(middlewareConfig && middlewareConfig.DataPersistAdaptor) {
+		if (middlewareConfig && middlewareConfig.DataPersistAdaptor) {
 			this.db = middlewareConfig.DataPersistAdaptor;
 		} else {
 			await this.setupDB();
 		}
 
-		if(middlewareConfig && middlewareConfig.CacheAdaptor) {
+		if (middlewareConfig && middlewareConfig.CacheAdaptor) {
 			this.cache = middlewareConfig.CacheAdaptor;
 		} else {
 			await this.setupCache();
 		}
-		if(middlewareConfig && middlewareConfig.ListenerAdaptor) {
+		if (middlewareConfig && middlewareConfig.ListenerAdaptor) {
 			this.listener = middlewareConfig.ListenerAdaptor;
 		} else {
 			await this.setupListener();
 		}
 
-		if(middlewareConfig && middlewareConfig.PublisherAdaptor) {
-		    this.publisher = middlewareConfig.PublisherAdaptor;
+		if (middlewareConfig && middlewareConfig.PublisherAdaptor) {
+			this.publisher = middlewareConfig.PublisherAdaptor;
 		} else {
 			await this.setupPublisher();
 		}
@@ -80,7 +81,11 @@ export class BotServer {
 			appId: config.appId || process.env.MicrosoftAppId,
 			appPassword: config.appSecret || process.env.MicrosoftAppPassword
 		});
-		const activityManager = new TeamsBot(this.cache, this.publisher);
+		const activityManager = new PowerBotActivityHandler(
+			this.cache,
+			this.publisher,
+			this.db
+		);
 		OutBound.listen(adapter, this.cache, this.listener);
 		this.app.post('/api/messages', (req, res) => {
 			adapter.processActivity(req, res, async context => {
@@ -103,5 +108,6 @@ export const createServer = async (
 ): Promise<IBotServer> => {
 	const botServer = new BotServer();
 	await botServer.setUpBotServer(config);
+
 	return botServer;
 };

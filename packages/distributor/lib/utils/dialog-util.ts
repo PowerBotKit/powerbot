@@ -20,9 +20,7 @@ export class DialogUtil {
 	}
 
 	// get user information
-	public static async getUserInfoFromTeams(
-		context: any
-	): Promise<TeamsChannelAccount> {
+	public static async getUserInfo(context: any): Promise<TeamsChannelAccount> {
 		logger.info('Query Teams user information');
 		let userDetails: TeamsChannelAccount;
 		if (process.env.MicrosoftAppId && process.env.MicrosoftAppId === '') {
@@ -51,7 +49,7 @@ export class DialogUtil {
 		const conversationReference = TurnContext.getConversationReference(
 			context.activity
 		);
-		const userInfo = await this.getUserInfoFromTeams(context);
+		const userInfo = await this.getUserInfo(context);
 
 		return {
 			id: context.activity.recipient.id,
