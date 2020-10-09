@@ -3,6 +3,7 @@ import { OutboundHandlerBase } from './base-handler';
 import { ICache } from '../../cache';
 import { IMQ } from '../../mq';
 import logger from '../../utils/logger';
+import { GDUserSession } from '@powerbotkit/core';
 
 export class OutBoundHandler extends OutboundHandlerBase {
 	public async listen(adapter: BotFrameworkAdapter, cache: ICache, mq: IMQ) {
@@ -17,4 +18,8 @@ export class OutBoundHandler extends OutboundHandlerBase {
 
 		mq.subscribe('outbound');
 	}
+}
+
+export interface IMiddlewareOutbound {
+	process(dialog: GDUserSession): Promise<void>;
 }
