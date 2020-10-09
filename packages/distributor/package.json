@@ -19,6 +19,7 @@
   ],
   "scripts": {
     "build": "tsc --build",
+    "start": "tsc --build && node dist/index.js",
     "test": "echo \"Error: run tests from root\" && exit 1"
   },
   "dependencies": {
