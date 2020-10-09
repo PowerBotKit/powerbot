@@ -3,8 +3,8 @@ import { BotFrameworkAdapter } from 'botbuilder';
 import logger from '../utils/logger';
 import { IDataPersist } from '../models';
 import { LowDBDataPersist } from '../models/low-db-model';
-import { PowerBotActivityHandler } from '../activity/index';
-import { OutBound } from '../entrance/outbound';
+import { InboundHandler } from '../activity/inbound';
+import { OutBoundHandler } from '../activity/outbound';
 import { IMQ } from '../mq';
 import { ICache } from '../cache';
 import { RedisMQ } from '../mq/redis-mq';
@@ -81,16 +81,17 @@ export class BotServer {
 			appId: config.appId || process.env.MicrosoftAppId,
 			appPassword: config.appSecret || process.env.MicrosoftAppPassword
 		});
-		const activityManager = new PowerBotActivityHandler(
+		const inboundHandler = new InboundHandler(
 			this.cache,
 			this.publisher,
 			this.db
 		);
-		OutBound.listen(adapter, this.cache, this.listener);
+		const outboundHandler = new OutBoundHandler();
+		outboundHandler.listen(adapter, this.cache, this.listener);
 		this.app.post('/api/messages', (req, res) => {
 			adapter.processActivity(req, res, async context => {
 				// Route to main dialog.
-				await activityManager.run(context);
+				await inboundHandler.run(context);
 			});
 		});
 	}

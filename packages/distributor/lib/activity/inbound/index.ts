@@ -1,8 +1,8 @@
-import { PowerBotActivityHandlerBase } from '../base-handler';
+import { InboundHandlerBase } from './base-handler';
 import { IMQ } from '../../mq';
 import { IDataPersist } from '../../models';
 import { ICache } from '../../cache';
-export class PowerBotActivityHandler extends PowerBotActivityHandlerBase {
+export class InboundHandler extends InboundHandlerBase {
 	constructor(cache: ICache, publisher: IMQ, dataStore: IDataPersist) {
 		super(cache, publisher, dataStore);
 		this.onMessage(async (context, next) => {

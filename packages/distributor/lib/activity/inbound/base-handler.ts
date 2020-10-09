@@ -4,13 +4,13 @@ import {
 	MessageFactory,
 	TeamsChannelAccount
 } from 'botbuilder';
-import { DialogUtil } from '../utils/dialog-util';
+import { DialogUtil } from '../../utils/dialog-util';
 import { GDWorker, GDUserSession } from '@powerbotkit/core';
-import logger from '../utils/logger';
-import { IMQ } from '../mq';
-import { ICache } from '../cache';
+import logger from '../../utils/logger';
+import { IMQ } from '../../mq';
+import { ICache } from '../../cache';
 import { IDataPersist } from 'lib/models';
-export class PowerBotActivityHandlerBase extends ActivityHandler {
+export class InboundHandlerBase extends ActivityHandler {
 	private cache: ICache;
 	private publisher: IMQ;
 	private dataStore: IDataPersist;
