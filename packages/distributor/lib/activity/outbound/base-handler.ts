@@ -9,14 +9,22 @@ import { GDUserSession, MessageType } from '@powerbotkit/core';
 import logger from '../../utils/logger';
 import * as fs from 'fs';
 import * as path from 'path';
+import { IMiddlewareOutbound } from '.';
 
 export class OutboundHandlerBase {
+	private outboundMiddleware: IMiddlewareOutbound;
+	constructor(outboundMiddleware: IMiddlewareOutbound) {
+		this.outboundMiddleware = outboundMiddleware;
+	}
 	public async publish(
 		adapter: BotFrameworkAdapter,
 		channel: string,
 		data: string
 	) {
 		const dialog: GDUserSession = JSON.parse(data);
+		if (this.outboundMiddleware) {
+			await this.outboundMiddleware.process(dialog);
+		}
 		await adapter.continueConversation(
 			dialog.botConversion,
 			async turnContext => {

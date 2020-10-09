@@ -3,8 +3,8 @@ import { BotFrameworkAdapter } from 'botbuilder';
 import logger from '../utils/logger';
 import { IDataPersist } from '../models';
 import { LowDBDataPersist } from '../models/low-db-model';
-import { InboundHandler } from '../activity/inbound';
-import { OutBoundHandler } from '../activity/outbound';
+import { IMiddlewareInbound, InboundHandler } from '../activity/inbound';
+import { IMiddlewareOutbound, OutBoundHandler } from '../activity/outbound';
 import { IMQ } from '../mq';
 import { ICache } from '../cache';
 import { RedisMQ } from '../mq/redis-mq';
@@ -19,6 +19,8 @@ export class BotServer {
 	public publisher?: IMQ;
 	public app?: restify.Server;
 	public botInstance: BotInstance;
+	public middlewareInbound: IMiddlewareInbound;
+	public middlewareOutbound: IMiddlewareOutbound;
 
 	public async setUpBotServer(
 		botConfig: IBotConfig,
@@ -84,9 +86,10 @@ export class BotServer {
 		const inboundHandler = new InboundHandler(
 			this.cache,
 			this.publisher,
-			this.db
+			this.db,
+			this.middlewareInbound
 		);
-		const outboundHandler = new OutBoundHandler();
+		const outboundHandler = new OutBoundHandler(this.middlewareOutbound);
 		outboundHandler.listen(adapter, this.cache, this.listener);
 		this.app.post('/api/messages', (req, res) => {
 			adapter.processActivity(req, res, async context => {
@@ -101,6 +104,14 @@ export class BotServer {
 		this.app.listen(por, '0.0.0.0', () => {
 			logger.info(`✈️  Bot Server listening to ${por}`);
 		});
+	}
+
+	public addInboundMiddleware(mwi: IMiddlewareInbound) {
+		this.middlewareInbound = mwi;
+	}
+
+	public addOutboundMiddleware(mwo: IMiddlewareOutbound) {
+		this.middlewareOutbound = mwo;
 	}
 }
 

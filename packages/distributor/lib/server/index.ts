@@ -2,6 +2,8 @@ import { BotFrameworkAdapter, ActivityHandler } from 'botbuilder';
 import { IDataPersist } from '../models';
 import { IMQ } from '../mq';
 import { ICache } from '../cache';
+import { IMiddlewareInbound } from 'lib/activity/inbound';
+import { IMiddlewareOutbound } from 'lib/activity/outbound';
 
 export interface IBotConfig {
 	appId?: string;
@@ -13,8 +15,8 @@ export interface IMiddlewareConfig {
 	PublisherAdaptor?: IMQ;
 	CacheAdaptor?: ICache;
 	DataPersistAdaptor?: IDataPersist;
-	InboundInterceptor?: any;
-	OutboundInterceptor?: any;
+	InboundInterceptor?: IMiddlewareInbound;
+	OutboundInterceptor?: IMiddlewareOutbound;
 }
 
 export interface BotInstance {
@@ -25,5 +27,4 @@ export interface BotInstance {
 export interface IBotServer {
 	setUpBotServer(botConfig: IBotConfig, middlewareConfig?: IMiddlewareConfig);
 	listen(port?: string | number);
-
 }

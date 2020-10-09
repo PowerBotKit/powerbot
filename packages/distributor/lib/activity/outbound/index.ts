@@ -6,6 +6,9 @@ import logger from '../../utils/logger';
 import { GDUserSession } from '@powerbotkit/core';
 
 export class OutBoundHandler extends OutboundHandlerBase {
+	constructor(outboundMiddleware?: IMiddlewareOutbound) {
+		super(outboundMiddleware);
+	}
 	public async listen(adapter: BotFrameworkAdapter, cache: ICache, mq: IMQ) {
 		mq.onSubscribed(channel => {
 			logger.info('🚗 Subscribed to outbound broker');

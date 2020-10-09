@@ -10,20 +10,32 @@ import logger from '../../utils/logger';
 import { IMQ } from '../../mq';
 import { ICache } from '../../cache';
 import { IDataPersist } from 'lib/models';
+import { IMiddlewareInbound } from '.';
 export class InboundHandlerBase extends ActivityHandler {
 	private cache: ICache;
 	private publisher: IMQ;
 	private dataStore: IDataPersist;
-	constructor(cache: ICache, publisher: IMQ, dataStore: IDataPersist) {
+	private inboundMiddleware: IMiddlewareInbound;
+
+	constructor(
+		cache: ICache,
+		publisher: IMQ,
+		dataStore: IDataPersist,
+		inboundMiddleware?: IMiddlewareInbound
+	) {
 		super();
 		this.cache = cache;
 		this.publisher = publisher;
 		this.dataStore = dataStore;
+		this.inboundMiddleware = inboundMiddleware;
 		this.dataStore.init();
 	}
 
 	public async publish(context: TurnContext, topic?: string) {
 		const { dialogKey, dialog } = await this.setupCustomizedDialog(context);
+		if (this.inboundMiddleware) {
+			await this.inboundMiddleware.process(dialog);
+		}
 		this.publisher.publish(
 			dialog.worker.topic || 'inbound',
 			JSON.stringify(dialog)
