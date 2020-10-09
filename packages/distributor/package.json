@@ -19,8 +19,8 @@
   ],
   "scripts": {
     "build": "tsc --build",
-    "test": "echo \"Error: run tests from root\" && exit 1",
-    "start": "tsc --build && node ./dist/index.js"
+    "start": "tsc --build && node dist/index.js",
+    "test": "echo \"Error: run tests from root\" && exit 1"
   },
   "dependencies": {
     "@powerbotkit/core": "0.0.0",
