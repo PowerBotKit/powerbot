@@ -45,6 +45,7 @@ export interface Event {
 	timestamp: Date;
 }
 
+// TODO: need to consider move this part, because we don't want to include botbuilder dependency in core module
 export interface GDUserSession {
 	id: string;
 	user?: GDUser;
@@ -55,4 +56,29 @@ export interface GDUserSession {
 	input?: MessageInput;
 	output?: MessageOutput;
 	history?: Event[];
+}
+
+export class CoreSessionUtil {
+	public static addHistory(
+		session: GDUserSession,
+		initiatorType: InitiatorType,
+		messageType: MessageType,
+		value: string
+	) {
+		const event: Event = {
+			initiator: initiatorType,
+			type: messageType,
+			value,
+			timestamp: new Date()
+		};
+		if (session && session.history) {
+			session.history.push(event);
+		}
+	}
+
+	public static cleanHistory(session: GDUserSession) {
+		if (session && session.history) {
+			session.history.length = 0;
+		}
+	}
 }

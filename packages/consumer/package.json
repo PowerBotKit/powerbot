@@ -2,7 +2,7 @@
   "name": "@powerbotkit/consumer",
   "version": "0.0.0",
   "description": "> TODO: description",
-  "author": "Arthur Ming <guobin.ming@pwc.com>",
+  "author": "Power Bot Kit Team",
   "homepage": "",
   "license": "MIT",
   "main": "lib/consumer.js",
@@ -15,5 +15,8 @@
   ],
   "scripts": {
     "test": "echo \"Error: run tests from root\" && exit 1"
+  },
+  "dependencies": {
+    "@powerbotkit/core": "0.0.0"
   }
 }

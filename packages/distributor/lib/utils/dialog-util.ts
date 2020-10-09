@@ -1,6 +1,16 @@
-import { Activity, TeamsChannelAccount, TeamsInfo, TurnContext } from 'botbuilder';
+import {
+	Activity,
+	TeamsChannelAccount,
+	TeamsInfo,
+	TurnContext
+} from 'botbuilder';
 
-import { GDUserSession, MessageType, InitiatorType, Event } from '@powerbotkit/core';
+import {
+	GDUserSession,
+	MessageType,
+	InitiatorType,
+	CoreSessionUtil
+} from '@powerbotkit/core';
 
 import logger from './logger';
 
@@ -10,7 +20,9 @@ export class DialogUtil {
 	}
 
 	// get user information
-	public static async getUserInfoFromTeams(context: any): Promise<TeamsChannelAccount> {
+	public static async getUserInfoFromTeams(
+		context: any
+	): Promise<TeamsChannelAccount> {
 		logger.info('Query Teams user information');
 		let userDetails: TeamsChannelAccount;
 		if (process.env.MicrosoftAppId && process.env.MicrosoftAppId === '') {
@@ -18,8 +30,8 @@ export class DialogUtil {
 				context,
 				context.activity.from.id
 			);
-
-		} else { // for local bot emulator
+		} else {
+			// for local bot emulator
 			logger.info('Local dev enviroment, set up dummy account...');
 			userDetails = {
 				id: '@localDev',
@@ -51,35 +63,49 @@ export class DialogUtil {
 			},
 			service: '',
 			step: 0,
-			input: { type: MessageType.text, value: context.activity.text, action: null },
+			input: {
+				type: MessageType.text,
+				value: context.activity.text,
+				action: null
+			},
 			output: { type: MessageType.text, value: '', action: null },
 			history: []
-
 		};
 	}
 
-	public static updateDialogInput(activity: Activity, session: GDUserSession): GDUserSession {
-				if (typeof(activity.text) === 'string') {
-						session.input.type = MessageType.text;
-						session.input.value = activity.text;
-				} else {
-						session.input.type = MessageType.card;
-						session.input.value = activity.value;
-				}
-
-				this.addHistory(session, InitiatorType.user, MessageType.text, activity.text);
-
-				return session;
-	}
-
-		public static addHistory(session: GDUserSession, initiatorType: InitiatorType, messageType: MessageType, value: string) {
-				const event: Event = {
-						initiator: initiatorType,
-						type: messageType,
-						value,
-						timestamp: new Date()
-				};
-				session.history.push(event);
+	public static updateDialogInput(
+		activity: Activity,
+		session: GDUserSession
+	): GDUserSession {
+		if (typeof activity.text === 'string') {
+			session.input.type = MessageType.text;
+			session.input.value = activity.text;
+		} else {
+			session.input.type = MessageType.card;
+			session.input.value = activity.value;
 		}
 
+		this.addHistory(
+			session,
+			InitiatorType.user,
+			MessageType.text,
+			activity.text
+		);
+
+		return session;
+	}
+
+	public static addHistory(
+		session: GDUserSession,
+		initiatorType: InitiatorType,
+		messageType: MessageType,
+		value: string
+	) {
+		return CoreSessionUtil.addHistory(
+			session,
+			initiatorType,
+			messageType,
+			value
+		);
+	}
 }

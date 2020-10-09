@@ -6,7 +6,7 @@
     "bot",
     "framework"
   ],
-  "author": "Arthur Ming <guobin.ming@pwc.com>",
+  "author": "Power Bot Kit Team",
   "homepage": "",
   "license": "MIT",
   "main": "lib/core.js",
