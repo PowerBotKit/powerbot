@@ -72,3 +72,7 @@ This repository employs a [monorepo](https://en.wikipedia.org/wiki/Monorepo) set
 - `consumer`: powerbot consumer package. It can manage worker to process message.
 
 - `distributor`: powerbot distributor package. It can distribute message to different channel and provide the api to return log.
+
+## TODO List
+
+Please find the TODO list from [Kanban board](https://github.com/orgs/PowerBotKit/projects/1)
