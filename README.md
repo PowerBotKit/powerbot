@@ -16,6 +16,8 @@ PowerBotKit is a bot development framework to help developer to quickly build en
 
 `PowerBotKit` is a bot framework developed by PowerBotKit Team. It helps developers to build the chatbot solution on different BOT platform(for example, [Teams](https://teams.microsoft.com/), [Slack](https://slack.com/), [Workspace](https://www.workplace.com/)). It is framework with high performance and easy to scaled.
 
+Find more details from the [PowerBotKit website](https://powerbotkit.github.io)
+
 [WIP] The key capability that PowerBotKit can offer is
 
 -
@@ -25,7 +27,36 @@ We use [yarn](https://classic.yarnpkg.com/) to bootstrap the project and use [le
 
 ## QuickStart
 
-WIP
+### Install
+
+1. You need to set up 2 projects, one is for distributor (producer), another is for consumer
+
+2. In your distributor project, run below
+
+```shell
+$ npm install @powerbotkit/distributor # yarn add @powerbotkit/distributor
+```
+
+3. Use below code snippet to quickly set up your bot distriubtor
+
+```typescript
+import { createDistributorServer, TBotConfig } from '@powerbotkit/distributor';
+
+(async () => {
+  const config: TBotConfig = {
+    appId: '',
+    appSecret: ''
+  };
+  const server = await createDistributorServer(config);
+  server.listen();
+})();
+```
+
+4. In your consumer project, run below
+
+```shell
+$ npm install @powerbotkit/consumer # yarn add @powerbotkit/consumer
+```
 
 ## DevelopGuide
 
