@@ -9,7 +9,7 @@
   "author": "Power Bot Kit Team",
   "homepage": "",
   "license": "MIT",
-  "main": "lib/distributor.js",
+  "main": "dist/index.js",
   "directories": {
     "lib": "lib",
     "test": "__tests__"
@@ -19,7 +19,6 @@
   ],
   "scripts": {
     "build": "tsc --build",
-    "start": "tsc --build && node dist/index.js",
     "test": "echo \"Error: run tests from root\" && exit 1"
   },
   "dependencies": {

@@ -2,22 +2,22 @@ import { BotFrameworkAdapter, ActivityHandler } from 'botbuilder';
 import { IDataPersist } from '../models';
 import { IMQ } from '../mq';
 import { ICache } from '../cache';
-import { IMiddlewareInbound } from 'lib/activity/inbound';
-import { IMiddlewareOutbound } from 'lib/activity/outbound';
+import { IMiddlewareInbound } from '../../lib/activity/inbound';
+import { IMiddlewareOutbound } from '../../lib/activity/outbound';
 
-export interface IBotConfig {
+export type TBotConfig = {
 	appId?: string;
 	appSecret?: string;
-}
+};
 
-export interface IMiddlewareConfig {
+export type TMiddlewareConfig = {
 	ListenerAdaptor?: IMQ;
 	PublisherAdaptor?: IMQ;
 	CacheAdaptor?: ICache;
 	DataPersistAdaptor?: IDataPersist;
 	InboundInterceptor?: IMiddlewareInbound;
 	OutboundInterceptor?: IMiddlewareOutbound;
-}
+};
 
 export interface BotInstance {
 	adapter: BotFrameworkAdapter;
@@ -25,6 +25,8 @@ export interface BotInstance {
 }
 
 export interface IBotServer {
-	setUpBotServer(botConfig: IBotConfig, middlewareConfig?: IMiddlewareConfig);
+	setUpBotServer(botConfig: TBotConfig, middlewareConfig?: TMiddlewareConfig);
 	listen(port?: string | number);
 }
+
+export * from './distributor-server';

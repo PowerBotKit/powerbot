@@ -9,7 +9,7 @@ import { GDWorker, GDUserSession } from '@powerbotkit/core';
 import logger from '../../utils/logger';
 import { IMQ } from '../../mq';
 import { ICache } from '../../cache';
-import { IDataPersist } from 'lib/models';
+import { IDataPersist } from '../../models';
 import { IMiddlewareInbound } from '.';
 export class InboundHandlerBase extends ActivityHandler {
 	private cache: ICache;

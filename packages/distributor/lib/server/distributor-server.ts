@@ -9,9 +9,9 @@ import { IMQ } from '../mq';
 import { ICache } from '../cache';
 import { RedisMQ } from '../mq/redis-mq';
 import { RedisCache } from '../cache/redis-cache';
-import { BotInstance, IBotConfig, IMiddlewareConfig, IBotServer } from '.';
+import { BotInstance, TBotConfig, TMiddlewareConfig, IBotServer } from '.';
 
-export class BotServer {
+export class DistributorServer {
 	// operation conversion saving
 	public db?: IDataPersist;
 	public cache?: ICache; // types define
@@ -23,8 +23,8 @@ export class BotServer {
 	public middlewareOutbound: IMiddlewareOutbound;
 
 	public async setUpBotServer(
-		botConfig: IBotConfig,
-		middlewareConfig?: IMiddlewareConfig
+		botConfig: TBotConfig,
+		middlewareConfig?: TMiddlewareConfig
 	) {
 		// below 3 steps need be configurable
 		if (middlewareConfig && middlewareConfig.DataPersistAdaptor) {
@@ -78,7 +78,7 @@ export class BotServer {
 		this.app.use(restify.plugins.queryParser());
 	}
 
-	private async setupBot(config: IBotConfig) {
+	private async setupBot(config: TBotConfig) {
 		const adapter = new BotFrameworkAdapter({
 			appId: config.appId || process.env.MicrosoftAppId,
 			appPassword: config.appSecret || process.env.MicrosoftAppPassword
@@ -115,11 +115,12 @@ export class BotServer {
 	}
 }
 
-export const createServer = async (
-	config?: IBotConfig
+export const createDistributorServer = async (
+	botConfig?: TBotConfig,
+	middlewareConfig?: TMiddlewareConfig
 ): Promise<IBotServer> => {
-	const botServer = new BotServer();
-	await botServer.setUpBotServer(config);
+	const server = new DistributorServer();
+	await server.setUpBotServer(botConfig, middlewareConfig);
 
-	return botServer;
+	return server;
 };
