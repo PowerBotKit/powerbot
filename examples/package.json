@@ -8,11 +8,7 @@
     "start": "tsc --build && node dist/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
-  "license": "IMT",
-  "dependencies": {
-    "@powerbotkit/core": "0.0.0",
-    "@powerbotkit/consumer": "0.0.0",
-    "@powerbotkit/distributor": "0.0.0"
+  "devDependencies": {
+    "typescript": "^4.0.3"
   }
 }
