@@ -7,8 +7,7 @@
     "publish": {
       "ignoreChanges": ["*.md"],
       "verifyAccess": false,
-      "verifyRegistry": false,
-      "message": "chore: publish"
+      "verifyRegistry": false
     }
   }
 }
