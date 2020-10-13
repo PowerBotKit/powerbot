@@ -18,7 +18,9 @@
     "lint": "tslint --format verbose packages/**/*.ts",
     "format": "prettier --write --parser typescript \"packages/**/*.ts?(x)\"",
     "preinstall": "node tools/check-yarn.js",
+    "prebuild": "rimraf packages/*/dist/",
     "build": "lerna run --stream --sort build",
+    "buuld2": "rollup -c",
     "clean": "yarn workspaces run clean",
     "test": "jest --runInBand --detectOpenHandles --forceExit"
   },
@@ -33,6 +35,8 @@
     "lerna": "^3.22.0",
     "lint-staged": "^10.4.0",
     "prettier": "^2.1.2",
+    "rimraf": "^3.0.2",
+    "rollup": "^2.29.0",
     "ts-jest": "^26.4.1",
     "tslint": "^6.1.3",
     "tslint-config-prettier": "^1.18.0",

@@ -10,23 +10,30 @@
   "homepage": "",
   "license": "MIT",
   "main": "dist/index.js",
+  "module": "",
   "types": "dist/index.d.ts",
-  "directories": {
-    "lib": "lib",
-    "test": "__tests__"
+  "buildOptions": {
+    "formats": [
+      "es",
+      "cjs"
+    ]
   },
   "publishConfig": {
     "access": "public"
   },
   "files": [
-    "lib"
+    "dist"
   ],
   "scripts": {
-    "build": "tsc index.ts --target es5 --outDir dist --declaration true",
-    "build2": "tsc --project tsconfig.json",
+    "build2": "tsc index.ts --target es5 --outDir dist --declaration true",
+    "build": "rollup -c",
     "test": "jest"
   },
   "dependencies": {
     "botbuilder": "^4.10.3"
+  },
+  "devDependencies": {
+    "rollup-plugin-commonjs": "^10.1.0",
+    "rollup-plugin-typescript2": "^0.27.3"
   }
 }
