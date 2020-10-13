@@ -3,6 +3,9 @@
   "version": "0.0.0",
   "useWorkspaces": true,
   "npmClient": "yarn",
+  "publishConfig": {
+    "access": "public"
+  },
   "command": {
     "publish": {
       "ignoreChanges": ["*.md"],
