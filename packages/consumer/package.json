@@ -14,7 +14,8 @@
     "lib"
   ],
   "scripts": {
-    "start": "tsc --build && node ./dist/lib/index.js"
+    "start": "tsc --build && node ./dist/lib/index.js",
+    "test": "jest"
   },
   "dependencies": {
     "@powerbotkit/core": "0.0.0",

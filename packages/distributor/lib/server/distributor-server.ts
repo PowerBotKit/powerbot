@@ -11,7 +11,7 @@ import { RedisMQ } from '../mq/redis-mq';
 import { RedisCache } from '../cache/redis-cache';
 import { BotInstance, TBotConfig, TMiddlewareConfig, IBotServer } from '.';
 
-export class DistributorServer {
+export class DistributorServer implements IBotServer {
 	// operation conversion saving
 	public db?: IDataPersist;
 	public cache?: ICache; // types define
