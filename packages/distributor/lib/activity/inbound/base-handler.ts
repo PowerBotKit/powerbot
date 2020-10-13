@@ -81,12 +81,14 @@ export class InboundHandlerBase extends ActivityHandler {
 				context.activity,
 				dialogInCache
 			);
-			this.cache.set(dialogKey, updatedDialog, 60 * 60);
+			// lock redis
+			await this.cache.lock(dialogKey, updatedDialog);
 		} else {
 			// new dialog
 			logger.info('new dialog');
 			updatedDialog = await DialogUtil.newDialog(context);
-			this.cache.set(dialogKey, updatedDialog, 60 * 60);
+			// lock redis
+			await this.cache.lock(dialogKey, updatedDialog);
 		}
 
 		return {

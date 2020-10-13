@@ -16,7 +16,7 @@ export class OutBoundHandler extends OutboundHandlerBase {
 
 		mq.onMessage(async (channel, data) => {
 			logger.info('Subscriber received message in channel: ' + channel);
-			await this.publish(adapter, channel, data);
+			await this.publish(adapter, cache, channel, data);
 		});
 
 		mq.subscribe('outbound');

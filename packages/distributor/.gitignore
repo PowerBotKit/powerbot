@@ -101,4 +101,4 @@ version.txt
 tmp
 .ignored/
 db.json
-
+*/**/**/*.js

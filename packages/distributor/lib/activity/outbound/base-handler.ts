@@ -10,6 +10,7 @@ import logger from '../../utils/logger';
 import * as fs from 'fs';
 import * as path from 'path';
 import { IMiddlewareOutbound } from '.';
+import { ICache } from 'lib/cache';
 
 export class OutboundHandlerBase {
 	private outboundMiddleware: IMiddlewareOutbound;
@@ -18,6 +19,7 @@ export class OutboundHandlerBase {
 	}
 	public async publish(
 		adapter: BotFrameworkAdapter,
+		cache: ICache,
 		channel: string,
 		data: string
 	) {
@@ -48,6 +50,7 @@ export class OutboundHandlerBase {
 				} else {
 					logger.error('Can not identify message type');
 				}
+				await cache.unlock(dialog.id);
 			}
 		);
 	}
