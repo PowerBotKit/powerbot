@@ -61,7 +61,7 @@ export class RedisCache implements ICache {
 		}
 		this.client.multi(multiOp).exec((err, _) => {
 			if (err) {
-				logger.error(`redis unlock error: `, err);
+				logger.error('redis unlock error: ', err);
 			}
 		});
 	}
@@ -80,6 +80,7 @@ export class RedisCache implements ICache {
 	}
 	public async get(key: string) {
 		const result = await this.promisify('get')(key);
+
 		return JSON.parse(result);
 	}
 	public delete(key: string) {

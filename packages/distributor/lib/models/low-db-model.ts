@@ -1,4 +1,4 @@
-import { IUserSession, IDataPersist } from '.'
+import { IUserSession, IDataPersist } from '.';
 import * as lowdb from 'lowdb';
 import * as FileAsync from 'lowdb/adapters/FileAsync';
 
