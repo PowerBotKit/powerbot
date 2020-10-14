@@ -4,7 +4,6 @@ const { createLogger, transports, format } = winston;
 const { combine, printf, json } = format;
 
 const newLogger = (logLabel = '') => {
-
 	const transportsOpt = [new transports.Console({ format: json() })];
 	const formatOpts = combine(
 		format.label({ label: logLabel }),
