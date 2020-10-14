@@ -1,17 +1,37 @@
 import { IRouterConfig, WokerRouterHandler } from '../router';
 import { InputMiddleware, OutputMiddleware } from '../middleware';
+import { IMQ } from '@powerbotkit/core';
 
-// Placeholder interface
-export type TConsumerConfig = {};
+export type TConsumerConfig = {
+	routerConfg: IRouterConfig;
+	routerHandler?: WokerRouterHandler;
+	listenerAdaptor?: IMQ;
+	publisherAdaptor?: IMQ;
+};
 
 export type TMiddlewareConfig = {
-	routerConfg: IRouterConfig;
-	routerHandler: WokerRouterHandler;
-	inputMiddleware: InputMiddleware;
-	outputMiddleware: OutputMiddleware;
+	inputMiddleware?: InputMiddleware;
+	outputMiddleware?: OutputMiddleware;
 };
 
 export interface IConsumerServer {
-	setup(botConfig: TConsumerConfig, middlewareConfig: TMiddlewareConfig);
+	setup(botConfig: TConsumerConfig, middlewareConfig?: TMiddlewareConfig);
 	start();
+}
+
+export class ConsumerServer implements IConsumerServer {
+	public routerConfg: IRouterConfig;
+	public listenerAdaptor: IMQ;
+
+	public setup(
+		botConfig: TConsumerConfig,
+		middlewareConfig?: TMiddlewareConfig
+	) {
+		this.listenerAdaptor = botConfig.listenerAdaptor;
+		this.routerConfg = botConfig.routerConfg;
+	}
+	public start() {
+		this.listenerAdaptor.init();
+		this.listenerAdaptor.subscribe('inbound');
+	}
 }
