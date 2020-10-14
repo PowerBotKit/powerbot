@@ -27,6 +27,9 @@
     "test": "jest"
   },
   "dependencies": {
-    "botbuilder": "^4.10.3"
+    "@types/redis": "^2.8.28",
+    "botbuilder": "^4.10.3",
+    "redis": "^3.0.2",
+    "winston": "^3.3.3"
   }
 }

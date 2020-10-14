@@ -1,8 +1,8 @@
 import { BotFrameworkAdapter } from 'botbuilder';
 import { OutboundHandlerBase } from './base-handler';
 import { ICache } from '../../cache';
-import { IMQ } from '../../mq';
-import logger from '../../utils/logger';
+import { IMQ } from '@powerbotkit/core';
+import logger from '@powerbotkit/core/lib/logger';
 import { GDUserSession } from '@powerbotkit/core';
 
 export class OutBoundHandler extends OutboundHandlerBase {

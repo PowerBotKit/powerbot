@@ -1,7 +1,7 @@
 import { ICache } from './index';
 import { promisify } from 'util';
 
-import logger from '../utils/logger';
+import logger from '@powerbotkit/core/lib/logger';
 import { RedisClient, createClient } from 'redis';
 
 export interface IRedisCacheConfig {

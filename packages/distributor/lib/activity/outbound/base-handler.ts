@@ -6,11 +6,11 @@ import {
 	MessageFactory
 } from 'botbuilder';
 import { GDUserSession, MessageType } from '@powerbotkit/core';
-import logger from '../../utils/logger';
+import logger from '@powerbotkit/core/lib/logger';
 import * as fs from 'fs';
 import * as path from 'path';
 import { IMiddlewareOutbound } from '.';
-import { ICache } from 'lib/cache';
+import { ICache } from '../../cache';
 
 export class OutboundHandlerBase {
 	private outboundMiddleware: IMiddlewareOutbound;

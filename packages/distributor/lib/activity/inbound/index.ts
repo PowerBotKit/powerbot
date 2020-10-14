@@ -1,5 +1,5 @@
 import { InboundHandlerBase } from './base-handler';
-import { IMQ } from '../../mq';
+import { IMQ } from '@powerbotkit/core';
 import { IDataPersist } from '../../models';
 import { ICache } from '../../cache';
 import { GDUserSession } from '@powerbotkit/core';
