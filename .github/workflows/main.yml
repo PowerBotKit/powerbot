@@ -7,7 +7,7 @@ on:
     branches: [master, develop]
 
 jobs:
-  setup:
+  lint:
     runs-on: ubuntu-latest
     steps:
       - name: checkout
