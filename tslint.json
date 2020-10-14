@@ -4,15 +4,30 @@
     "tslint-config-prettier",
     "tslint-eslint-rules"
   ],
+  "linterOptions": {
+    "exclude": ["packages/**/dist"]
+  },
   "rules": {
+    "ban-types": false,
     "deprecation": true,
     "object-literal-sort-keys": false,
     "indent": [true, "tabs", 2],
-    "trailing-comma": [true, { "multiline": "never", "singleline": "never" }],
+    "trailing-comma": [
+      true,
+      {
+        "multiline": "never",
+        "singleline": "never"
+      }
+    ],
     "object-curly-spacing": [true, "always"],
     "no-trailing-whitespace": true,
     "no-consecutive-blank-lines": true,
-    "ter-prefer-arrow-callback": [true, { "allowNamedFunctions": true }],
+    "ter-prefer-arrow-callback": [
+      true,
+      {
+        "allowNamedFunctions": true
+      }
+    ],
     "curly": [true, "ignore-same-line"],
     "one-line": [true, "check-open-brace", "check-whitespace"],
     "typedef-whitespace": [

@@ -1,4 +1,4 @@
 interface Worker {
-    createWorker(): Worker
-    use(middleware: Function);
+	createWorker(): Worker;
+	use(middleware: Function);
 }

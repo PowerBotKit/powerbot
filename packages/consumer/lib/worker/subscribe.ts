@@ -1,4 +1,3 @@
-
 interface WorkerSubscribe {
-    subscribe(topic: string): Promise<void>
+	subscribe(topic: string): Promise<void>;
 }
