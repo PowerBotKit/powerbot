@@ -1,6 +1,6 @@
 {
   "name": "@powerbotkit/consumer",
-  "version": "0.0.1-alpha.0",
+  "version": "0.0.1-alpha.1",
   "description": "> TODO: description",
   "author": "Power Bot Kit Team",
   "homepage": "",
@@ -25,7 +25,7 @@
     "test": "jest"
   },
   "dependencies": {
-    "@powerbotkit/core": "^0.0.1-alpha.0",
+    "@powerbotkit/core": "^0.0.1-alpha.1",
     "redis": "^3.0.2"
   }
 }
