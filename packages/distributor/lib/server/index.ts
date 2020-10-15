@@ -5,19 +5,19 @@ import { ICache } from '../cache';
 import { IMiddlewareInbound } from '../../lib/activity/inbound';
 import { IMiddlewareOutbound } from '../../lib/activity/outbound';
 
-export type TBotConfig = {
+export interface TBotConfig {
 	appId?: string;
 	appSecret?: string;
-};
+}
 
-export type TMiddlewareConfig = {
+export interface TMiddlewareConfig {
 	ListenerAdaptor?: IMQ;
 	PublisherAdaptor?: IMQ;
 	CacheAdaptor?: ICache;
 	DataPersistAdaptor?: IDataPersist;
 	InboundInterceptor?: IMiddlewareInbound;
 	OutboundInterceptor?: IMiddlewareOutbound;
-};
+}
 
 export interface BotInstance {
 	adapter: BotFrameworkAdapter;
