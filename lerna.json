@@ -11,6 +11,9 @@
       "ignoreChanges": ["*.md"],
       "verifyAccess": false,
       "verifyRegistry": false
+    },
+    "version": {
+      "conventionalCommits": true
     }
   }
 }
