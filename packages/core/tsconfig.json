@@ -1,21 +1,21 @@
 {
-  // "extends": "../../tsconfig.json",
+  "extends": "../../tsconfig.json",
   "compilerOptions": {
-    "module": "commonjs",
-    "target": "ES5",
-    "lib": ["es6"],
-    "outDir": "dist",
-    "declaration": true,
-    "noImplicitAny": true,
-    "noImplicitThis": true,
-    "strictFunctionTypes": true,
-    "strictNullChecks": true,
     "baseUrl": ".",
-    "typeRoots": ["."],
-    "types": [],
-    "noEmit": true,
-    "forceConsistentCasingInFileNames": true
+    "target": "es5",
+    "lib": ["es6", "esnext", "dom"],
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "sourceMap": false,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "declaration": true,
+    "outDir": "dist",
+    "rootDir": "lib",
+    "types": ["node", "jest"],
+    "allowSyntheticDefaultImports": true,
+    "resolveJsonModule": true
   },
-  "include": ["lib/**/*.ts", "index.ts"],
+  "include": ["lib/**/*.ts"],
   "exclude": ["node_modules", "**/__tests__/**/*.ts"]
 }

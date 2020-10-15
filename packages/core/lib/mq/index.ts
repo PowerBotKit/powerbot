@@ -1,5 +1,5 @@
-import { IMQ } from './core';
-import logger from './logger';
+import { IMQ } from '../core';
+import logger from '../logger';
 
 import { RedisClient, createClient } from 'redis';
 
