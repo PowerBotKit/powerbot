@@ -5,7 +5,8 @@
   "author": "Power Bot Kit Team",
   "homepage": "",
   "license": "MIT",
-  "main": "lib/index.js",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "publishConfig": {
     "access": "public"
   },
@@ -14,9 +15,12 @@
     "test": "__tests__"
   },
   "files": [
-    "lib"
+    "dist",
+    "LICENSE",
+    "README.md"
   ],
   "scripts": {
+    "build": "tsc --build",
     "start": "tsc --build && node ./dist/lib/index.js",
     "test": "jest"
   },
