@@ -6,18 +6,12 @@ module.exports = {
 			filenames.length > 10
 				? 'yarn lint'
 				: `tslint --format verbose ${filenames.join(' ')}`;
-		const prettier =
-			filenames.length > 10
-				? 'prettier --parser=typescript --write'
-				: `prettier --parser=typescript --write -- ${filenames.join(' ')}`;
+		const prettier = 'prettier --parser=typescript --write **/*.ts';
 		const git = `git add ${filenames.join(' ')}`;
 		return [tslint, prettier, git];
 	},
-	'*.{md,json,js}': filenames => {
-		const prettier =
-			filenames.length > 10
-				? 'prettier --write'
-				: `prettier --write -- ${filenames.join(' ')}`;
+	'*.js': filenames => {
+		const prettier = 'prettier --write **/*.js';
 		const git = `git add ${filenames.join(' ')}`;
 		return [prettier, git];
 	}
