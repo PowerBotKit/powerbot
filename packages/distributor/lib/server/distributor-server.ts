@@ -1,13 +1,11 @@
 import * as restify from 'restify';
 import { BotFrameworkAdapter } from 'botbuilder';
-import logger from '@powerbotkit/core';
 import { IDataPersist } from '../models';
 import { LowDBDataPersist } from '../models/low-db-model';
 import { IMiddlewareInbound, InboundHandler } from '../activity/inbound';
 import { IMiddlewareOutbound, OutBoundHandler } from '../activity/outbound';
-import { IMQ } from '@powerbotkit/core';
+import { IMQ, RedisMQ, logger } from '@powerbotkit/core';
 import { ICache } from '../cache';
-import { RedisMQ } from '@powerbotkit/core';
 import { RedisCache } from '../cache/redis-cache';
 import { BotInstance, TBotConfig, TMiddlewareConfig, IBotServer } from '.';
 
