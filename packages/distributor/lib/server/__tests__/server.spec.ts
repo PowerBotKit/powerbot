@@ -1,7 +1,6 @@
-import { createDistributorServer, IBotServer } from '..';
+import { IBotServer } from '..';
 
 describe('server', () => {
-	let server: IBotServer;
 	// beforeAll(async() => {
 	// 	server = await createDistributorServer();
 	// });

@@ -2,17 +2,17 @@ import { IRouterConfig, WokerRouterHandler } from '../router';
 import { InputMiddleware, OutputMiddleware } from '../middleware';
 import { IMQ } from '@powerbotkit/core';
 
-export type TConsumerConfig = {
+export interface TConsumerConfig {
 	routerConfg: IRouterConfig;
 	routerHandler?: WokerRouterHandler;
 	listenerAdaptor?: IMQ;
 	publisherAdaptor?: IMQ;
-};
+}
 
-export type TMiddlewareConfig = {
+export interface TMiddlewareConfig {
 	inputMiddleware?: InputMiddleware;
 	outputMiddleware?: OutputMiddleware;
-};
+}
 
 export interface IConsumerServer {
 	setup(botConfig: TConsumerConfig, middlewareConfig?: TMiddlewareConfig);

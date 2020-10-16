@@ -3,7 +3,7 @@ import * as winston from 'winston';
 const { createLogger, transports, format } = winston;
 const { combine, printf, json } = format;
 
-const newLogger = (logLabel = '') => {
+const newLogger = (logLabel = ''): winston.Logger => {
 	const transportsOpt = [new transports.Console({ format: json() })];
 	const formatOpts = combine(
 		format.label({ label: logLabel }),

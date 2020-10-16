@@ -15,7 +15,7 @@
   "scripts": {
     "bootstrap": "lerna bootstrap --npm-client yarn --use-workspaces",
     "create": "lerna create",
-    "lint": "tslint --format verbose -c tslint.json \"+(packages|tools|examples)/**/*.+ts\"",
+    "tslint": "tslint --format verbose -c tslint.json \"+(packages|tools|examples)/**/*.+(ts)\"",
     "format": "prettier --check --parser typescript \"{packages,tools,examples}/**/*.{t,j}s?(x)\"",
     "preinstall": "node tools/check-yarn.js",
     "build": "lerna run --stream --sort build",

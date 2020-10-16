@@ -1,14 +1,14 @@
 import { ConversationReference } from 'botbuilder';
 
-export type GDWorker = {
+export interface GDWorker {
 	workerName: string;
 	topic: string;
-};
+}
 
-export type GDUser = {
+export interface GDUser {
 	email?: string;
 	username?: string;
-};
+}
 
 export enum MessageAction {
 	update,
@@ -21,32 +21,32 @@ export enum MessageType {
 	text
 }
 
-export type MessageInput = {
+export interface MessageInput {
 	type: MessageType;
 	action?: MessageAction;
 	value: string | any;
-};
+}
 
-export type MessageOutput = {
+export interface MessageOutput {
 	type: MessageType;
 	action?: MessageAction;
 	value: string | any;
-};
+}
 
 export enum InitiatorType {
 	bot,
 	user
 }
 
-export type Event = {
+export interface Event {
 	initiator: InitiatorType; // bot or user
 	type: MessageType; // card or plantext
 	value: string | any; // card name or user input
 	timestamp: Date;
-};
+}
 
 // TODO: need to consider move this part, because we don't want to include botbuilder dependency in core module
-export type GDUserSession = {
+export interface GDUserSession {
 	id: string;
 	user?: GDUser;
 	botConversion: Partial<ConversationReference>;
@@ -56,7 +56,7 @@ export type GDUserSession = {
 	input?: MessageInput;
 	output?: MessageOutput;
 	history?: Event[];
-};
+}
 
 /**
  * A interface for PubSub features, you can implement this interface to integrate your Message Queue tool

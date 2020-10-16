@@ -78,6 +78,8 @@
     ],
     "no-return-await": false,
     "await-promise": false,
-    "no-unused-expression": [true, "allow-fast-null-checks"]
+    "no-unused-expression": [true, "allow-fast-null-checks"],
+    "interface-over-type-literal": true,
+    "import-spacing": true
   }
 }
