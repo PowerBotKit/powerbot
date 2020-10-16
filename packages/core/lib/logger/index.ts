@@ -18,4 +18,4 @@ const newLogger = (logLabel = ''): winston.Logger => {
 	});
 };
 
-export default newLogger('Power-Bot-Log');
+export const logger = newLogger('Power-Bot-Log');
