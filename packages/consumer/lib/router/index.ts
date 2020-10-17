@@ -19,18 +19,22 @@ export interface RouteStackMeta {
 	stack: { path: string; funcStack: Function }[];
 }
 
-
 export class WokerRouterHandler implements IWokerRouterHandler {
 	stacks: RouteStackMeta[];
 	setUpIntent(object: string | object) {
 		BotKitLogger.getLogger().info('set up intent file', object);
-	};
+	}
 	redirect(context: GDUserSession): Promise<any> {
 		BotKitLogger.getLogger().info('redirect');
-		return;
-	};
-	register(path: string, func: Function, middlewareIn?: InputMiddleware, middlewareOut?: OutputMiddleware) {
-		BotKitLogger.getLogger().info('register');
-	};
 
+		return;
+	}
+	register(
+		path: string,
+		func: Function,
+		middlewareIn?: InputMiddleware,
+		middlewareOut?: OutputMiddleware
+	) {
+		BotKitLogger.getLogger().info('register');
+	}
 }
