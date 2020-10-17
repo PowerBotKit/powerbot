@@ -11,11 +11,10 @@
     "emitDecoratorMetadata": true,
     "declaration": true,
     "outDir": "dist",
-    "rootDir": "lib",
     "types": ["node", "jest"],
     "allowSyntheticDefaultImports": true,
     "resolveJsonModule": true
   },
-  "include": ["lib/**/*.ts"],
+  "include": ["lib/**/*.ts", "index.ts"],
   "exclude": ["node_modules", "**/__tests__/**/*.ts"]
 }

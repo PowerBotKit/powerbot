@@ -9,10 +9,9 @@ import {
 	GDUserSession,
 	MessageType,
 	InitiatorType,
-	CoreSessionUtil
+	CoreSessionUtil,
+	logger
 } from '@powerbotkit/core';
-
-import logger from '@powerbotkit/core/lib/logger';
 
 export class DialogUtil {
 	public static getDialogKey(id: string) {

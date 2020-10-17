@@ -5,12 +5,11 @@ import {
 	TeamsChannelAccount
 } from 'botbuilder';
 import { DialogUtil } from '../../utils/dialog-util';
-import { GDWorker, GDUserSession } from '@powerbotkit/core';
-import logger from '@powerbotkit/core/lib/logger';
-import { IMQ } from '@powerbotkit/core';
+import { GDWorker, GDUserSession, logger, IMQ } from '@powerbotkit/core';
 import { ICache } from '../../cache';
 import { IDataPersist } from '../../models';
 import { IMiddlewareInbound } from '.';
+
 export class InboundHandlerBase extends ActivityHandler {
 	private cache: ICache;
 	private publisher: IMQ;

@@ -10,8 +10,5 @@
   },
   "devDependencies": {
     "typescript": "^4.0.3"
-  },
-  "dependencies": {
-    "tsc": "^1.20150623.0"
   }
 }

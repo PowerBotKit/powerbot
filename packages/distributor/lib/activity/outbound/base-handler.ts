@@ -5,8 +5,7 @@ import {
 	CardFactory,
 	MessageFactory
 } from 'botbuilder';
-import { GDUserSession, MessageType } from '@powerbotkit/core';
-import logger from '@powerbotkit/core/lib/logger';
+import { GDUserSession, MessageType, logger } from '@powerbotkit/core';
 import * as fs from 'fs';
 import * as path from 'path';
 import { IMiddlewareOutbound } from '.';
