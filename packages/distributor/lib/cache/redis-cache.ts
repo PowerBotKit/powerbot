@@ -1,7 +1,7 @@
 import { ICache } from './index';
 import { promisify } from 'util';
 
-import { logger } from '@powerbotkit/core';
+import { BotKitLogger } from '@powerbotkit/core';
 import { RedisClient, createClient } from 'redis';
 
 export interface IRedisCacheConfig {
@@ -31,11 +31,11 @@ export class RedisCache implements ICache {
 			const client = createClient(this.config);
 			client.on('ready', () => {
 				this.client = client;
-				logger.info('Redis Cache connection established!');
+				BotKitLogger.getLogger().info('Redis Cache connection established!');
 				resolve();
 			});
 			client.on('error', err => {
-				logger.error(err);
+				BotKitLogger.getLogger().error(err);
 				reject(err);
 			});
 		});
@@ -61,7 +61,7 @@ export class RedisCache implements ICache {
 		}
 		this.client.multi(multiOp).exec((err, _) => {
 			if (err) {
-				logger.error('redis unlock error: ', err);
+				BotKitLogger.getLogger().error('redis unlock error: ', err);
 			}
 		});
 	}

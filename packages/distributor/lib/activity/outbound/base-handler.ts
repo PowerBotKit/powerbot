@@ -5,7 +5,7 @@ import {
 	CardFactory,
 	MessageFactory
 } from 'botbuilder';
-import { GDUserSession, MessageType, logger } from '@powerbotkit/core';
+import { GDUserSession, MessageType, BotKitLogger } from '@powerbotkit/core';
 import * as fs from 'fs';
 import * as path from 'path';
 import { IMiddlewareOutbound } from '.';
@@ -47,7 +47,7 @@ export class OutboundHandlerBase {
 				} else if (dialog.output.type === MessageType.text) {
 					await turnContext.sendActivity(dialog.output.value);
 				} else {
-					logger.error('Can not identify message type');
+					BotKitLogger.getLogger().error('Can not identify message type');
 				}
 				await cache.unlock(dialog.id);
 			}

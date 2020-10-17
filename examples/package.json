@@ -5,7 +5,8 @@
   "main": "index.ts",
   "scripts": {
     "build": "tsc --build",
-    "start": "tsc --build && node dist/index.js",
+    "start-distributor": "tsc --build && node dist/distributor.js",
+    "start-consumer": "tsc --build && node dist/consumer.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "devDependencies": {

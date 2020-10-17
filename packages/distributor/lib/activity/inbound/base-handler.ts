@@ -5,7 +5,7 @@ import {
 	TeamsChannelAccount
 } from 'botbuilder';
 import { DialogUtil } from '../../utils/dialog-util';
-import { GDWorker, GDUserSession, logger, IMQ } from '@powerbotkit/core';
+import { GDWorker, GDUserSession, BotKitLogger, IMQ } from '@powerbotkit/core';
 import { ICache } from '../../cache';
 import { IDataPersist } from '../../models';
 import { IMiddlewareInbound } from '.';
@@ -75,7 +75,7 @@ export class InboundHandlerBase extends ActivityHandler {
 		let updatedDialog: GDUserSession;
 		if (dialogInCache) {
 			// update dialog
-			logger.info('found dialog');
+			BotKitLogger.getLogger().info('found dialog');
 			updatedDialog = DialogUtil.updateDialogInput(
 				context.activity,
 				dialogInCache
@@ -84,7 +84,7 @@ export class InboundHandlerBase extends ActivityHandler {
 			await this.cache.lock(dialogKey, updatedDialog);
 		} else {
 			// new dialog
-			logger.info('new dialog');
+			BotKitLogger.getLogger().info('new dialog');
 			updatedDialog = await DialogUtil.newDialog(context);
 			// lock redis
 			await this.cache.lock(dialogKey, updatedDialog);

@@ -1,7 +1,7 @@
 import { BotFrameworkAdapter } from 'botbuilder';
 import { OutboundHandlerBase } from './base-handler';
 import { ICache } from '../../cache';
-import { IMQ, logger, GDUserSession } from '@powerbotkit/core';
+import { IMQ, BotKitLogger, GDUserSession } from '@powerbotkit/core';
 
 export class OutBoundHandler extends OutboundHandlerBase {
 	constructor(outboundMiddleware?: IMiddlewareOutbound) {
@@ -9,11 +9,13 @@ export class OutBoundHandler extends OutboundHandlerBase {
 	}
 	public async listen(adapter: BotFrameworkAdapter, cache: ICache, mq: IMQ) {
 		mq.onSubscribed(channel => {
-			logger.info('🚗 Subscribed to outbound broker');
+			BotKitLogger.getLogger().info('🚗 Subscribed to outbound broker');
 		});
 
 		mq.onMessage(async (channel, data) => {
-			logger.info('Subscriber received message in channel: ' + channel);
+			BotKitLogger.getLogger().info(
+				'Subscriber received message in channel: ' + channel
+			);
 			await this.publish(adapter, cache, channel, data);
 		});
 

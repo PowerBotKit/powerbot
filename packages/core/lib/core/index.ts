@@ -1,4 +1,5 @@
 import { ConversationReference } from 'botbuilder';
+export { BotKitLogger } from './logger';
 
 export interface GDWorker {
 	workerName: string;

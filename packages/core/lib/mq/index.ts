@@ -1,6 +1,4 @@
-import { IMQ } from '../core';
-import { logger } from '../logger';
-
+import { IMQ, BotKitLogger } from '../core';
 import { RedisClient, createClient } from 'redis';
 
 export class RedisMQ implements IMQ {
@@ -15,11 +13,11 @@ export class RedisMQ implements IMQ {
 			});
 			client.on('ready', () => {
 				this.client = client;
-				logger.info('Redis MQ connection established!');
+				BotKitLogger.getLogger().info('Redis MQ connection established!');
 				resolve();
 			});
 			client.on('error', err => {
-				logger.error(err);
+				BotKitLogger.getLogger().error(err);
 				reject(err);
 			});
 		});

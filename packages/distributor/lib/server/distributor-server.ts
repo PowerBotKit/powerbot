@@ -4,7 +4,7 @@ import { IDataPersist } from '../models';
 import { LowDBDataPersist } from '../models/low-db-model';
 import { IMiddlewareInbound, InboundHandler } from '../activity/inbound';
 import { IMiddlewareOutbound, OutBoundHandler } from '../activity/outbound';
-import { IMQ, RedisMQ, logger } from '@powerbotkit/core';
+import { IMQ, RedisMQ, BotKitLogger } from '@powerbotkit/core';
 import { ICache } from '../cache';
 import { RedisCache } from '../cache/redis-cache';
 import { BotInstance, TBotConfig, TMiddlewareConfig, IBotServer } from '.';
@@ -100,7 +100,7 @@ export class DistributorServer implements IBotServer {
 	public async listen(port?: string | number) {
 		const por = port ? port : 3978;
 		this.app.listen(por, '0.0.0.0', () => {
-			logger.info(`✈️  Bot Server listening to ${por}`);
+			BotKitLogger.getLogger().info(`✈️  Bot Server listening to ${por}`);
 		});
 	}
 

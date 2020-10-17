@@ -1,37 +1,74 @@
-import { IRouterConfig, WokerRouterHandler } from '../router';
+import { IWokerRouterHandler } from '../router';
 import { InputMiddleware, OutputMiddleware } from '../middleware';
-import { IMQ } from '@powerbotkit/core';
+import { GDUserSession, IMQ, RedisMQ, BotKitLogger } from '@powerbotkit/core';
 
-export interface TConsumerConfig {
-	routerConfg: IRouterConfig;
-	routerHandler?: WokerRouterHandler;
+export type TConsumerServerConfig = {
+	routerHandler: IWokerRouterHandler;
 	listenerAdaptor?: IMQ;
 	publisherAdaptor?: IMQ;
-}
 
-export interface TMiddlewareConfig {
+};
+
+export type TMiddlewareConfig = {
 	inputMiddleware?: InputMiddleware;
 	outputMiddleware?: OutputMiddleware;
-}
+};
 
 export interface IConsumerServer {
-	setup(botConfig: TConsumerConfig, middlewareConfig?: TMiddlewareConfig);
+	setup(serverConfig: TConsumerServerConfig, middlewareConfig?: TMiddlewareConfig);
 	start();
+	sendToOutbound(channel: string, data: string);
+
 }
 
 export class ConsumerServer implements IConsumerServer {
-	public routerConfg: IRouterConfig;
-	public listenerAdaptor: IMQ;
+
+	private routerHandler: IWokerRouterHandler;
+	private listenerAdaptor: IMQ;
+	private publisher: IMQ;
+	private inputMiddleware: InputMiddleware;
+	private outputMiddleware: OutputMiddleware;
 
 	public setup(
-		botConfig: TConsumerConfig,
+		serverConfig: TConsumerServerConfig,
 		middlewareConfig?: TMiddlewareConfig
+
 	) {
-		this.listenerAdaptor = botConfig.listenerAdaptor;
-		this.routerConfg = botConfig.routerConfg;
+		this.routerHandler = serverConfig.routerHandler;
+		this.listenerAdaptor = serverConfig.listenerAdaptor || new RedisMQ();
+		this.publisher = serverConfig.publisherAdaptor || new RedisMQ();
+		if (middlewareConfig && middlewareConfig.inputMiddleware) {
+			this.inputMiddleware = middlewareConfig.inputMiddleware;
+		};
+		if (middlewareConfig && middlewareConfig.outputMiddleware) {
+			this.outputMiddleware = middlewareConfig.outputMiddleware;
+		};
 	}
-	public start() {
-		this.listenerAdaptor.init();
+
+	public async start() {
+
+		await this.listenerAdaptor.init();
+		await this.publisher.init();
+
+		this.listenerAdaptor.onMessage(async (channel: string, data: any) => {
+			BotKitLogger.getLogger().info("Con received message in channel: " + channel + " value: " + data);
+			const dialog: GDUserSession = JSON.parse(data);
+			if (this.inputMiddleware) {
+				await this.inputMiddleware.process(dialog);
+			}
+			await this.routerHandler.redirect(data); //process bussiness logic
+			if (this.outputMiddleware) {
+				await this.outputMiddleware.process(dialog);
+			}
+			this.sendToOutbound(channel, data);
+
+		});
+
 		this.listenerAdaptor.subscribe('inbound');
 	}
+
+	public sendToOutbound(channel: string, data) {
+		return this.publisher.publish(channel, data);
+	}
+
 }

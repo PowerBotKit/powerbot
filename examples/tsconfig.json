@@ -20,6 +20,6 @@
       "test/*": ["test/*"]
     }
   },
-  "files": ["index.ts"],
+  "files": ["index.ts", "distributor.ts", "consumer.ts"],
   "exclude": ["node_modules"]
 }

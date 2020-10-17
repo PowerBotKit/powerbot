@@ -10,7 +10,7 @@ import {
 	MessageType,
 	InitiatorType,
 	CoreSessionUtil,
-	logger
+	BotKitLogger
 } from '@powerbotkit/core';
 
 export class DialogUtil {
@@ -20,7 +20,7 @@ export class DialogUtil {
 
 	// get user information
 	public static async getUserInfo(context: any): Promise<TeamsChannelAccount> {
-		logger.info('Query Teams user information');
+		BotKitLogger.getLogger().info('Query Teams user information');
 		let userDetails: TeamsChannelAccount;
 		if (process.env.MicrosoftAppId && process.env.MicrosoftAppId === '') {
 			userDetails = await TeamsInfo.getMember(
@@ -29,7 +29,9 @@ export class DialogUtil {
 			);
 		} else {
 			// for local bot emulator
-			logger.info('Local dev enviroment, set up dummy account...');
+			BotKitLogger.getLogger().info(
+				'Local dev enviroment, set up dummy account...'
+			);
 			userDetails = {
 				id: '@localDev',
 				name: 'Local Dev',
