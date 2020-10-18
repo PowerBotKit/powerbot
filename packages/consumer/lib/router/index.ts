@@ -1,5 +1,5 @@
 import { GDUserSession, BotKitLogger } from '@powerbotkit/core';
-import { BaseWorker, IBotWorker } from '../worker';
+import { IBotWorker } from '../worker';
 import { InputMiddleware, OutputMiddleware } from '../middleware';
 
 export interface IWokerRouterHandler {
@@ -10,7 +10,7 @@ export interface IWokerRouterHandler {
 	// register('SavingHours/welcomeMessage', dealWithWelcomeMessage)
 	register(
 		path: string,
-		func: Function,
+		worker: any,
 		middlewareIn?: InputMiddleware,
 		middlewareOut?: OutputMiddleware
 	);
@@ -18,20 +18,34 @@ export interface IWokerRouterHandler {
 }
 
 export interface RouteStackMeta {
-	[details: string]: any;
+	[workerName: string]: IBotWorker;
 }
 
 export interface IntentStackMeta {
-	[details: string]: any;
+	[intentName: string]: any;
+}
+
+export interface InboundMiddlewareStackMeta {
+	[workerName: string]: InputMiddleware;
+}
+
+export interface OutboundMiddlewareStackMeta {
+	[workerName: string]: OutputMiddleware;
 }
 
 export class WokerRouterHandler implements IWokerRouterHandler {
 	routeStack: RouteStackMeta;
 	intentStack: IntentStackMeta;
+	inboundMiddlewareStack: InboundMiddlewareStackMeta;
+	outboundMiddlewareStack: OutboundMiddlewareStackMeta;
+	defaultWorker: string;
 
-	constructor() {
+	constructor(defaultWorker: string) {
 		this.routeStack = {};
 		this.intentStack = {};
+		this.inboundMiddlewareStack = {};
+		this.outboundMiddlewareStack = {};
+		this.defaultWorker = defaultWorker;
 	}
 
 	setUpIntent(object: string | object) {
@@ -41,7 +55,7 @@ export class WokerRouterHandler implements IWokerRouterHandler {
 	getWokerNameByIntent(intent: string): string {
 		let workerName = this.intentStack[intent];
 		if (!workerName) {
-			workerName = 'EchoWorker';
+			workerName = this.defaultWorker;
 		}
 
 		return workerName;
@@ -55,11 +69,23 @@ export class WokerRouterHandler implements IWokerRouterHandler {
 			);
 		}
 		const workerName = context.worker.workerName;
+
+		if (this.inboundMiddlewareStack[workerName]) {
+			const inMDW: InputMiddleware = this.inboundMiddlewareStack[workerName];
+			await inMDW.process(context);
+		}
+
 		const workerClass: IBotWorker = this.routeStack[workerName];
 		await workerClass.process(context);
 
+		if (this.outboundMiddlewareStack[workerName]) {
+			const outMDW: OutputMiddleware = this.outboundMiddlewareStack[workerName];
+			await outMDW.process(context);
+		}
+
 		return context;
 	}
+
 	register(
 		path: string,
 		worker: any,
@@ -68,5 +94,11 @@ export class WokerRouterHandler implements IWokerRouterHandler {
 	) {
 		BotKitLogger.getLogger().info('register');
 		this.routeStack[path] = worker;
+		if (middlewareIn) {
+			this.inboundMiddlewareStack[path] = middlewareIn;
+		}
+		if (middlewareOut) {
+			this.outboundMiddlewareStack[path] = middlewareOut;
+		}
 	}
 }

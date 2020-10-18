@@ -69,7 +69,6 @@ export class ConsumerServer implements IConsumerServer {
 			if (this.outputMiddleware) {
 				await this.outputMiddleware.process(updatedDialog);
 			}
-			BotKitLogger.getLogger().info(updatedDialog);
 			this.sendToOutbound('outbound', JSON.stringify(updatedDialog));
 		});
 
