@@ -41,8 +41,8 @@ export class RedisCache implements ICache {
 		});
 	}
 
-	public async lock(key: string, value: any) {
-		return await this.client.set(key, value, 'EX', this.lockTime, 'NX');
+	public async lock(key: string, value: string) {
+		return this.client.set(key, value, 'EX', this.lockTime, 'NX');
 	}
 
 	public async unlock(key: string, expireTime?: number) {

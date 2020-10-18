@@ -1,6 +1,12 @@
 import { IWokerRouterHandler } from '../router';
 import { InputMiddleware, OutputMiddleware } from '../middleware';
-import { GDUserSession, IMQ, RedisMQ, BotKitLogger } from '@powerbotkit/core';
+import {
+	GDUserSession,
+	IMQ,
+	RedisMQ,
+	BotKitLogger,
+	MessageType
+} from '@powerbotkit/core';
 
 export interface TConsumerServerConfig {
 	routerHandler: IWokerRouterHandler;
@@ -47,26 +53,30 @@ export class ConsumerServer implements IConsumerServer {
 	public async start() {
 		await this.listenerAdaptor.init();
 		await this.publisher.init();
+		this.listenerAdaptor.onSubscribed(channel => {
+			BotKitLogger.getLogger().info('🚗 Consumer listen to outbound broker');
+		});
 
 		this.listenerAdaptor.onMessage(async (channel: string, data: any) => {
 			BotKitLogger.getLogger().info(
-				'Con received message in channel: ' + channel + ' value: ' + data
+				'Consumer received message in channel: ' + channel
 			);
 			const dialog: GDUserSession = JSON.parse(data);
 			if (this.inputMiddleware) {
 				await this.inputMiddleware.process(dialog);
 			}
-			await this.routerHandler.redirect(data); // process bussiness logic
+			const updatedDialog = await this.routerHandler.redirect(dialog); // process bussiness logic
 			if (this.outputMiddleware) {
-				await this.outputMiddleware.process(dialog);
+				await this.outputMiddleware.process(updatedDialog);
 			}
-			this.sendToOutbound(channel, data);
+			BotKitLogger.getLogger().info(updatedDialog);
+			this.sendToOutbound('outbound', JSON.stringify(updatedDialog));
 		});
 
 		this.listenerAdaptor.subscribe('inbound');
 	}
 
-	public sendToOutbound(channel: string, data) {
+	public sendToOutbound(channel: string, data: string) {
 		return this.publisher.publish(channel, data);
 	}
 }

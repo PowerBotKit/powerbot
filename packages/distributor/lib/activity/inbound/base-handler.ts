@@ -81,13 +81,13 @@ export class InboundHandlerBase extends ActivityHandler {
 				dialogInCache
 			);
 			// lock redis
-			await this.cache.lock(dialogKey, updatedDialog);
+			await this.cache.lock(dialogKey, JSON.stringify(updatedDialog));
 		} else {
 			// new dialog
 			BotKitLogger.getLogger().info('new dialog');
 			updatedDialog = await DialogUtil.newDialog(context);
 			// lock redis
-			await this.cache.lock(dialogKey, updatedDialog);
+			await this.cache.lock(dialogKey, JSON.stringify(updatedDialog));
 		}
 
 		return {
