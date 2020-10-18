@@ -5,7 +5,7 @@
     "tslint-eslint-rules"
   ],
   "linterOptions": {
-    "exclude": ["packages/**/dist"]
+    "exclude": ["packages/**/dist", "**/*.d.ts"]
   },
   "rules": {
     "ban-types": false,
