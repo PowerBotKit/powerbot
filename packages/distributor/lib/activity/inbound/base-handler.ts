@@ -1,14 +1,14 @@
+import { BotKitLogger, GDUserSession, GDWorker, IMQ } from '@powerbotkit/core';
 import {
 	ActivityHandler,
-	TurnContext,
 	MessageFactory,
-	TeamsChannelAccount
+	TeamsChannelAccount,
+	TurnContext
 } from 'botbuilder';
-import { DialogUtil } from '../../utils/dialog-util';
-import { GDWorker, GDUserSession, BotKitLogger, IMQ } from '@powerbotkit/core';
+import { IMiddlewareInbound } from '.';
 import { ICache } from '../../cache';
 import { IDataPersist } from '../../models';
-import { IMiddlewareInbound } from '.';
+import { DialogUtil } from '../../utils/dialog-util';
 
 export class InboundHandlerBase extends ActivityHandler {
 	private cache: ICache;

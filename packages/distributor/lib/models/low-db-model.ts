@@ -1,6 +1,6 @@
-import { IUserSession, IDataPersist } from '.';
 import * as lowdb from 'lowdb';
 import * as FileAsync from 'lowdb/adapters/FileAsync';
+import { IDataPersist, IUserSession } from '.';
 
 export class LowDBDataPersist implements IDataPersist {
 	public client: lowdb.LowdbAsync<any>;

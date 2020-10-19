@@ -1,5 +1,5 @@
-import { IMQ, BotKitLogger } from '../core';
-import { RedisClient, createClient } from 'redis';
+import { createClient, RedisClient } from 'redis';
+import { BotKitLogger, IMQ } from '../core';
 
 export class RedisMQ implements IMQ {
 	public client: RedisClient;

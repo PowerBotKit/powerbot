@@ -1,12 +1,6 @@
-import { IWokerRouterHandler } from '../router';
+import { BotKitLogger, GDUserSession, IMQ, RedisMQ } from '@powerbotkit/core';
 import { InputMiddleware, OutputMiddleware } from '../middleware';
-import {
-	GDUserSession,
-	IMQ,
-	RedisMQ,
-	BotKitLogger,
-	MessageType
-} from '@powerbotkit/core';
+import { IWokerRouterHandler } from '../router';
 
 export interface TConsumerServerConfig {
 	routerHandler: IWokerRouterHandler;

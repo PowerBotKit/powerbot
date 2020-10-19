@@ -80,6 +80,13 @@
     "await-promise": false,
     "no-unused-expression": [true, "allow-fast-null-checks"],
     "interface-over-type-literal": true,
-    "import-spacing": true
+    "import-spacing": true,
+    "ordered-imports": [
+			true,
+			{
+				"import-sources-order": "lowercase-last",
+				"named-imports-order": "lowercase-first"
+			}
+		]
   }
 }

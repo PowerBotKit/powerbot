@@ -1,19 +1,19 @@
 import {
-	ConsumerServer,
-	WokerRouterHandler,
-	TConsumerServerConfig,
 	BaseWorker,
+	ConsumerServer,
 	IBotWorker,
 	IWokerRouterHandler,
-	TMiddlewareConfig
+	TConsumerServerConfig,
+	TMiddlewareConfig,
+	WokerRouterHandler
 } from '@powerbotkit/consumer';
 
 import { GDUserSession, MessageOutput } from '@powerbotkit/core';
 import {
-	InputMiddlewareGlobal,
-	OutputMiddlewareGlobal,
 	InputMiddleware4Worker,
-	OutputMiddleware4Worker
+	InputMiddlewareGlobal,
+	OutputMiddleware4Worker,
+	OutputMiddlewareGlobal
 } from './middleware';
 
 class EchoWorker extends BaseWorker {

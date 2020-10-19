@@ -1,7 +1,7 @@
+import { BotKitLogger, GDUserSession, IMQ } from '@powerbotkit/core';
 import { BotFrameworkAdapter } from 'botbuilder';
-import { OutboundHandlerBase } from './base-handler';
 import { ICache } from '../../cache';
-import { IMQ, BotKitLogger, GDUserSession } from '@powerbotkit/core';
+import { OutboundHandlerBase } from './base-handler';
 
 export class OutBoundHandler extends OutboundHandlerBase {
 	constructor(outboundMiddleware?: IMiddlewareOutbound) {
