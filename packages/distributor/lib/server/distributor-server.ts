@@ -1,13 +1,15 @@
-import * as restify from 'restify';
 import { BotFrameworkAdapter } from 'botbuilder';
-import { IDataPersist } from '../models';
-import { LowDBDataPersist } from '../models/low-db-model';
-import { IMiddlewareInbound, InboundHandler } from '../activity/inbound';
+import * as restify from 'restify';
+
+import { BotKitLogger, IMQ, RedisMQ } from '@powerbotkit/core';
+
+import { BotInstance, IBotServer, TBotConfig, TMiddlewareConfig } from '.';
+import { InboundHandler, IMiddlewareInbound } from '../activity/inbound';
 import { IMiddlewareOutbound, OutBoundHandler } from '../activity/outbound';
-import { IMQ, RedisMQ, BotKitLogger } from '@powerbotkit/core';
 import { ICache } from '../cache';
 import { RedisCache } from '../cache/redis-cache';
-import { BotInstance, TBotConfig, TMiddlewareConfig, IBotServer } from '.';
+import { IDataPersist } from '../models';
+import { LowDBDataPersist } from '../models/low-db-model';
 
 export class DistributorServer implements IBotServer {
 	// operation conversion saving

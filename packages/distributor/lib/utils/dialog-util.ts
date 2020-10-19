@@ -6,11 +6,11 @@ import {
 } from 'botbuilder';
 
 import {
-	GDUserSession,
-	MessageType,
-	InitiatorType,
+	BotKitLogger,
 	CoreSessionUtil,
-	BotKitLogger
+	GDUserSession,
+	InitiatorType,
+	MessageType
 } from '@powerbotkit/core';
 
 export class DialogUtil {

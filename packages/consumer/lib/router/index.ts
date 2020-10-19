@@ -1,6 +1,6 @@
-import { GDUserSession, BotKitLogger } from '@powerbotkit/core';
-import { IBotWorker } from '../worker';
+import { BotKitLogger, GDUserSession } from '@powerbotkit/core';
 import { InputMiddleware, OutputMiddleware } from '../middleware';
+import { IBotWorker } from '../worker';
 
 export interface IWokerRouterHandler {
 	// filePath, or object

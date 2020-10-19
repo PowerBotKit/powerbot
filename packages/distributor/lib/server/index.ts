@@ -1,9 +1,9 @@
-import { BotFrameworkAdapter, ActivityHandler } from 'botbuilder';
-import { IDataPersist } from '../models';
 import { IMQ } from '@powerbotkit/core';
-import { ICache } from '../cache';
+import { ActivityHandler, BotFrameworkAdapter } from 'botbuilder';
 import { IMiddlewareInbound } from '../../lib/activity/inbound';
 import { IMiddlewareOutbound } from '../../lib/activity/outbound';
+import { ICache } from '../cache';
+import { IDataPersist } from '../models';
 
 export interface TBotConfig {
 	appId?: string;

@@ -1,10 +1,10 @@
 import {
+	BotKitLogger,
+	Event,
 	GDUserSession,
 	InitiatorType,
 	MessageInput,
 	MessageOutput,
-	Event,
-	BotKitLogger,
 	MessageType
 } from '@powerbotkit/core';
 
