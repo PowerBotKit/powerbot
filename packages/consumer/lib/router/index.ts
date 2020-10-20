@@ -2,7 +2,7 @@ import { BotKitLogger, GDUserSession } from '@powerbotkit/core';
 import { InputMiddleware, OutputMiddleware } from '../middleware';
 import { IBotWorker } from '../worker';
 
-export interface IWokerRouterHandler {
+export interface IWorkerRouterHandler {
 	// filePath, or object
 	setUpIntent(object: string | object);
 	// control message to correspond worker or serivce
@@ -14,7 +14,7 @@ export interface IWokerRouterHandler {
 		middlewareIn?: InputMiddleware,
 		middlewareOut?: OutputMiddleware
 	);
-	getWokerNameByIntent(intent: string): string;
+	getWorkerNameByIntent(intent: string): string;
 }
 
 export interface RouteStackMeta {
@@ -33,7 +33,7 @@ export interface OutboundMiddlewareStackMeta {
 	[workerName: string]: OutputMiddleware;
 }
 
-export class WokerRouterHandler implements IWokerRouterHandler {
+export class WorkerRouterHandler implements IWorkerRouterHandler {
 	routeStack: RouteStackMeta;
 	intentStack: IntentStackMeta;
 	inboundMiddlewareStack: InboundMiddlewareStackMeta;
@@ -52,7 +52,7 @@ export class WokerRouterHandler implements IWokerRouterHandler {
 		BotKitLogger.getLogger().info('set up intent file', object);
 	}
 
-	getWokerNameByIntent(intent: string): string {
+	getWorkerNameByIntent(intent: string): string {
 		let workerName = this.intentStack[intent];
 		if (!workerName) {
 			workerName = this.defaultWorker;
@@ -64,7 +64,7 @@ export class WokerRouterHandler implements IWokerRouterHandler {
 	async redirect(context: GDUserSession): Promise<GDUserSession> {
 		BotKitLogger.getLogger().info('redirect');
 		if (context.worker && context.worker.workerName === '') {
-			context.worker.workerName = this.getWokerNameByIntent(
+			context.worker.workerName = this.getWorkerNameByIntent(
 				context.input.value
 			);
 		}
