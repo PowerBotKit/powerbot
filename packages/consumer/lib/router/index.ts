@@ -1,10 +1,21 @@
-import { BotKitLogger, GDUserSession } from '@powerbotkit/core';
+import * as path from 'path';
+
+import {
+	BotKitLogger,
+	GDUserSession,
+	Intent,
+	IntentYAMLConfig,
+	IntentYAMLWildcardConfig,
+	WildcardIntent
+} from '@powerbotkit/core';
+
 import { InputMiddleware, OutputMiddleware } from '../middleware';
+import { readYamlFromFilePath } from '../utils';
 import { IBotWorker } from '../worker';
 
 export interface IWorkerRouterHandler {
 	// filePath, or object
-	setUpIntent(object: string | object);
+	setUpIntent(intent: string | object);
 	// control message to correspond worker or serivce
 	redirect(context: GDUserSession): Promise<GDUserSession>;
 	// register('SavingHours/welcomeMessage', dealWithWelcomeMessage)
@@ -34,6 +45,7 @@ export interface OutboundMiddlewareStackMeta {
 }
 
 export class WorkerRouterHandler implements IWorkerRouterHandler {
+	intent: Intent;
 	routeStack: RouteStackMeta;
 	intentStack: IntentStackMeta;
 	inboundMiddlewareStack: InboundMiddlewareStackMeta;
@@ -48,12 +60,17 @@ export class WorkerRouterHandler implements IWorkerRouterHandler {
 		this.defaultWorker = defaultWorker;
 	}
 
-	setUpIntent(object: string | object) {
-		BotKitLogger.getLogger().info('set up intent file', object);
+	setUpIntent(intent: string | object) {
+		BotKitLogger.getLogger().info('set up intent file', intent);
+		if (typeof intent === 'string') {
+			this.setUpIntentFile(intent);
+		}
+		throw new Error('only support intent file path set');
 	}
 
 	getWorkerNameByIntent(intent: string): string {
-		let workerName = this.intentStack[intent];
+		const intentStackName = this.intent.process(intent);
+		let workerName = this.intentStack[intentStackName];
 		if (!workerName) {
 			workerName = this.defaultWorker;
 		}
@@ -87,18 +104,37 @@ export class WorkerRouterHandler implements IWorkerRouterHandler {
 	}
 
 	register(
-		path: string,
+		filepath: string,
 		worker: any,
 		middlewareIn?: InputMiddleware,
 		middlewareOut?: OutputMiddleware
 	) {
 		BotKitLogger.getLogger().info('register');
-		this.routeStack[path] = worker;
+		this.routeStack[filepath] = worker;
 		if (middlewareIn) {
-			this.inboundMiddlewareStack[path] = middlewareIn;
+			this.inboundMiddlewareStack[filepath] = middlewareIn;
 		}
 		if (middlewareOut) {
-			this.outboundMiddlewareStack[path] = middlewareOut;
+			this.outboundMiddlewareStack[filepath] = middlewareOut;
+		}
+	}
+
+	private setUpIntentFile(intentFilePath: string) {
+		const extname = path.extname(intentFilePath);
+		if (extname !== '.yaml') {
+			throw new Error('no yml file is unsupported');
+		}
+		const config = readYamlFromFilePath<IntentYAMLConfig>(intentFilePath);
+		if (config.type !== 'wildcard') {
+			throw new Error('wildcard yml file is only unsupported');
+		}
+		const wildCardConfig = config as IntentYAMLWildcardConfig;
+		if (wildCardConfig.intents) {
+			const map = new Map<string, string[]>();
+			wildCardConfig.intents.forEach(intent => {
+				map.set(intent.name, intent.wildcards);
+			});
+			this.intent = new WildcardIntent(map);
 		}
 	}
 }

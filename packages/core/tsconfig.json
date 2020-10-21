@@ -2,7 +2,7 @@
   "extends": "../../tsconfig.json",
   "compilerOptions": {
     "baseUrl": ".",
-    "target": "es5",
+    "target": "esnext",
     "lib": ["es6", "esnext", "dom"],
     "module": "commonjs",
     "moduleResolution": "node",
@@ -13,6 +13,7 @@
     "outDir": "dist",
     "types": ["node", "jest"],
     "allowSyntheticDefaultImports": true,
+    "downlevelIteration": true,
     "resolveJsonModule": true
   },
   "include": ["lib/**/*.ts", "index.ts"],
