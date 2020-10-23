@@ -94,7 +94,7 @@ uploads/
 # Jenkins git version
 version.txt
 
-#IDE
+# IDE
 .idea/
 .DS_Store
 .idea
@@ -102,3 +102,5 @@ tmp
 .ignored/
 db.json
 
+# Other
+packages/**/dist

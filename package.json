@@ -17,6 +17,7 @@
     "create": "lerna create",
     "tslint": "tslint --format verbose -c tslint.json \"+(packages|tools|examples)/**/*.+(ts)\"",
     "format": "prettier --check --parser typescript \"{packages,tools,examples}/**/*.{t,j}s?(x)\"",
+    "lint": "yarn tslint && yarn format",
     "preinstall": "node tools/check-yarn.js",
     "build": "lerna run --stream --sort build",
     "clean": "yarn workspaces run clean",
