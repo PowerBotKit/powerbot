@@ -1,6 +1,6 @@
 {
   "name": "@powerbotkit/consumer",
-  "version": "0.0.1-alpha.1",
+  "version": "0.0.1-alpha.2",
   "description": "> TODO: description",
   "author": "Power Bot Kit Team",
   "homepage": "https://github.com/PowerBotKit/powerbot/tree/develop/packages/consumer#readme",
@@ -25,9 +25,8 @@
     "test": "jest"
   },
   "dependencies": {
-    "@powerbotkit/core": "^0.0.1-alpha.1",
+    "@powerbotkit/core": "^0.0.1-alpha.2",
     "js-yaml": "^3.14.0",
     "redis": "^3.0.2"
-  },
-  "devDependencies": {}
+  }
 }
