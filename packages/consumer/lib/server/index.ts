@@ -1,9 +1,9 @@
 import { BotKitLogger, GDUserSession, IMQ, RedisMQ } from '@powerbotkit/core';
 import { InputMiddleware, OutputMiddleware } from '../middleware';
-import { IWokerRouterHandler } from '../router';
+import { IWorkerRouterHandler } from '../router';
 
 export interface TConsumerServerConfig {
-	routerHandler: IWokerRouterHandler;
+	routerHandler: IWorkerRouterHandler;
 	listenerAdaptor?: IMQ;
 	publisherAdaptor?: IMQ;
 }
@@ -23,7 +23,7 @@ export interface IConsumerServer {
 }
 
 export class ConsumerServer implements IConsumerServer {
-	private routerHandler: IWokerRouterHandler;
+	private routerHandler: IWorkerRouterHandler;
 	private listenerAdaptor: IMQ;
 	private publisher: IMQ;
 	private inputMiddleware: InputMiddleware;

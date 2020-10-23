@@ -2,10 +2,10 @@ import {
 	BaseWorker,
 	ConsumerServer,
 	IBotWorker,
-	IWokerRouterHandler,
+	IWorkerRouterHandler,
 	TConsumerServerConfig,
 	TMiddlewareConfig,
-	WokerRouterHandler
+	WorkerRouterHandler
 } from '@powerbotkit/consumer';
 
 import { GDUserSession, MessageOutput } from '@powerbotkit/core';
@@ -36,7 +36,7 @@ class EchoWorker extends BaseWorker {
 }
 
 (async () => {
-	const rounterHandler: IWokerRouterHandler = new WokerRouterHandler(
+	const routerHandler: IWorkerRouterHandler = new WorkerRouterHandler(
 		'EchoWorker'
 	);
 	const echoWorker: IBotWorker = new EchoWorker('echoService');
@@ -47,14 +47,14 @@ class EchoWorker extends BaseWorker {
 	const inputMiddleware4Worker = new InputMiddleware4Worker();
 	const outputMiddleware4Worker = new OutputMiddleware4Worker();
 
-	rounterHandler.register(
+	routerHandler.register(
 		'EchoWorker',
 		echoWorker,
 		inputMiddleware4Worker,
 		outputMiddleware4Worker
 	);
 	const serverConfig: TConsumerServerConfig = {
-		routerHandler: rounterHandler
+		routerHandler
 	};
 	const middlewareConfig: TMiddlewareConfig = {
 		inputMiddleware: inputMiddlewareGlobal,
