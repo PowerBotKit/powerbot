@@ -12,7 +12,6 @@ npm install @powerbotkit/distributor --save
 
 using yarn:
 
-
 ```shellscript
 yarn add @powerbotkit/distributor
 ```

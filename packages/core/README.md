@@ -12,7 +12,6 @@ npm install @powerbotkit/core --save
 
 using yarn:
 
-
 ```shellscript
 yarn add @powerbotkit/core
 ```
