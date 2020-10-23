@@ -1,11 +1,18 @@
-# `distributor`
+# @powerbotkit/distributor
 
-> TODO: description
+> PowerBotKit Distributor package
 
-## Usage
+## Install
 
+Using npm:
+
+```shellscript
+npm install @powerbotkit/distributor --save
 ```
-const distributor = require('distributor');
 
-// TODO: DEMONSTRATE API
+using yarn:
+
+
+```shellscript
+yarn add @powerbotkit/distributor
 ```
