@@ -1,11 +1,18 @@
-# `consumer`
+# @powerbotkit/consumer
 
-> TODO: description
+> PowerBotKit Consumer package
 
-## Usage
+## Install
 
+Using npm:
+
+```shellscript
+npm install @powerbotkit/consumer --save
 ```
-const consumer = require('consumer');
 
-// TODO: DEMONSTRATE API
+using yarn:
+
+
+```shellscript
+yarn add @powerbotkit/consumer
 ```
