@@ -21,7 +21,9 @@
     "build": "lerna run --stream --sort build",
     "clean": "yarn workspaces run clean",
     "test": "jest --runInBand --detectOpenHandles --forceExit",
-    "release": "yarn build && lerna publish"
+    "prerelease": "yarn build",
+    "release": "lerna publish --conventional-commits",
+    "release:alpha": "yarn release prerelease"
   },
   "devDependencies": {
     "@commitlint/cli": "^11.0.0",
