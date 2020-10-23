@@ -1,11 +1,18 @@
-# `core`
+# @powerbotkit/core
 
-> TODO: description
+> PowerBotKit Core package
 
-## Usage
+## Install
 
+Using npm:
+
+```shellscript
+npm install @powerbotkit/core --save
 ```
-const core = require('core');
 
-// TODO: DEMONSTRATE API
+using yarn:
+
+
+```shellscript
+yarn add @powerbotkit/core
 ```
