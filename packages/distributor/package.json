@@ -7,7 +7,7 @@
     "framework"
   ],
   "author": "Power Bot Kit Team",
-  "homepage": "",
+  "homepage": "https://github.com/PowerBotKit/powerbot/tree/develop/packages/distributor#readme",
   "license": "MIT",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
