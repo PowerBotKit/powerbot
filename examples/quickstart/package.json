@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "description": "examples of using powerbotkit",
   "main": "index.ts",
+  "private": "true",
   "scripts": {
     "build": "tsc --build",
     "start-distributor": "tsc --build && node dist/distributor.js",

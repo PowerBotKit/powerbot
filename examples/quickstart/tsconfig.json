@@ -1,5 +1,5 @@
 {
-  "extends": "../tsconfig.json",
+  "extends": "../../tsconfig.json",
   "compilerOptions": {
     "baseUrl": ".",
     "target": "es6",
@@ -11,14 +11,9 @@
     "emitDecoratorMetadata": true,
     "declaration": false,
     "outDir": "dist",
-    // "typeRoots": ["node_modules/@types"],
     "types": ["node", "jest"],
     "allowSyntheticDefaultImports": true,
-    "resolveJsonModule": true,
-    "paths": {
-      "lib/*": ["lib/*"],
-      "test/*": ["test/*"]
-    }
+    "resolveJsonModule": true
   },
   "files": ["index.ts", "distributor.ts", "consumer.ts"],
   "exclude": ["node_modules"]
