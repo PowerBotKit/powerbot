@@ -13,9 +13,8 @@ export interface IntentYAMLBaseConfig {
 export interface IntentYAMLWildcardConfig {
 	type: 'wildcard';
 	intents: {
-		name: string;
-		wildcards: string[];
-	}[];
+		[key: string]: [string];
+	};
 }
 
 export type IntentYAMLConfig = IntentYAMLBaseConfig & IntentYAMLWildcardConfig;
