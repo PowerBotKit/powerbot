@@ -12,18 +12,17 @@ export class WildcardIntent implements Intent {
 		return this.doProcess(input);
 	}
 
-	public doProcess(input: string): string {
-		const keys = this.maps.keys();
-		for (const key of keys) {
-			const values: string[] = this.maps[key];
+	private doProcess(input: string): string {
+		let result = null;
+		this.maps.forEach((values, key) => {
 			for (const value of values) {
-				if (wildcard(value, input)) {
-					return key;
+				if (wildcard(input, value)) {
+					result = key;
 				}
 			}
-		}
+		});
 
-		return null;
+		return result;
 	}
 
 	public processAsync(input: string): Promise<string> {

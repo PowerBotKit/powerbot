@@ -19,7 +19,7 @@ jest.mock('winston', () => ({
 	}
 }));
 
-import { BotKitLogger } from '../lib/core/logger';
+import { BotKitLogger } from '../../lib/core/logger';
 
 describe('core logger unit test', () => {
 	test('get logger', () => {
