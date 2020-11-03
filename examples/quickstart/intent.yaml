@@ -1,7 +1,0 @@
-version: "1"
-locale: "us"
-language: "us"
-type: "wildcard"
-intents:
-  testA: ["a.b.c"]
-  testB: ["d.e.f"]

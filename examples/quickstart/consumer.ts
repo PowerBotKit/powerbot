@@ -53,7 +53,6 @@ class EchoWorker extends BaseWorker {
 		inputMiddleware4Worker,
 		outputMiddleware4Worker
 	);
-	routerHandler.setUpIntent('./intent.yaml');
 	const serverConfig: TConsumerServerConfig = {
 		routerHandler
 	};

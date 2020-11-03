@@ -62,10 +62,10 @@ export class WorkerRouterHandler implements IWorkerRouterHandler {
 
 	setUpIntent(intent: string | object) {
 		BotKitLogger.getLogger().info('set up intent file', intent);
-		if (typeof intent !== 'string') {
-			throw new Error('only support intent file path set');
+		if (typeof intent === 'string') {
+			this.setUpIntentFile(intent);
 		}
-		this.setUpIntentFile(intent);
+		throw new Error('only support intent file path set');
 	}
 
 	getWorkerNameByIntent(intent: string): string {
@@ -128,13 +128,12 @@ export class WorkerRouterHandler implements IWorkerRouterHandler {
 		if (config.type !== 'wildcard') {
 			throw new Error('wildcard yml file is only unsupported');
 		}
-
 		const wildCardConfig = config as IntentYAMLWildcardConfig;
 		if (wildCardConfig.intents) {
 			const map = new Map<string, string[]>();
-			Object.keys(wildCardConfig.intents).forEach(k =>
-				map.set(k, [...wildCardConfig.intents[k]])
-			);
+			wildCardConfig.intents.forEach(intent => {
+				map.set(intent.name, intent.wildcards);
+			});
 			this.intent = new WildcardIntent(map);
 		}
 	}
