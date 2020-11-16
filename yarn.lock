@@ -2,10 +2,10 @@
 # yarn lockfile v1
 
 
-"@azure/ms-rest-js@1.8.15":
-  version "1.8.15"
-  resolved "https://registry.yarnpkg.com/@azure/ms-rest-js/-/ms-rest-js-1.8.15.tgz#4267b6b8c00d85301791fe0cf347e0455a807338"
-  integrity sha512-kIB71V3DcrA4iysBbOsYcxd4WWlOE7OFtCUYNfflPODM0lbIR23A236QeTn5iAeYwcHmMjR/TAKp5KQQh/WqoQ==
+"@azure/ms-rest-js@1.9.0":
+  version "1.9.0"
+  resolved "https://registry.yarnpkg.com/@azure/ms-rest-js/-/ms-rest-js-1.9.0.tgz#5eb6516cf20e972a2eb4c589d6b48c3151bc801b"
+  integrity sha512-cB4Z2Mg7eBmet1rfbf0QSO1XbhfknRW7B+mX3IHJq0KGHaGJvCPoVTgdsJdCkazEMK1jtANFNEDDzSQacxyzbA==
   dependencies:
     "@types/tunnel" "0.0.0"
     axios "^0.19.0"
@@ -2197,54 +2197,53 @@ bluebird@^3.5.1, bluebird@^3.5.3, bluebird@^3.5.5:
   resolved "https://registry.yarnpkg.com/bluebird/-/bluebird-3.7.2.tgz#9f229c15be272454ffa973ace0dbee79a1b0c36f"
   integrity sha512-XpNj6GDQzdfW+r2Wnn7xiSAd7TM3jzkxGXBGTtWKuSXv1xUV+azxAm8jdWZN06QTQk+2N2XB9jRDkvbmQmcRtg==
 
-botbuilder-core@4.10.4:
-  version "4.10.4"
-  resolved "https://registry.yarnpkg.com/botbuilder-core/-/botbuilder-core-4.10.4.tgz#6c61bd09036b327898a53db601b45ae1ffdff369"
-  integrity sha512-1FsAXZVNs7H7BbIfmMZFiMtNaNQYyNE7UbuWJxETIB6/s5IIXkLkSRNQBl+G28v3Q2mdCsYRpXVmCHTPCAEpUQ==
+botbuilder-core@4.11.0:
+  version "4.11.0"
+  resolved "https://registry.yarnpkg.com/botbuilder-core/-/botbuilder-core-4.11.0.tgz#4154e0eb6f7d45d693bfcc900594e72413609144"
+  integrity sha512-fKFCNsbNG8ISWUG0r63VDwmjOOjgt6TBqB6nmMb9BVVhMMhhosB0wWZCjvrzFqrUuHwaZkeEEaoJLpCRK0Etww==
   dependencies:
     assert "^1.4.1"
-    botframework-schema "4.10.4"
+    botframework-connector "4.11.0"
+    botframework-schema "4.11.0"
 
 botbuilder@^4.10.3:
-  version "4.10.4"
-  resolved "https://registry.yarnpkg.com/botbuilder/-/botbuilder-4.10.4.tgz#8ec38d8c13841329d2969216ee178e2d56fe8e4e"
-  integrity sha512-tEtxebCvSs173fSpbKJovExUhlXJBNOJwUieeW9Mx5OO6WXeczslonvivtynuQAeyAO5qzLCgOF6HGyMohXMNw==
+  version "4.11.0"
+  resolved "https://registry.yarnpkg.com/botbuilder/-/botbuilder-4.11.0.tgz#148d6b3aa59b006dede8f88283ec71682c7c5e51"
+  integrity sha512-amNKc8f9M5lGlWn3e3QTYcNFJhGAC+fWU2wV/PQG6Tn7TRBh4tMcxw3tS6WZbgPDHj1KSSe+/Ih4LOLYfYJHTQ==
   dependencies:
-    "@azure/ms-rest-js" "1.8.15"
+    "@azure/ms-rest-js" "1.9.0"
     "@types/node" "^10.17.27"
     axios "^0.19.0"
-    botbuilder-core "4.10.4"
-    botframework-connector "4.10.4"
-    botframework-streaming "4.10.4"
+    botbuilder-core "4.11.0"
+    botframework-connector "4.11.0"
+    botframework-streaming "4.11.0"
     filenamify "^4.1.0"
     fs-extra "^7.0.1"
     moment-timezone "^0.5.28"
 
-botframework-connector@4.10.4:
-  version "4.10.4"
-  resolved "https://registry.yarnpkg.com/botframework-connector/-/botframework-connector-4.10.4.tgz#3b1f55bfca380e5797d9c379a4af4038a50f0b4f"
-  integrity sha512-TsoAi5S8Jfpg+nxDswgoEiw2lG9ZRTexxGtOplcxwt7GdI19vuUP+v2mZdWtsc68vzzl/BRcBQh6NaIJmBkZ0Q==
+botframework-connector@4.11.0:
+  version "4.11.0"
+  resolved "https://registry.yarnpkg.com/botframework-connector/-/botframework-connector-4.11.0.tgz#fdf41530da132b45da886a266802ca87bcbff144"
+  integrity sha512-8Hopo/FZwMwmI5vIFwWKzHxO0pKCWN5c/ggMF3pdSqbsl2B3YcaxKBWdmwbDzIksxSGu6dV0Z91JapD/LJdgeQ==
   dependencies:
-    "@azure/ms-rest-js" "1.8.15"
+    "@azure/ms-rest-js" "1.9.0"
     "@types/jsonwebtoken" "7.2.8"
-    "@types/node" "^10.17.27"
     adal-node "0.2.1"
     base64url "^3.0.0"
-    botframework-schema "4.10.4"
-    form-data "^2.3.3"
+    botframework-schema "4.11.0"
+    cross-fetch "^3.0.5"
     jsonwebtoken "8.0.1"
-    node-fetch "^2.6.0"
     rsa-pem-from-mod-exp "^0.8.4"
 
-botframework-schema@4.10.4:
-  version "4.10.4"
-  resolved "https://registry.yarnpkg.com/botframework-schema/-/botframework-schema-4.10.4.tgz#b42eeb39d8e94a3d5e8abdb2e59be68c9b038860"
-  integrity sha512-xkbCC+BrDhfA+rPITp3dmI+YY8pqBRO4cGQhjWcmwrKp+bIsBJU8N5++u/UpSMY94KXJXjTHyYuMEE3xDYBMDg==
+botframework-schema@4.11.0:
+  version "4.11.0"
+  resolved "https://registry.yarnpkg.com/botframework-schema/-/botframework-schema-4.11.0.tgz#e7851eee76288302129d87d848484e772ce5c80c"
+  integrity sha512-K/VQ66jFTws2UmJRP3nlKMi4ZQM1xS8yGhh+lA0MoLrYJBgpzCoi9P2isbAub9QQotzQnTv5bK8NiJTwcdt+hQ==
 
-botframework-streaming@4.10.4:
-  version "4.10.4"
-  resolved "https://registry.yarnpkg.com/botframework-streaming/-/botframework-streaming-4.10.4.tgz#5cb7434a4dea81c6a7e6a3196a876749a15f98db"
-  integrity sha512-Z5N1YnO6hQMeg4DFOn7wYlYe5C8a14aQ+UiZMklap9/1Yu5izucmWPVXF65qCOG5ua8WDH/mPZyw0NKkvgcRXA==
+botframework-streaming@4.11.0:
+  version "4.11.0"
+  resolved "https://registry.yarnpkg.com/botframework-streaming/-/botframework-streaming-4.11.0.tgz#cb8d59074b4caee1e49b8f5ee07d0396eda98b9f"
+  integrity sha512-sJjC01TwMbJKx3yUN0J4AAzwggQ3+G096Kb0/oF3TmxwqibPWcNFH0feHmg5FpWVJn7q5tuZ8vnkKtdfsVnh/g==
   dependencies:
     "@types/ws" "^6.0.3"
     uuid "^3.4.0"
@@ -2961,6 +2960,13 @@ cosmiconfig@^7.0.0:
     parse-json "^5.0.0"
     path-type "^4.0.0"
     yaml "^1.10.0"
+
+cross-fetch@^3.0.5:
+  version "3.0.6"
+  resolved "https://registry.yarnpkg.com/cross-fetch/-/cross-fetch-3.0.6.tgz#3a4040bc8941e653e0e9cf17f29ebcd177d3365c"
+  integrity sha512-KBPUbqgFjzWlVcURG+Svp9TlhA5uliYtiNx/0r8nv0pdypeQCRJ9IaSIc3q/x3q8t3F75cHuwxVql1HFGHCNJQ==
+  dependencies:
+    node-fetch "2.6.1"
 
 cross-spawn@^6.0.0:
   version "6.0.5"
@@ -3851,7 +3857,7 @@ forever-agent@~0.6.1:
   resolved "https://registry.yarnpkg.com/forever-agent/-/forever-agent-0.6.1.tgz#fbc71f0c41adeb37f96c577ad1ed42d8fdacca91"
   integrity sha1-+8cfDEGt6zf5bFd60e1C2P2sypE=
 
-form-data@^2.3.2, form-data@^2.3.3:
+form-data@^2.3.2:
   version "2.5.1"
   resolved "https://registry.yarnpkg.com/form-data/-/form-data-2.5.1.tgz#f2cbec57b5e59e23716e128fe44d4e5dd23895f4"
   integrity sha512-m21N3WOmEEURgk6B9GLOE4RuWOFf28Lhh9qGYeNlGq4VDXUlJy2th2slBNU8Gp8EzloYZOibZJ7t5ecIrFSjVA==
@@ -6292,7 +6298,7 @@ node-fetch-npm@^2.0.2:
     json-parse-better-errors "^1.0.0"
     safe-buffer "^5.1.1"
 
-node-fetch@^2.5.0, node-fetch@^2.6.0, node-fetch@^2.6.1:
+node-fetch@2.6.1, node-fetch@^2.5.0, node-fetch@^2.6.1:
   version "2.6.1"
   resolved "https://registry.yarnpkg.com/node-fetch/-/node-fetch-2.6.1.tgz#045bd323631f76ed2e2b55573394416b639a0052"
   integrity sha512-V4aYg89jEoVRxRb2fJdAg8FHvI7cEyYdVAh94HH0UIK8oJxUfkjlDQN9RbMx+bEjP7+ggMiFRprSti032Oipxw==
