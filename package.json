@@ -38,7 +38,7 @@
     "husky": "^7.0.0",
     "jest": "^26.5.2",
     "lerna": "^3.22.0",
-    "license-check-and-add": "^3.0.4",
+    "license-check-and-add": "^4.0.2",
     "lint-staged": "^10.4.0",
     "prettier": "^2.1.2",
     "ts-jest": "^26.4.1",
