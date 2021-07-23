@@ -39,7 +39,7 @@
     "jest": "^26.5.2",
     "lerna": "^3.22.0",
     "license-check-and-add": "^4.0.2",
-    "lint-staged": "^10.4.0",
+    "lint-staged": "^11.0.1",
     "prettier": "^2.1.2",
     "ts-jest": "^26.4.1",
     "tslint": "^6.1.3",
