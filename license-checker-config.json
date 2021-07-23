@@ -5,6 +5,7 @@
     "coverage",
     "cypress",
     ".idea",
+    "*.DS_Store",
     "**/*.json",
     "**/*.svg",
     "**/*.png",

@@ -27,7 +27,7 @@
     "prerelease": "yarn build",
     "release": "lerna publish --conventional-commits",
     "release:alpha": "yarn release prerelease",
-    "prepare": "husky install"
+    "prepare": "npx husky install"
   },
   "devDependencies": {
     "@commitlint/cli": "^11.0.0",
