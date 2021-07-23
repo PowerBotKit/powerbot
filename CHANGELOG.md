@@ -3,6 +3,35 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.0.1-alpha.4](https://github.com/PowerBotKit/powerbot/compare/v0.0.1-alpha.3...v0.0.1-alpha.4) (2021-07-23)
+
+
+### Bug Fixes
+
+*  do not throw error if the intent is empty ([#141](https://github.com/PowerBotKit/powerbot/issues/141)) ([147946c](https://github.com/PowerBotKit/powerbot/commit/147946c61471679dbace7b15624d5226487315af))
+* **core:** change yarn lock to address security issue ([c940104](https://github.com/PowerBotKit/powerbot/commit/c940104cc06beedda6b79c130b00f7569b642dce))
+
+
+### chore
+
+* modify IntentYAMLWildcardConfig for js yaml limit ([d5387b9](https://github.com/PowerBotKit/powerbot/commit/d5387b94ec2222d9f03bdf9fd3d3d7f5f288b266))
+
+
+### Code Refactoring
+
+* **core:** use forEach to rewrite WildcardIntent#doProcess ([1629049](https://github.com/PowerBotKit/powerbot/commit/1629049220efd14d76856be52e5c621eef58960c))
+
+
+### BREAKING CHANGES
+
+* **core:** WildcardIntent#doProcess method is private
+* IntentYAMLWildcardConfig#intents change to object with
+stringg key from object arrays
+
+
+
+
+
 ## [0.0.1-alpha.3](https://github.com/PowerBotKit/powerbot/compare/v0.0.1-alpha.2...v0.0.1-alpha.3) (2020-10-29)
 
 **Note:** Version bump only for package root
