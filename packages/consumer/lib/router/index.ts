@@ -89,8 +89,12 @@ export class WorkerRouterHandler implements IWorkerRouterHandler {
 	}
 
 	getWorkerNameByIntent(intent: string): string {
-		const intentStackName = this.intent.process(intent);
-		let workerName = this.intentStack[intentStackName];
+		let workerName = null;
+		if (this.intent) {
+			// if intent yaml file has been set
+			const intentStackName = this.intent.process(intent);
+			workerName = this.intentStack[intentStackName];
+		}
 		if (!workerName) {
 			workerName = this.defaultWorker;
 		}
