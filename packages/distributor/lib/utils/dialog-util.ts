@@ -42,7 +42,7 @@ export class DialogUtil {
 	public static async getUserInfo(context: any): Promise<TeamsChannelAccount> {
 		BotKitLogger.getLogger().info('Query Teams user information');
 		let userDetails: TeamsChannelAccount;
-		if (process.env.MicrosoftAppId && process.env.MicrosoftAppId === '') {
+		if (process.env.MicrosoftAppId && process.env.MicrosoftAppId !== '') { // connect to online teams bot
 			userDetails = await TeamsInfo.getMember(
 				context,
 				context.activity.from.id
