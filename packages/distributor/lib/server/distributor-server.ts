@@ -49,23 +49,27 @@ export class DistributorServer implements IBotServer {
 		// below 3 steps need be configurable
 		if (middlewareConfig && middlewareConfig.DataPersistAdaptor) {
 			this.db = middlewareConfig.DataPersistAdaptor;
+			await this.db.init();
 		} else {
 			await this.setupDB();
 		}
 
 		if (middlewareConfig && middlewareConfig.CacheAdaptor) {
 			this.cache = middlewareConfig.CacheAdaptor;
+			await this.cache.init();
 		} else {
 			await this.setupCache();
 		}
 		if (middlewareConfig && middlewareConfig.ListenerAdaptor) {
 			this.listener = middlewareConfig.ListenerAdaptor;
+			await this.listener.init();
 		} else {
 			await this.setupListener();
 		}
 
 		if (middlewareConfig && middlewareConfig.PublisherAdaptor) {
 			this.publisher = middlewareConfig.PublisherAdaptor;
+			await this.publisher.init();
 		} else {
 			await this.setupPublisher();
 		}
