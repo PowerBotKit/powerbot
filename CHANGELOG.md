@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.0.2-alpha.0](https://github.com/PowerBotKit/powerbot/compare/v0.0.1...v0.0.2-alpha.0) (2021-07-24)
+
+
+### Bug Fixes
+
+* export more interfaces to external to allow implment ([66d7930](https://github.com/PowerBotKit/powerbot/commit/66d7930e975355ab328f08c5b4b899a4432f2bf7))
+* fix the logic error of get teams member if the distributor connect to online real bot ([4bb67a4](https://github.com/PowerBotKit/powerbot/commit/4bb67a450c97387f26847cc1d23ff1d2b35f6b33))
+
+
+
+
+
+
 ## [0.0.1](https://github.com/PowerBotKit/powerbot/compare/v0.0.1-alpha.4...v0.0.1) (2021-07-23)
 
 **Note:** Version bump only for package root
