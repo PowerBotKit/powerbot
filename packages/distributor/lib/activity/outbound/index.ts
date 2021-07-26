@@ -46,3 +46,5 @@ export class OutBoundHandler extends OutboundHandlerBase {
 export interface IMiddlewareOutbound {
 	process(dialog: GDUserSession): Promise<void>;
 }
+
+export * from './base-handler';

@@ -18,12 +18,12 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-import { IMQ } from '@powerbotkit/core';
 import { ActivityHandler, BotFrameworkAdapter } from 'botbuilder';
-import { IMiddlewareInbound } from '../../lib/activity/inbound';
-import { IMiddlewareOutbound } from '../../lib/activity/outbound';
 import { ICache } from '../cache';
 import { IDataPersist } from '../models';
+import { IMQ } from '@powerbotkit/core';
+import { IMiddlewareInbound, IMiddlewareOutbound } from '../../lib/activity';
+import { InboundHandlerBase } from '../../lib/activity/inbound/base-handler';
 
 export interface TBotConfig {
 	appId?: string;
@@ -45,7 +45,7 @@ export interface BotInstance {
 }
 
 export interface IBotServer {
-	setUpBotServer(botConfig: TBotConfig, middlewareConfig?: TMiddlewareConfig);
+	setUpBotServer(botConfig: TBotConfig, middlewareConfig?: TMiddlewareConfig, inboundHandler?: InboundHandlerBase);
 	listen(port?: string | number);
 }
 

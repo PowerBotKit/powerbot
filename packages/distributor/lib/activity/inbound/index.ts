@@ -24,13 +24,8 @@ import { ICache } from '../../cache';
 import { IDataPersist } from '../../models';
 import { InboundHandlerBase } from './base-handler';
 export class InboundHandler extends InboundHandlerBase {
-	constructor(
-		cache: ICache,
-		publisher: IMQ,
-		dataStore: IDataPersist,
-		inboundMiddleware?: IMiddlewareInbound
-	) {
-		super(cache, publisher, dataStore, inboundMiddleware);
+	constructor() {
+		super();
 		this.onMessage(async (context, next) => {
 			await this.publish(context);
 			await next();
@@ -41,8 +36,17 @@ export class InboundHandler extends InboundHandlerBase {
 			await next();
 		});
 	}
+
+	public init(cache: ICache,
+		publisher: IMQ,
+		dataStore: IDataPersist,
+		inboundMiddleware?: IMiddlewareInbound) {
+		super.init(cache, publisher, dataStore, inboundMiddleware);
+	}
 }
 
 export interface IMiddlewareInbound {
 	process(dialog: GDUserSession): Promise<void>;
 }
+
+export * from './base-handler';

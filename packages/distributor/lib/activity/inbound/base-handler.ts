@@ -36,18 +36,28 @@ export class InboundHandlerBase extends ActivityHandler {
 	private dataStore: IDataPersist;
 	private inboundMiddleware: IMiddlewareInbound;
 
-	constructor(
-		cache: ICache,
+	constructor() {
+		super();
+
+	}
+
+	public init(cache: ICache,
 		publisher: IMQ,
 		dataStore: IDataPersist,
-		inboundMiddleware?: IMiddlewareInbound
-	) {
-		super();
+		inboundMiddleware?: IMiddlewareInbound) {
 		this.cache = cache;
 		this.publisher = publisher;
 		this.dataStore = dataStore;
 		this.inboundMiddleware = inboundMiddleware;
 		this.dataStore.init();
+	}
+
+	// can be override
+	public async sendMsgOnMemberAdded(context: TurnContext) {
+		const welcome = 'Welcome to Teams bot !';
+		await context.sendActivity(
+			MessageFactory.text(welcome, welcome)
+		);
 	}
 
 	public async publish(context: TurnContext, topic?: string) {
@@ -79,9 +89,7 @@ export class InboundHandlerBase extends ActivityHandler {
 						context.activity
 					)
 				});
-				await context.sendActivity(
-					MessageFactory.text(welcomeText, welcomeText)
-				);
+				await this.sendMsgOnMemberAdded(context);
 			}
 		}
 	}

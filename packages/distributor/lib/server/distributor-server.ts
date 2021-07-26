@@ -24,7 +24,7 @@ import * as restify from 'restify';
 import { BotKitLogger, IMQ, RedisMQ } from '@powerbotkit/core';
 
 import { BotInstance, IBotServer, TBotConfig, TMiddlewareConfig } from '.';
-import { InboundHandler, IMiddlewareInbound } from '../activity/inbound';
+import { InboundHandler, InboundHandlerBase, IMiddlewareInbound } from '../activity/inbound';
 import { IMiddlewareOutbound, OutBoundHandler } from '../activity/outbound';
 import { ICache } from '../cache';
 import { RedisCache } from '../cache/redis-cache';
@@ -41,10 +41,12 @@ export class DistributorServer implements IBotServer {
 	public botInstance: BotInstance;
 	public middlewareInbound: IMiddlewareInbound;
 	public middlewareOutbound: IMiddlewareOutbound;
+	public inboundHandler: InboundHandlerBase;
 
 	public async setUpBotServer(
 		botConfig: TBotConfig,
-		middlewareConfig?: TMiddlewareConfig
+		middlewareConfig?: TMiddlewareConfig,
+		inboundHandler?: InboundHandlerBase
 	) {
 		// below 3 steps need be configurable
 		if (middlewareConfig && middlewareConfig.DataPersistAdaptor) {
@@ -72,6 +74,21 @@ export class DistributorServer implements IBotServer {
 			await this.publisher.init();
 		} else {
 			await this.setupPublisher();
+		}
+		if (inboundHandler) {
+			this.inboundHandler = inboundHandler;
+			this.inboundHandler.init(this.cache,
+				this.publisher,
+				this.db,
+				this.middlewareInbound);
+
+		} else {
+			this.inboundHandler = new InboundHandler();
+			this.inboundHandler.init(this.cache,
+				this.publisher,
+				this.db,
+				this.middlewareInbound);
+
 		}
 
 		await this.setupApp();
@@ -107,18 +124,12 @@ export class DistributorServer implements IBotServer {
 			appId: config.appId || process.env.MicrosoftAppId,
 			appPassword: config.appSecret || process.env.MicrosoftAppPassword
 		});
-		const inboundHandler = new InboundHandler(
-			this.cache,
-			this.publisher,
-			this.db,
-			this.middlewareInbound
-		);
 		const outboundHandler = new OutBoundHandler(this.middlewareOutbound);
 		outboundHandler.listen(adapter, this.cache, this.listener);
 		this.app.post('/api/messages', (req, res) => {
 			adapter.processActivity(req, res, async context => {
 				// Route to main dialog.
-				await inboundHandler.run(context);
+				await this.inboundHandler.run(context);
 			});
 		});
 	}
@@ -141,10 +152,11 @@ export class DistributorServer implements IBotServer {
 
 export const createDistributorServer = async (
 	botConfig?: TBotConfig,
-	middlewareConfig?: TMiddlewareConfig
+	middlewareConfig?: TMiddlewareConfig,
+	inboundHandler?: InboundHandlerBase
 ): Promise<IBotServer> => {
 	const server = new DistributorServer();
-	await server.setUpBotServer(botConfig, middlewareConfig);
+	await server.setUpBotServer(botConfig, middlewareConfig, inboundHandler);
 
 	return server;
 };
