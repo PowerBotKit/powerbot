@@ -2324,41 +2324,41 @@ bluebird@^3.5.1, bluebird@^3.5.3, bluebird@^3.5.5:
   resolved "https://registry.yarnpkg.com/bluebird/-/bluebird-3.7.2.tgz#9f229c15be272454ffa973ace0dbee79a1b0c36f"
   integrity sha512-XpNj6GDQzdfW+r2Wnn7xiSAd7TM3jzkxGXBGTtWKuSXv1xUV+azxAm8jdWZN06QTQk+2N2XB9jRDkvbmQmcRtg==
 
-botbuilder-core@4.14.0:
-  version "4.14.0"
-  resolved "https://registry.yarnpkg.com/botbuilder-core/-/botbuilder-core-4.14.0.tgz#27e280498239e9fdbf68419427736a7a768917f8"
-  integrity sha512-ZlN+K/SGbj2rKBOji7Ihl0FSR9vmcRM/m6bh1e8D5/+SrSakmIKOC1LKFV5XZ3fCCi2pUxz9mjJAs0GNjf9y2g==
+botbuilder-core@4.14.1:
+  version "4.14.1"
+  resolved "https://registry.yarnpkg.com/botbuilder-core/-/botbuilder-core-4.14.1.tgz#dc0a0287d5c0fd70acef8561d00f904bb1a20c40"
+  integrity sha512-DgYpV398+EYijBS75YtYGl8T6t3N8Fj/Idblw2mFhLfpA5vP+j5BYgEKvXBpO/cYPoYj+4zU5aSFT9KQS+0Xgw==
   dependencies:
-    botbuilder-dialogs-adaptive-runtime-core "4.14.0-preview"
-    botbuilder-stdlib "4.14.0-internal"
-    botframework-connector "4.14.0"
-    botframework-schema "4.14.0"
+    botbuilder-dialogs-adaptive-runtime-core "4.14.1-preview"
+    botbuilder-stdlib "4.14.1-internal"
+    botframework-connector "4.14.1"
+    botframework-schema "4.14.1"
     uuid "^8.3.2"
     zod "~1.11.17"
 
-botbuilder-dialogs-adaptive-runtime-core@4.14.0-preview:
-  version "4.14.0-preview"
-  resolved "https://registry.yarnpkg.com/botbuilder-dialogs-adaptive-runtime-core/-/botbuilder-dialogs-adaptive-runtime-core-4.14.0-preview.tgz#770b35688cac583f5862f1fd5aea67557e54f1cf"
-  integrity sha512-+L+I//BXx23Kr9G1nf9lfcPm/zCLvL2lchs7SCBtnmtFbIScPewwQL0MIhjl2dxalfOM9Fzj1hAq4WtKxyfGQw==
+botbuilder-dialogs-adaptive-runtime-core@4.14.1-preview:
+  version "4.14.1-preview"
+  resolved "https://registry.yarnpkg.com/botbuilder-dialogs-adaptive-runtime-core/-/botbuilder-dialogs-adaptive-runtime-core-4.14.1-preview.tgz#9e06afafe73e10cba13fd2017ca8f70f66b2a5db"
+  integrity sha512-+lBfZzom5UMHnHXcTyCHjHZtwVO5EemeVckg0RzPysCuqXB01Jp9Dknfiy1ldtPJoJYHr4s40gAvIIA5ijIMcg==
   dependencies:
     dependency-graph "^0.10.0"
 
-botbuilder-stdlib@4.14.0-internal:
-  version "4.14.0-internal"
-  resolved "https://registry.yarnpkg.com/botbuilder-stdlib/-/botbuilder-stdlib-4.14.0-internal.tgz#000cf0068b35fdc2f179b26ef2c73df303054c3f"
-  integrity sha512-XByXxSLpYrlqxYnVZRKMCQCoy21mUmjgOENssyNFxED1PJXjnR0PoiPTA5OH/qUh3bcJqJdD63ZuyyhH3MIiaA==
+botbuilder-stdlib@4.14.1-internal:
+  version "4.14.1-internal"
+  resolved "https://registry.yarnpkg.com/botbuilder-stdlib/-/botbuilder-stdlib-4.14.1-internal.tgz#3a1d195fb3d143f7372bae3a3991491c479e7e18"
+  integrity sha512-cyEw/X5i21e2mq6qn7NViSk5f/jg2gukyQkExX1CWh0TEM3w8UtzkZX2zq+lpDLDkBTJWA09BbiVS/D/IM6PVA==
 
 botbuilder@^4.10.3:
-  version "4.14.0"
-  resolved "https://registry.yarnpkg.com/botbuilder/-/botbuilder-4.14.0.tgz#d85bdea44cf5bebb1d6ea898946b866b71073d3c"
-  integrity sha512-uJVLyHo6C44pu7vDRBoNkdfYM6awiZZwzOPO1NDr4nFnmllt4H88wgdDEIzDwBRf2AW0XkD8JIpYF8BOZxXSOA==
+  version "4.14.1"
+  resolved "https://registry.yarnpkg.com/botbuilder/-/botbuilder-4.14.1.tgz#43fb643bef0fa5ef7a0d73dc7668349af0019ed9"
+  integrity sha512-CEtWIDVAAOs6fM9yr9gAVOwNpF2l9yVBk/2Wc0OQgcmIr7OTTBgR/ZnpeRTioyGef1EGC2OkoIggEjZPet7rwA==
   dependencies:
     "@azure/ms-rest-js" "1.9.1"
     axios "^0.21.1"
-    botbuilder-core "4.14.0"
-    botbuilder-stdlib "4.14.0-internal"
-    botframework-connector "4.14.0"
-    botframework-streaming "4.14.0"
+    botbuilder-core "4.14.1"
+    botbuilder-stdlib "4.14.1-internal"
+    botframework-connector "4.14.1"
+    botframework-streaming "4.14.1"
     dayjs "^1.10.3"
     filenamify "^4.1.0"
     fs-extra "^7.0.1"
@@ -2366,10 +2366,10 @@ botbuilder@^4.10.3:
     uuid "^8.3.2"
     zod "~1.11.17"
 
-botframework-connector@4.14.0:
-  version "4.14.0"
-  resolved "https://registry.yarnpkg.com/botframework-connector/-/botframework-connector-4.14.0.tgz#06096e7f7266e3c48c79d32fe47efb75f46cdce6"
-  integrity sha512-L0ywhPxhX2FdcyCQ5NrVvaqTxyVDmgOKF1leTrluMmf+yJ0FNswWitnkmh7flMvSoln9TkD/6KM4zJnCRkO2cw==
+botframework-connector@4.14.1:
+  version "4.14.1"
+  resolved "https://registry.yarnpkg.com/botframework-connector/-/botframework-connector-4.14.1.tgz#3f9605f34d0ddb3688881b9ac1904afe34992dc2"
+  integrity sha512-HQ5fsh5cB6tnUqAQurg8EpHCV/SyLsq2ava11SKqvOR+2nh6YEYDAsso/yDsUOL9Dfz77NweVI9JhS/F9K2Z6g==
   dependencies:
     "@azure/ms-rest-js" "1.9.1"
     "@types/jsonwebtoken" "7.2.8"
@@ -2377,24 +2377,24 @@ botframework-connector@4.14.0:
     adal-node "0.2.2"
     axios "^0.21.1"
     base64url "^3.0.0"
-    botbuilder-stdlib "4.14.0-internal"
-    botframework-schema "4.14.0"
+    botbuilder-stdlib "4.14.1-internal"
+    botframework-schema "4.14.1"
     cross-fetch "^3.0.5"
     jsonwebtoken "8.0.1"
     rsa-pem-from-mod-exp "^0.8.4"
 
-botframework-schema@4.14.0:
-  version "4.14.0"
-  resolved "https://registry.yarnpkg.com/botframework-schema/-/botframework-schema-4.14.0.tgz#492ea51d6feb020cc6232fd6a289ab06c2e3f75d"
-  integrity sha512-GDFjcnyYnNmp/8jc5vnupEBF/KhtGCv4QDugH/7Xq6xDO64yG6YQPe5apsPVjER4vdePJ+DNpkg39CEF/ML8Dw==
+botframework-schema@4.14.1:
+  version "4.14.1"
+  resolved "https://registry.yarnpkg.com/botframework-schema/-/botframework-schema-4.14.1.tgz#1bd19eea0dd3c9e5f1c0e0c874add8c7f9fb743c"
+  integrity sha512-v1zptzaCuNMmRV+5gb4+8K2BtTh5qyAN+WC5I706gk7BcYSVI+RP33g9bFHRERaNcqGHTjsujiOmEm4AJK4nGQ==
   dependencies:
-    botbuilder-stdlib "4.14.0-internal"
+    botbuilder-stdlib "4.14.1-internal"
     uuid "^8.3.2"
 
-botframework-streaming@4.14.0:
-  version "4.14.0"
-  resolved "https://registry.yarnpkg.com/botframework-streaming/-/botframework-streaming-4.14.0.tgz#de69318101e30fa093c86a523736b3abbf3f1fb6"
-  integrity sha512-OOg1VpXAWfmXX03P/2pmAcY997/jmhOphfwIRwzT8HJyy3ozpDPymEH6lpGkrlWTtMg3k8wb8SXEflgGKJifnA==
+botframework-streaming@4.14.1:
+  version "4.14.1"
+  resolved "https://registry.yarnpkg.com/botframework-streaming/-/botframework-streaming-4.14.1.tgz#3eed51c2581886b6d5fdd9dee41291eaf7a7cc3d"
+  integrity sha512-x5J9CB/PbKieJroPDy0qgwx7l6s9djkIxW7nSfq4neqKpquPJe+tukw2heINvXZWGkL3OXlaHTXVJRaRsoyNRQ==
   dependencies:
     "@types/node" "^10.17.27"
     "@types/ws" "^6.0.3"
