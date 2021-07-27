@@ -24,7 +24,11 @@ import * as restify from 'restify';
 import { BotKitLogger, IMQ, RedisMQ } from '@powerbotkit/core';
 
 import { BotInstance, IBotServer, TBotConfig, TMiddlewareConfig } from '.';
-import { InboundHandler, InboundHandlerBase, IMiddlewareInbound } from '../activity/inbound';
+import {
+	InboundHandler,
+	InboundHandlerBase,
+	IMiddlewareInbound
+} from '../activity/inbound';
 import { IMiddlewareOutbound, OutBoundHandler } from '../activity/outbound';
 import { ICache } from '../cache';
 import { RedisCache } from '../cache/redis-cache';
@@ -77,18 +81,20 @@ export class DistributorServer implements IBotServer {
 		}
 		if (inboundHandler) {
 			this.inboundHandler = inboundHandler;
-			this.inboundHandler.init(this.cache,
+			this.inboundHandler.init(
+				this.cache,
 				this.publisher,
 				this.db,
-				this.middlewareInbound);
-
+				this.middlewareInbound
+			);
 		} else {
 			this.inboundHandler = new InboundHandler();
-			this.inboundHandler.init(this.cache,
+			this.inboundHandler.init(
+				this.cache,
 				this.publisher,
 				this.db,
-				this.middlewareInbound);
-
+				this.middlewareInbound
+			);
 		}
 
 		await this.setupApp();

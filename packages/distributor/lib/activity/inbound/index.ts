@@ -37,10 +37,12 @@ export class InboundHandler extends InboundHandlerBase {
 		});
 	}
 
-	public init(cache: ICache,
+	public init(
+		cache: ICache,
 		publisher: IMQ,
 		dataStore: IDataPersist,
-		inboundMiddleware?: IMiddlewareInbound) {
+		inboundMiddleware?: IMiddlewareInbound
+	) {
 		super.init(cache, publisher, dataStore, inboundMiddleware);
 	}
 }

@@ -28,8 +28,8 @@ import {
 	MessageType
 } from '@powerbotkit/core';
 
-import { Activity, Attachment, CardFactory, MessageFactory } from 'botbuilder';
 import * as ACData from 'adaptivecards-templating';
+import { Activity, Attachment, CardFactory, MessageFactory } from 'botbuilder';
 
 export interface IBotWorker {
 	process(dialog: GDUserSession): Promise<GDUserSession>;
@@ -90,13 +90,12 @@ export class BaseWorker implements IBotWorker {
 	getRenderCard(cardTemplate: object, data: object): Partial<Activity> {
 		const template: ACData.Template = new ACData.Template(cardTemplate);
 		const context: ACData.IEvaluationContext = {
-			$root: {},
+			$root: {}
 		};
 		context.$root = data;
 		const content: object = template.expand(context);
 		const card: Attachment = CardFactory.adaptiveCard(content);
-	
+
 		return MessageFactory.attachment(card);
-	
 	}
 }

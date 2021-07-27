@@ -38,13 +38,14 @@ export class InboundHandlerBase extends ActivityHandler {
 
 	constructor() {
 		super();
-
 	}
 
-	public init(cache: ICache,
+	public init(
+		cache: ICache,
 		publisher: IMQ,
 		dataStore: IDataPersist,
-		inboundMiddleware?: IMiddlewareInbound) {
+		inboundMiddleware?: IMiddlewareInbound
+	) {
 		this.cache = cache;
 		this.publisher = publisher;
 		this.dataStore = dataStore;
@@ -55,9 +56,7 @@ export class InboundHandlerBase extends ActivityHandler {
 	// can be override
 	public async sendMsgOnMemberAdded(context: TurnContext) {
 		const welcome = 'Welcome to Teams bot !';
-		await context.sendActivity(
-			MessageFactory.text(welcome, welcome)
-		);
+		await context.sendActivity(MessageFactory.text(welcome, welcome));
 	}
 
 	public async publish(context: TurnContext, topic?: string) {

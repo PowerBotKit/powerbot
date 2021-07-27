@@ -23,23 +23,20 @@ import { InputMiddleware, OutputMiddleware } from '@powerbotkit/consumer';
 import { GDUserSession } from '@powerbotkit/core';
 
 export class InputMiddlewareGlobal implements InputMiddleware {
-	async process(context: GDUserSession) {
-
-	}
+	// tslint:disable-next-line:no-empty
+	async process(context: GDUserSession) {}
 }
 
 export class OutputMiddlewareGlobal implements OutputMiddleware {
-	async process(context: GDUserSession) {
-
-	}
+	// tslint:disable-next-line:no-empty
+	async process(context: GDUserSession) {}
 }
 export class InputMiddleware4Worker implements InputMiddleware {
-	async process(context: GDUserSession) {
-		
-	}
+	// tslint:disable-next-line:no-empty
+	async process(context: GDUserSession) {}
 }
 
 export class OutputMiddleware4Worker implements OutputMiddleware {
-	async process(context: GDUserSession) {
-	}
+	// tslint:disable-next-line:no-empty
+	async process(context: GDUserSession) {}
 }
