@@ -5,6 +5,7 @@
     "coverage",
     "cypress",
     ".idea",
+    ".husky/_",
     "*.DS_Store",
     "**/*.json",
     "**/*.svg",
