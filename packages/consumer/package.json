@@ -26,6 +26,8 @@
   },
   "dependencies": {
     "@powerbotkit/core": "^0.0.2-alpha.0",
+    "adaptive-expressions": "^4.14.1",
+    "adaptivecards-templating": "^2.1.0",
     "js-yaml": "^3.14.0",
     "redis": "^3.0.2"
   }

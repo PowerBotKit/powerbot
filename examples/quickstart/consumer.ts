@@ -25,10 +25,10 @@ import {
 	IWorkerRouterHandler,
 	TConsumerServerConfig,
 	TMiddlewareConfig,
-	WorkerRouterHandler
+	WorkerRouterHandler,
 } from '@powerbotkit/consumer';
 
-import { GDUserSession, MessageOutput } from '@powerbotkit/core';
+import { GDUserSession, MessageOutput, MessageType } from '@powerbotkit/core';
 import {
 	InputMiddleware4Worker,
 	InputMiddlewareGlobal,
@@ -46,9 +46,28 @@ class EchoWorker extends BaseWorker {
 
 	echoService(dialog: GDUserSession): MessageOutput {
 		const userInput = super.getUserInput(dialog);
+		const card = {
+			"type": "AdaptiveCard",
+			"version": "1.0",
+			"body": [
+			  {
+				"type": "TextBlock",
+				"text": "Echo ${value}!",
+				"size": "large"
+			  }
+			],
+			"actions": [
+			  {
+				"type": "Action.OpenUrl",
+				"url": "http://adaptivecards.io",
+				"title": "Learn More"
+			  }
+			]
+		  };
+		const result = super.getRenderCard(card, userInput);
 		const outputMessage: MessageOutput = {
-			type: userInput.type,
-			value: `Echo ${userInput.value}`
+			type: MessageType.card,
+			value: result
 		};
 
 		return outputMessage;
