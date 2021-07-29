@@ -72,7 +72,6 @@ export class InboundHandlerBase extends ActivityHandler {
 
 	public async handleMemberAdded(context: TurnContext) {
 		const membersAdded = context.activity.membersAdded;
-		const welcomeText = 'Hello and welcome!';
 		for (const member of membersAdded) {
 			if (member.id !== context.activity.recipient.id) {
 				const dialogKey = DialogUtil.getDialogKey(
