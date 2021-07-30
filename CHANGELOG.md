@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.0.2-alpha.2](https://github.com/PowerBotKit/powerbot/compare/v0.0.2-alpha.1...v0.0.2-alpha.2) (2021-07-30)
+
+
+### Bug Fixes
+
+* BaseWorker redirect function need bind this to call dialog service ([354db90](https://github.com/PowerBotKit/powerbot/commit/354db909318c3ae43e2f195eeaea5ec10e554b61))
+* DialogUtil need to export ([9a80a12](https://github.com/PowerBotKit/powerbot/commit/9a80a1277bb36f05e172610987761e33614a44dd))
+
+
+
+
+
 ## [0.0.2-alpha.1](https://github.com/PowerBotKit/powerbot/compare/v0.0.2-alpha.0...v0.0.2-alpha.1) (2021-07-27)
 
 
