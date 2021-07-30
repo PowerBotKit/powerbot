@@ -63,7 +63,7 @@ export class BaseWorker implements IBotWorker {
 
 	async redirect(dialog: GDUserSession) {
 		const func: Function = this[dialog.service || this.defaultService];
-		const output: MessageOutput = await func(dialog);
+		const output: MessageOutput = await func.call(this, dialog);
 		this.setBotOutput(output, dialog);
 	}
 
