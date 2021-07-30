@@ -32,7 +32,7 @@
     "botbuilder": "^4.10.3",
     "dotenv": "^10.0.0",
     "lodash": "^4.17.20",
-    "lowdb": "^2.1.0",
+    "lowdb": "^1.0.0",
     "redis": "^3.0.2",
     "replace": "^1.2.0",
     "restify": "^8.5.1",
