@@ -19,15 +19,7 @@
 // THE SOFTWARE.
 
 import { BotKitLogger, GDUserSession, MessageType } from '@powerbotkit/core';
-import {
-	Activity,
-	Attachment,
-	BotFrameworkAdapter,
-	CardFactory,
-	MessageFactory
-} from 'botbuilder';
-import * as fs from 'fs';
-import * as path from 'path';
+import { Activity, BotFrameworkAdapter } from 'botbuilder';
 import { IMiddlewareOutbound } from '.';
 import { ICache } from '../../cache';
 
@@ -49,10 +41,10 @@ export class OutboundHandlerBase {
 		await adapter.continueConversation(
 			dialog.botConversion,
 			async turnContext => {
-				if (dialog.output.type === MessageType.card) {
+				if (dialog.output.type === MessageType.card_add) {
 					const message: Partial<Activity> = dialog.output.value;
 					await turnContext.sendActivity(message);
-				} else if (dialog.output.type === MessageType.text) {
+				} else if (dialog.output.type === MessageType.text_add) {
 					await turnContext.sendActivity(dialog.output.value);
 				} else {
 					BotKitLogger.getLogger().error('Can not identify message type');

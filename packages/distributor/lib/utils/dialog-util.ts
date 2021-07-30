@@ -84,11 +84,11 @@ export class DialogUtil {
 			service: '',
 			step: 0,
 			input: {
-				type: MessageType.text,
+				type: MessageType.text_add,
 				value: context.activity.text,
 				action: null
 			},
-			output: { type: MessageType.text, value: '', action: null },
+			output: { type: MessageType.text_add, value: '', action: null },
 			history: []
 		};
 	}
@@ -98,18 +98,19 @@ export class DialogUtil {
 		session: GDUserSession
 	): GDUserSession {
 		if (typeof activity.text === 'string') {
-			session.input.type = MessageType.text;
+			session.input.type = MessageType.text_add;
 			session.input.value = activity.text;
 		} else {
-			session.input.type = MessageType.card;
+			session.input.type = MessageType.card_add;
 			session.input.value = activity.value;
 		}
 
 		this.addHistory(
 			session,
 			InitiatorType.user,
-			MessageType.text,
-			activity.text
+			MessageType.text_add,
+			activity.text,
+			activity.id
 		);
 
 		return session;
@@ -119,13 +120,15 @@ export class DialogUtil {
 		session: GDUserSession,
 		initiatorType: InitiatorType,
 		messageType: MessageType,
-		value: string
+		value: string,
+		activityId: string
 	) {
 		return CoreSessionUtil.addHistory(
 			session,
 			initiatorType,
 			messageType,
-			value
+			value,
+			activityId
 		);
 	}
 }

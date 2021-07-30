@@ -37,8 +37,12 @@ export enum MessageAction {
 }
 
 export enum MessageType {
-	card,
-	text
+	card_add,
+	text_add,
+	card_edit,
+	text_edit,
+	card_delete,
+	text_delete
 }
 
 export interface MessageInput {
@@ -63,6 +67,7 @@ export interface Event {
 	type: MessageType; // card or plantext
 	value: string | any; // card name or user input
 	timestamp: Date;
+	activityId: string;
 }
 
 // TODO: need to consider move this part, because we don't want to include botbuilder dependency in core module
@@ -95,13 +100,15 @@ export class CoreSessionUtil {
 		session: GDUserSession,
 		initiatorType: InitiatorType,
 		messageType: MessageType,
-		value: string
+		value: string,
+		activityId: string
 	) {
 		const event: Event = {
 			initiator: initiatorType,
 			type: messageType,
 			value,
-			timestamp: new Date()
+			timestamp: new Date(),
+			activityId: activityId || ''
 		};
 		if (session && session.history) {
 			session.history.push(event);

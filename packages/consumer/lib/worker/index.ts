@@ -71,7 +71,7 @@ export class BaseWorker implements IBotWorker {
 		BotKitLogger.getLogger().info('Start dummy service:' + dialog.input.value);
 
 		return {
-			type: MessageType.text,
+			type: MessageType.text_add,
 			value: 'dummy message for test'
 		};
 	}
@@ -82,7 +82,8 @@ export class BaseWorker implements IBotWorker {
 			initiator: InitiatorType.bot,
 			type: output.type,
 			value: output.value,
-			timestamp: new Date()
+			timestamp: new Date(),
+			activityId: ''
 		};
 		dialog.history.push(event);
 	}
