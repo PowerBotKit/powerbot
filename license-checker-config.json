@@ -4,6 +4,7 @@
     ".github/ISSUE_TEMPLATE",
     "coverage",
     "cypress",
+    "**/*.log",
     ".idea",
     ".husky/_",
     "*.DS_Store",
