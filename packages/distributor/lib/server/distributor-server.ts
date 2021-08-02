@@ -107,7 +107,12 @@ export class DistributorServer implements IBotServer {
 	}
 
 	private async setupCache() {
-		this.cache = new RedisCache();
+		this.cache = new RedisCache({
+			port: process.env.CACHE_REDIS_PORT
+				? parseInt(process.env.CACHE_REDIS_PORT, 10)
+				: 6379,
+			host: process.env.CACHE_REDIS_HOST || '127.0.0.1'
+		});
 		await this.cache.init();
 	}
 
