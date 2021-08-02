@@ -13,6 +13,7 @@
       "ignoreChanges": [
         "*.md"
       ],
+      "message": "chore(release): %s",
       "verifyAccess": false,
       "verifyRegistry": false
     }
