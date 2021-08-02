@@ -26,7 +26,9 @@ export class RedisMQ implements IMQ {
 	public async init(): Promise<void> {
 		return new Promise((resolve, reject) => {
 			const client = createClient({
-				port: 6379,
+				port: process.env.REDISPORT
+					? parseInt(process.env.REDISPORT, 10)
+					: 6379,
 				host: process.env.REDISCACHEHOSTNAME,
 				password: process.env.REDISCACHEKEY,
 				tls: null
