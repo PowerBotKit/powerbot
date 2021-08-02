@@ -48,10 +48,12 @@ export class DialogUtil {
 				context,
 				context.activity.from.id
 			);
+			/* tslint:disable:no-console */
 			console.log('Print Context');
 			console.log(context);
 			console.log('Load User Info from teams');
 			console.log(userDetails);
+			/* tslint:enable:no-console */
 		} else {
 			// for local bot emulator
 			BotKitLogger.getLogger().info(

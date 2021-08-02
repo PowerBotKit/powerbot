@@ -61,11 +61,8 @@ export class RedisMQ implements IMQ {
 	public async onMessage(
 		callback: (channel: string, data: any) => Promise<void>
 	) {
-		this.client.on(
-			'message',
-			async (channel, data: any): Promise<void> => {
-				return callback(channel, data);
-			}
-		);
+		this.client.on('message', async (channel, data: any): Promise<void> => {
+			return callback(channel, data);
+		});
 	}
 }
