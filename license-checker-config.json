@@ -6,6 +6,7 @@
     "cypress",
     "**/*.log",
     ".idea",
+    ".npmrc",
     ".husky/_",
     "*.DS_Store",
     "**/*.json",
