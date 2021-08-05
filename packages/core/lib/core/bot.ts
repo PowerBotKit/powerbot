@@ -26,8 +26,16 @@ export interface GDWorker {
 }
 
 export interface GDUser {
+	id?: string;
 	email?: string;
+	/**
+	 * @deprecated please use name
+	 */
 	username?: string;
+	name?;
+	string;
+	givenName?: string;
+	surname?: string;
 }
 
 export enum MessageAction {
