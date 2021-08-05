@@ -24,7 +24,7 @@ module.exports = {
 	'*.ts?(x)': filenames => {
 		const tslint =
 			filenames.length > 10
-				? 'yarn tslint'
+				? 'yarn tslint --fix'
 				: `tslint --format verbose ${filenames.join(' ')}`;
 		const prettier = 'prettier --parser=typescript --write **/*.ts';
 		const git = `git add ${filenames.join(' ')}`;

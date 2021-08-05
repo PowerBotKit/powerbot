@@ -32,8 +32,7 @@ export interface GDUser {
 	 * @deprecated please use name
 	 */
 	username?: string;
-	name?;
-	string;
+	name?: string;
 	givenName?: string;
 	surname?: string;
 }
