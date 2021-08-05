@@ -70,7 +70,6 @@ export class RedisMQ implements IMQ {
 export class RedisTlsMQ extends RedisMQ {
 	public async init(): Promise<void> {
 		return new Promise((resolve, reject) => {
-			// client = redis.createClient(config.port, config.host, { auth_pass: config.password, tls: { servername: config.host } });
 			const client = createClient(
 				process.env.REDISPORT ? parseInt(process.env.REDISPORT, 10) : 6380,
 				process.env.REDISCACHEHOSTNAME,
