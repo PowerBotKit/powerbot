@@ -19,7 +19,6 @@
     "tslint": "tslint --format verbose -c tslint.json \"+(packages|tools|examples)/**/*.+(ts)\"",
     "format": "prettier --check --parser typescript \"{packages,tools,examples}/**/*.{t,j}s?(x)\"",
     "lint": "yarn tslint && yarn format",
-    "preinstall": "node tools/check-yarn.js",
     "build": "lerna run --stream --sort build",
     "check:license": "license-check-and-add check",
     "clean": "yarn workspaces run clean",
