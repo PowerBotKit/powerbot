@@ -20,4 +20,5 @@
 
 export * from './base-handler';
 export * from './handler';
+export * from './hook';
 export * from './middleware';
