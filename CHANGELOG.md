@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.0.2-alpha.8](https://github.com/PowerBotKit/powerbot/compare/v0.0.2-alpha.7...v0.0.2-alpha.8) (2021-08-06)
+
+
+### Bug Fixes
+
+* add hook export ([9d8cc0b](https://github.com/PowerBotKit/powerbot/commit/9d8cc0b15c6461a2e63d601810b74b984dbd505f))
+* fix distributor-server interal import path ([6956903](https://github.com/PowerBotKit/powerbot/commit/6956903308824f060528cfaae3c551bbf41be396))
+
+
+
+
+
 ## [0.0.2-alpha.7](https://github.com/PowerBotKit/powerbot/compare/v0.0.2-alpha.6...v0.0.2-alpha.7) (2021-08-06)
 
 **Note:** Version bump only for package root
