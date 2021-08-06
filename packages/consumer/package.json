@@ -1,7 +1,7 @@
 {
   "name": "@powerbotkit/consumer",
   "version": "0.0.2-alpha.6",
-  "description": "> TODO: description",
+  "description": "powerbot-consumer",
   "author": "Power Bot Kit Team",
   "homepage": "https://github.com/PowerBotKit/powerbot/tree/develop/packages/consumer#readme",
   "license": "MIT",
