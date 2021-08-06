@@ -18,6 +18,12 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-export * from './base-handler';
-export * from './handler';
-export * from './middleware';
+import { TurnContext } from 'botbuilder-core';
+
+export interface OnPreMessage {
+	onPreMessage(context: TurnContext);
+}
+
+export interface OnPostMessage {
+	onPostMessage(context: TurnContext);
+}

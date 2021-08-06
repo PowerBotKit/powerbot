@@ -18,6 +18,39 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-export * from './base-handler';
-export * from './handler';
-export * from './middleware';
+import { IMQ } from '@powerbotkit/core';
+import { ICache } from '../../cache';
+import { IDataPersist } from '../../models';
+import { InboundHandlerBase } from './base-handler';
+import { OnPostMessage, OnPreMessage } from './hook';
+import { IMiddlewareInbound } from './middleware';
+
+export class InboundHandler extends InboundHandlerBase {
+	constructor() {
+		super();
+		this.onMessage(async (context, next) => {
+			if ((this as unknown as OnPreMessage).onPreMessage) {
+				(this as unknown as OnPreMessage).onPreMessage(context);
+			}
+			await this.publish(context);
+			await next();
+			if ((this as unknown as OnPostMessage).onPostMessage) {
+				(this as unknown as OnPostMessage).onPostMessage(context);
+			}
+		});
+
+		this.onMembersAdded(async (context, next) => {
+			await this.handleMemberAdded(context);
+			await next();
+		});
+	}
+
+	public init(
+		cache: ICache,
+		publisher: IMQ,
+		dataStore: IDataPersist,
+		inboundMiddleware?: IMiddlewareInbound
+	) {
+		super.init(cache, publisher, dataStore, inboundMiddleware);
+	}
+}

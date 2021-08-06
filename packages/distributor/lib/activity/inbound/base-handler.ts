@@ -25,10 +25,10 @@ import {
 	TeamsChannelAccount,
 	TurnContext
 } from 'botbuilder';
-import { IMiddlewareInbound } from '.';
 import { ICache } from '../../cache';
 import { IDataPersist } from '../../models';
 import { DialogUtil } from '../../utils/dialog-util';
+import { IMiddlewareInbound } from './middleware';
 
 export class InboundHandlerBase extends ActivityHandler {
 	private cache: ICache;
