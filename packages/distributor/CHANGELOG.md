@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.0.2-alpha.6](https://github.com/PowerBotKit/powerbot/compare/v0.0.2-alpha.5...v0.0.2-alpha.6) (2021-08-06)
+
+
+### Features
+
+* provide pre and post hook for onMessage ([7b39314](https://github.com/PowerBotKit/powerbot/commit/7b3931458d235a4840a40aedce19ea3abcbab5dd))
+
+
+### Reverts
+
+* Revert "feat: add print user infologgs" (#154) ([a42efd4](https://github.com/PowerBotKit/powerbot/commit/a42efd4976014572686cab5fe45fa4f877cd3c00)), closes [#154](https://github.com/PowerBotKit/powerbot/issues/154)
+
+
+
+
+
 ## [0.0.2-alpha.5](https://github.com/PowerBotKit/powerbot/compare/v0.0.2-alpha.4...v0.0.2-alpha.5) (2021-08-02)
 
 

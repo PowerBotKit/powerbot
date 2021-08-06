@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.0.2-alpha.6](https://github.com/PowerBotKit/powerbot/compare/v0.0.2-alpha.5...v0.0.2-alpha.6) (2021-08-06)
+
+
+### Features
+
+* add tls redis support ([#155](https://github.com/PowerBotKit/powerbot/issues/155)) ([62d4448](https://github.com/PowerBotKit/powerbot/commit/62d4448d83948e99c6f3c9953a4678a74c618643))
+* **core:** add more fields for GDUser ([643f969](https://github.com/PowerBotKit/powerbot/commit/643f969170ed0ed7ef154d67b5a0071545b66627))
+* provide pre and post hook for onMessage ([7b39314](https://github.com/PowerBotKit/powerbot/commit/7b3931458d235a4840a40aedce19ea3abcbab5dd))
+
+
+### Reverts
+
+* Revert "feat: add print user infologgs" (#154) ([a42efd4](https://github.com/PowerBotKit/powerbot/commit/a42efd4976014572686cab5fe45fa4f877cd3c00)), closes [#154](https://github.com/PowerBotKit/powerbot/issues/154)
+
+
+
+
+
 ## [0.0.2-alpha.5](https://github.com/PowerBotKit/powerbot/compare/v0.0.2-alpha.4...v0.0.2-alpha.5) (2021-08-02)
 
 
