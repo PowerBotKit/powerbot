@@ -18,7 +18,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-import { GDUserSession } from './../../../../core/lib/core/bot';
+import { GDUserSession } from '@powerbotkit/core';
 
 export interface IMiddlewareInbound {
 	process(dialog: GDUserSession): Promise<void>;

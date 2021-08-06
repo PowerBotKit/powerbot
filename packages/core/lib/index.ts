@@ -19,4 +19,5 @@
 // THE SOFTWARE.
 
 export * from './core';
+export * from './intent';
 export * from './mq';

@@ -19,6 +19,6 @@
       "test/*": ["test/*"]
     }
   },
-  "files": ["index.ts"],
+  "files": ["lib/index.ts"],
   "exclude": ["node_modules"]
 }

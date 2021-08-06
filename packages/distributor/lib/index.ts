@@ -17,8 +17,9 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
-export * from './lib/activity';
-export * from './lib/cache';
-export * from './lib/models';
-export * from './lib/server';
-export * from './lib/utils';
+
+export * from './activity';
+export * from './cache';
+export * from './models';
+export * from './server';
+export * from './utils';
