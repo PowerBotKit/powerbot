@@ -25,7 +25,7 @@
     "test": "jest"
   },
   "dependencies": {
-    "@powerbotkit/core": "^0.0.2-alpha.7",
+    "@powerbotkit/core": "^0.0.2-alpha.8",
     "adaptive-expressions": "^4.14.1",
     "adaptivecards-templating": "^2.1.0",
     "js-yaml": "^4.1.0",
