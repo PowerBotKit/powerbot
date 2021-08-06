@@ -20,8 +20,8 @@
 
 import { IMQ } from '@powerbotkit/core';
 import { ActivityHandler, BotFrameworkAdapter } from 'botbuilder';
-import { IMiddlewareInbound, IMiddlewareOutbound } from '../../lib/activity';
-import { InboundHandlerBase } from '../../lib/activity/inbound/base-handler';
+import { InboundHandlerBase, IMiddlewareInbound } from '../activity/inbound';
+import { IMiddlewareOutbound } from '../activity/outbound';
 import { ICache } from '../cache';
 import { IDataPersist } from '../models';
 
