@@ -22,7 +22,12 @@ import { IMQ } from '@powerbotkit/core';
 import { ICache } from '../../cache';
 import { IDataPersist } from '../../models';
 import { InboundHandlerBase } from './base-handler';
-import { OnPostMessage, OnPreMessage } from './hook';
+import {
+	OnPostMembersAdded,
+	OnPostMessage,
+	OnPreMembersAdded,
+	OnPreMessage
+} from './hook';
 import { IMiddlewareInbound } from './middleware';
 
 export class InboundHandler extends InboundHandlerBase {
@@ -30,18 +35,26 @@ export class InboundHandler extends InboundHandlerBase {
 		super();
 		this.onMessage(async (context, next) => {
 			if ((this as unknown as OnPreMessage).onPreMessage) {
-				(this as unknown as OnPreMessage).onPreMessage(context);
+				await (this as unknown as OnPreMessage).onPreMessage(context);
 			}
 			await this.publish(context);
 			await next();
 			if ((this as unknown as OnPostMessage).onPostMessage) {
-				(this as unknown as OnPostMessage).onPostMessage(context);
+				await (this as unknown as OnPostMessage).onPostMessage(context);
 			}
 		});
 
 		this.onMembersAdded(async (context, next) => {
+			if ((this as unknown as OnPreMembersAdded).onPreMembersAdded) {
+				await (this as unknown as OnPreMembersAdded).onPreMembersAdded(context);
+			}
 			await this.handleMemberAdded(context);
 			await next();
+			if ((this as unknown as OnPostMembersAdded).onPostMembersAdded) {
+				await (this as unknown as OnPostMembersAdded).onPostMembersAdded(
+					context
+				);
+			}
 		});
 	}
 

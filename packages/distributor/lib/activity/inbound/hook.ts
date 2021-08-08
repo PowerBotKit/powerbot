@@ -27,3 +27,11 @@ export interface OnPreMessage {
 export interface OnPostMessage {
 	onPostMessage(context: TurnContext);
 }
+
+export interface OnPreMembersAdded {
+	onPreMembersAdded(context: TurnContext);
+}
+
+export interface OnPostMembersAdded {
+	onPostMembersAdded(context: TurnContext);
+}
