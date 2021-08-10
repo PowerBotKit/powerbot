@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.0.2-alpha.10](https://github.com/PowerBotKit/powerbot/compare/v0.0.2-alpha.9...v0.0.2-alpha.10) (2021-08-10)
+
+**Note:** Version bump only for package @powerbotkit/consumer
+
+
+
+
+
 ## [0.0.2-alpha.9](https://github.com/PowerBotKit/powerbot/compare/v0.0.2-alpha.8...v0.0.2-alpha.9) (2021-08-06)
 
 **Note:** Version bump only for package @powerbotkit/consumer

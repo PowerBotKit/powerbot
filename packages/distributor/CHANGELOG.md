@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.0.2-alpha.10](https://github.com/PowerBotKit/powerbot/compare/v0.0.2-alpha.9...v0.0.2-alpha.10) (2021-08-10)
+
+
+### Features
+
+* add memory-cache ([#160](https://github.com/PowerBotKit/powerbot/issues/160)) ([632e789](https://github.com/PowerBotKit/powerbot/commit/632e789703b1d32cc48e04b205c6b0b4d24eeb6d))
+* add pre/post membersadd lifecycle ([#157](https://github.com/PowerBotKit/powerbot/issues/157)) ([f5e1f6b](https://github.com/PowerBotKit/powerbot/commit/f5e1f6b2ee33780693cd6dd5c8a8fb8a0113b590))
+* **distributor:** add update card support ([8e9eba4](https://github.com/PowerBotKit/powerbot/commit/8e9eba43d6b5de158f6c67b0fca3f5ed07e9a439))
+
+
+
+
+
 ## [0.0.2-alpha.9](https://github.com/PowerBotKit/powerbot/compare/v0.0.2-alpha.8...v0.0.2-alpha.9) (2021-08-06)
 
 **Note:** Version bump only for package @powerbotkit/distributor

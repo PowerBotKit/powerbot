@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.0.2-alpha.10](https://github.com/PowerBotKit/powerbot/compare/v0.0.2-alpha.9...v0.0.2-alpha.10) (2021-08-10)
+
+
+### Features
+
+* add card template tool ([#161](https://github.com/PowerBotKit/powerbot/issues/161)) ([a6c939d](https://github.com/PowerBotKit/powerbot/commit/a6c939d30c3dedc0338534a2948b697063e34ce2))
+
+
+
+
+
 ## [0.0.2-alpha.9](https://github.com/PowerBotKit/powerbot/compare/v0.0.2-alpha.8...v0.0.2-alpha.9) (2021-08-06)
 
 **Note:** Version bump only for package @powerbotkit/core

@@ -2,7 +2,7 @@
   "packages": [
     "packages/*"
   ],
-  "version": "0.0.2-alpha.9",
+  "version": "0.0.2-alpha.10",
   "useWorkspaces": true,
   "npmClient": "yarn",
   "publishConfig": {
@@ -14,7 +14,10 @@
         "*.md"
       ],
       "version": {
-        "allowBranch": ["master", "develop"]
+        "allowBranch": [
+          "master",
+          "develop"
+        ]
       },
       "message": "chore(release): %s",
       "verifyAccess": false,
