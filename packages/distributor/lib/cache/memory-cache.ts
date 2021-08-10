@@ -18,19 +18,43 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-/**
- * A interface for cache features, you can implement this interface to integrate your k-v cache system
- */
-export interface ICache {
-	client: any;
-	lockTime: number;
-	init(): Promise<void>;
-	set(key: string, value: any, expireTime?: number): Promise<void>;
-	get(key: string): Promise<any>;
-	delete(key: string): Promise<void>;
-	lock(key: string, value: any): Promise<any>;
-	unlock(key: string, expireTime?: number): Promise<void>;
-}
+import { ICache } from './index';
 
-export * from './memory-cache';
-export * from './redis-cache';
+export class MemoryCache implements ICache {
+	client: Map<string, any>;
+	lockTime: number;
+	init(): Promise<void> {
+		this.client = new Map<string, any>();
+		this.lockTime = 20;
+
+		return Promise.resolve();
+	}
+	set(key: string, value: any, expireTime?: number): Promise<void> {
+		return new Promise(resolve => {
+			this.client.set(key, value);
+			if (expireTime) {
+				setTimeout(() => {
+					this.client.delete(key);
+				}, expireTime);
+			} else {
+				resolve();
+			}
+		});
+	}
+	get(key: string): Promise<any> {
+		const value = this.client.get(key);
+
+		return Promise.resolve(value);
+	}
+	delete(key: string): Promise<void> {
+		this.client.delete(key);
+
+		return Promise.resolve();
+	}
+	lock(key: string, value: any): Promise<any> {
+		return Promise.resolve(true);
+	}
+	unlock(key: string, expireTime?: number): Promise<void> {
+		return Promise.resolve();
+	}
+}
