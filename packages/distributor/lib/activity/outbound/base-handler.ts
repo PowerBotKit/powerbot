@@ -46,6 +46,10 @@ export class OutboundHandlerBase {
 					await turnContext.sendActivity(message);
 				} else if (dialog.output.type === MessageType.text_add) {
 					await turnContext.sendActivity(dialog.output.value);
+				} else if (dialog.output.type === MessageType.card_edit) {
+					const message = dialog.output.value;
+					message.id = turnContext.activity.replyToId;
+					await turnContext.updateActivity(message);
 				} else {
 					BotKitLogger.getLogger().error('Can not identify message type');
 				}
