@@ -18,7 +18,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-import { ICache } from '@powerbotkit/distributor';
+import { ICache } from './index';
 
 export class MemoryCache implements ICache {
 	client: Map<string, any>;
