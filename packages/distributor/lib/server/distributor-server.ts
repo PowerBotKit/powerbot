@@ -79,23 +79,13 @@ export class DistributorServer implements IBotServer {
 		} else {
 			await this.setupPublisher();
 		}
-		if (inboundHandler) {
-			this.inboundHandler = inboundHandler;
-			this.inboundHandler.init(
-				this.cache,
-				this.publisher,
-				this.db,
-				this.middlewareInbound
-			);
-		} else {
-			this.inboundHandler = new InboundHandler();
-			this.inboundHandler.init(
-				this.cache,
-				this.publisher,
-				this.db,
-				this.middlewareInbound
-			);
-		}
+		this.inboundHandler = inboundHandler || new InboundHandler();
+		this.inboundHandler.init(
+			this.cache,
+			this.publisher,
+			this.db,
+			this.middlewareInbound
+		);
 
 		await this.setupApp();
 		await this.setupBot(botConfig);
