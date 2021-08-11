@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.0.2-alpha.11](https://github.com/PowerBotKit/powerbot/compare/v0.0.2-alpha.10...v0.0.2-alpha.11) (2021-08-11)
+
+
+### Features
+
+* add mult message/cards ([#162](https://github.com/PowerBotKit/powerbot/issues/162)) ([e856d70](https://github.com/PowerBotKit/powerbot/commit/e856d70f7477677a2e788e0210391a10205b4428))
+
+
+
+
+
 ## [0.0.2-alpha.10](https://github.com/PowerBotKit/powerbot/compare/v0.0.2-alpha.9...v0.0.2-alpha.10) (2021-08-10)
 
 
