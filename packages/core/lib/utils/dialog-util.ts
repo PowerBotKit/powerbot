@@ -31,11 +31,8 @@ import {
 	GDUserSession,
 	InitiatorType,
 	MessageType
-} from '@powerbotkit/core';
+} from '../core';
 
-/**
- * @deprecated please use @powerbotkit/core#DialogUtil
- */
 export class DialogUtil {
 	public static getDialogKey(id: string) {
 		return `dialog-${id}`;

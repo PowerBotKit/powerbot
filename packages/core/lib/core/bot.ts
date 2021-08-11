@@ -18,7 +18,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-import { ConversationReference } from 'botbuilder';
+import { Activity, ConversationReference } from 'botbuilder';
 
 export interface GDWorker {
 	workerName: string;
@@ -44,12 +44,12 @@ export enum MessageAction {
 }
 
 export enum MessageType {
-	card_add,
-	text_add,
-	card_edit,
-	text_edit,
-	card_delete,
-	text_delete
+	cardAdd,
+	textAdd,
+	cardEdit,
+	textEdit,
+	cardDelete,
+	textDelete
 }
 
 export interface MessageInput {
@@ -61,7 +61,7 @@ export interface MessageInput {
 export interface MessageOutput {
 	type: MessageType;
 	action?: MessageAction;
-	value: string | any;
+	value: string | Partial<Activity> | Partial<Activity>[];
 }
 
 export enum InitiatorType {

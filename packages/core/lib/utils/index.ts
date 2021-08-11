@@ -18,7 +18,4 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-export * from './core';
-export * from './intent';
-export * from './mq';
-export * from './utils';
+export * from './dialog-util';

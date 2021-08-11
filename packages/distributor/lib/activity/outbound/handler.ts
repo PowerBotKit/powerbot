@@ -18,7 +18,28 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-export * from './core';
-export * from './intent';
-export * from './mq';
-export * from './utils';
+import { BotKitLogger, IMQ } from '@powerbotkit/core';
+import { BotFrameworkAdapter } from 'botbuilder';
+import { ICache } from '../../cache';
+import { OutboundHandlerBase } from './base-handler';
+import { IMiddlewareOutbound } from './middleware';
+
+export class OutBoundHandler extends OutboundHandlerBase {
+	constructor(outboundMiddleware?: IMiddlewareOutbound) {
+		super(outboundMiddleware);
+	}
+	public async listen(adapter: BotFrameworkAdapter, cache: ICache, mq: IMQ) {
+		mq.onSubscribed(channel => {
+			BotKitLogger.getLogger().info('🚗 Subscribed to outbound broker');
+		});
+
+		mq.onMessage(async (channel, data) => {
+			BotKitLogger.getLogger().info(
+				'Subscriber received message in channel: ' + channel
+			);
+			await this.publish(adapter, cache, channel, data);
+		});
+
+		mq.subscribe('outbound');
+	}
+}

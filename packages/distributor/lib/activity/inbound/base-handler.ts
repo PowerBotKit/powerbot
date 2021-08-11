@@ -18,7 +18,13 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-import { BotKitLogger, GDUserSession, GDWorker, IMQ } from '@powerbotkit/core';
+import {
+	BotKitLogger,
+	DialogUtil,
+	GDUserSession,
+	GDWorker,
+	IMQ
+} from '@powerbotkit/core';
 import {
 	ActivityHandler,
 	MessageFactory,
@@ -27,7 +33,6 @@ import {
 } from 'botbuilder';
 import { ICache } from '../../cache';
 import { IDataPersist } from '../../models';
-import { DialogUtil } from '../../utils/dialog-util';
 import { IMiddlewareInbound } from './middleware';
 
 export class InboundHandlerBase extends ActivityHandler {
@@ -56,7 +61,7 @@ export class InboundHandlerBase extends ActivityHandler {
 	// can be override
 	public async sendMsgOnMemberAdded(context: TurnContext) {
 		const welcome = 'Welcome to Teams bot !';
-		await context.sendActivity(MessageFactory.text(welcome, welcome));
+		await context.sendActivity(MessageFactory.text(welcome));
 	}
 
 	public async publish(context: TurnContext, topic?: string) {
