@@ -56,7 +56,7 @@ export class InboundHandlerBase extends ActivityHandler {
 	// can be override
 	public async sendMsgOnMemberAdded(context: TurnContext) {
 		const welcome = 'Welcome to Teams bot !';
-		await context.sendActivity(MessageFactory.text(welcome, welcome));
+		await context.sendActivity(MessageFactory.text(welcome));
 	}
 
 	public async publish(context: TurnContext, topic?: string) {

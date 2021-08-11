@@ -19,7 +19,7 @@
 // THE SOFTWARE.
 
 import { BotKitLogger, GDUserSession, MessageType } from '@powerbotkit/core';
-import { Activity, BotFrameworkAdapter } from 'botbuilder';
+import { BotFrameworkAdapter } from 'botbuilder';
 import { IMiddlewareOutbound } from '.';
 import { ICache } from '../../cache';
 
@@ -41,17 +41,31 @@ export class OutboundHandlerBase {
 		await adapter.continueConversation(
 			dialog.botConversion,
 			async turnContext => {
-				if (dialog.output.type === MessageType.card_add) {
-					const message: Partial<Activity> = dialog.output.value;
-					await turnContext.sendActivity(message);
-				} else if (dialog.output.type === MessageType.text_add) {
-					await turnContext.sendActivity(dialog.output.value);
-				} else if (dialog.output.type === MessageType.card_edit) {
+				if (
+					dialog.output.type === MessageType.cardAdd ||
+					dialog.output.type === MessageType.textAdd
+				) {
 					const message = dialog.output.value;
-					message.id = turnContext.activity.replyToId;
-					await turnContext.updateActivity(message);
+					if (Array.isArray(message)) {
+						await turnContext.sendActivities(message);
+					} else {
+						await turnContext.sendActivity(message);
+					}
+				} else if (dialog.output.type === MessageType.cardEdit) {
+					// https://docs.microsoft.com/en-us/microsoftteams/platform/bots/how-to/update-and-delete-bot-messages?tabs=typescript#updating-messages
+					const message = dialog.output.value;
+					if (Array.isArray(message)) {
+						BotKitLogger.getLogger().error(
+							'Batch update card is non supported'
+						);
+					} else {
+						await turnContext.updateActivity(message);
+					}
 				} else {
 					BotKitLogger.getLogger().error('Can not identify message type');
+				}
+				if (!turnContext.responded) {
+					await turnContext.sendActivity("I'm sorry. I didn't understand.");
 				}
 				await cache.unlock(dialog.id);
 			}
