@@ -21,11 +21,15 @@
 import { TurnContext } from 'botbuilder-core';
 
 export interface OnPreMessage {
-	onPreMessage(context: TurnContext);
+	onPreMessage(context: TurnContext): Promise<void>;
+}
+
+export interface OnPreMessage {
+	onPreMessage(context: TurnContext): Promise<void>;
 }
 
 export interface OnPostMessage {
-	onPostMessage(context: TurnContext);
+	onPostMessage(context: TurnContext): Promise<void>;
 }
 
 export interface OnPreMembersAdded {

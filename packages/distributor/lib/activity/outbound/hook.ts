@@ -18,7 +18,18 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-export * from './base-handler';
-export * from './handler';
-export * from './hook';
-export * from './middleware';
+import { GDUserSession } from '@powerbotkit/core';
+import { TurnContext } from 'botbuilder';
+
+export interface ActivityResponse {
+	id: string;
+}
+
+type Playground = { dialog: GDUserSession } & { response: ActivityResponse };
+
+export interface OnPostrReceiveMessage {
+	onPostReceiveMessage(
+		context: TurnContext,
+		playground: Partial<Playground>
+	): Promise<void>;
+}

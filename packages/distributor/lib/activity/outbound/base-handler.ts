@@ -21,6 +21,7 @@
 import { BotKitLogger, GDUserSession, MessageType } from '@powerbotkit/core';
 import { BotFrameworkAdapter } from 'botbuilder';
 import { ICache } from '../../cache';
+import { OnPostrReceiveMessage } from './hook';
 import { IMiddlewareOutbound } from './middleware';
 
 export class OutboundHandlerBase {
@@ -41,15 +42,18 @@ export class OutboundHandlerBase {
 		await adapter.continueConversation(
 			dialog.botConversion,
 			async turnContext => {
+				const response = {} as { id: string } & { ids: string[] };
 				if (
 					dialog.output.type === MessageType.cardAdd ||
 					dialog.output.type === MessageType.textAdd
 				) {
 					const message = dialog.output.value;
 					if (Array.isArray(message)) {
-						await turnContext.sendActivities(message);
+						const ress = await turnContext.sendActivities(message);
+						response.ids = ress.map(r => r.id);
 					} else {
-						await turnContext.sendActivity(message);
+						const { id } = await turnContext.sendActivity(message);
+						response.id = id;
 					}
 				} else if (dialog.output.type === MessageType.cardEdit) {
 					// https://docs.microsoft.com/en-us/microsoftteams/platform/bots/how-to/update-and-delete-bot-messages?tabs=typescript#updating-messages
@@ -64,12 +68,35 @@ export class OutboundHandlerBase {
 						);
 					} else {
 						await turnContext.updateActivity(message);
+						response.id = message.id;
 					}
 				} else {
 					BotKitLogger.getLogger().error('Can not identify message type');
 				}
-				if (!turnContext.responded) {
-					await turnContext.sendActivity("I'm sorry. I didn't understand.");
+				// TODO(arthur): add toggle
+				// if (!turnContext.responded) {
+				// 	await turnContext.sendActivity("I'm sorry. I didn't understand.");
+				// }
+				if ((this as unknown as OnPostrReceiveMessage).onPostReceiveMessage) {
+					if (response.id) {
+						await (
+							this as unknown as OnPostrReceiveMessage
+						).onPostReceiveMessage(turnContext, {
+							dialog,
+							response
+						});
+					} else if (response.ids && response.ids.length > 0) {
+						await Promise.all(
+							response.ids.map(async id => {
+								return (
+									this as unknown as OnPostrReceiveMessage
+								).onPostReceiveMessage(turnContext, {
+									dialog,
+									response: { id }
+								});
+							})
+						);
+					}
 				}
 				await cache.unlock(dialog.id);
 			}
