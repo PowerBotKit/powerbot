@@ -31,7 +31,7 @@ import {
 	GDUserSession,
 	InitiatorType,
 	MessageType
-} from '@powerbotkit/core';
+} from '../core';
 
 export class DialogUtil {
 	public static getDialogKey(id: string) {
@@ -108,7 +108,7 @@ export class DialogUtil {
 		this.addHistory(
 			session,
 			InitiatorType.user,
-			MessageType.text_add,
+			MessageType.textAdd,
 			activity.text,
 			activity.id
 		);

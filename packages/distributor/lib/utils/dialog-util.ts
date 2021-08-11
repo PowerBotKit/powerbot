@@ -111,7 +111,7 @@ export class DialogUtil {
 		this.addHistory(
 			session,
 			InitiatorType.user,
-			MessageType.text_add,
+			MessageType.textAdd,
 			activity.text,
 			activity.id
 		);

@@ -20,8 +20,8 @@
 
 import { BotKitLogger, GDUserSession, MessageType } from '@powerbotkit/core';
 import { BotFrameworkAdapter } from 'botbuilder';
-import { IMiddlewareOutbound } from '.';
 import { ICache } from '../../cache';
+import { IMiddlewareOutbound } from './middleware';
 
 export class OutboundHandlerBase {
 	private outboundMiddleware: IMiddlewareOutbound;
@@ -55,6 +55,10 @@ export class OutboundHandlerBase {
 					// https://docs.microsoft.com/en-us/microsoftteams/platform/bots/how-to/update-and-delete-bot-messages?tabs=typescript#updating-messages
 					const message = dialog.output.value;
 					if (Array.isArray(message)) {
+						BotKitLogger.getLogger().error(
+							'Batch update card is non supported'
+						);
+					} else if (typeof message === 'string') {
 						BotKitLogger.getLogger().error(
 							'Batch update card is non supported'
 						);

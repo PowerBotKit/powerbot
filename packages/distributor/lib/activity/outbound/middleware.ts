@@ -18,6 +18,8 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-export * from './base-handler';
-export * from './handler';
-export * from './middleware';
+import { GDUserSession } from '@powerbotkit/core';
+
+export interface IMiddlewareOutbound {
+	process(dialog: GDUserSession): Promise<void>;
+}

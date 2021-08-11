@@ -61,7 +61,7 @@ export interface MessageInput {
 export interface MessageOutput {
 	type: MessageType;
 	action?: MessageAction;
-	value: string | Partial<Activity> | (string | Partial<Activity>)[];
+	value: string | Partial<Activity> | Partial<Activity>[];
 }
 
 export enum InitiatorType {

@@ -71,7 +71,7 @@ export class BaseWorker implements IBotWorker {
 		BotKitLogger.getLogger().info('Start dummy service:' + dialog.input.value);
 
 		return {
-			type: MessageType.text_add,
+			type: MessageType.textAdd,
 			value: 'dummy message for test'
 		};
 	}
