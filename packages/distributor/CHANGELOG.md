@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.0.2-alpha.14](https://github.com/PowerBotKit/powerbot/compare/v0.0.2-alpha.13...v0.0.2-alpha.14) (2021-08-12)
+
+
+### Features
+
+* remove DialogUtil in distributor part ([cc9a716](https://github.com/PowerBotKit/powerbot/commit/cc9a7165f0bd5cde7e15dc0a69d8cf8a85836534))
+
+
+
+
+
 ## [0.0.2-alpha.13](https://github.com/PowerBotKit/powerbot/compare/v0.0.2-alpha.12...v0.0.2-alpha.13) (2021-08-12)
 
 
