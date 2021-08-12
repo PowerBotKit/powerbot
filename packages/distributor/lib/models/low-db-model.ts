@@ -18,30 +18,24 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-import { JSONFile, Low } from 'lowdb';
+import * as lowdb from 'lowdb';
+import * as FileAsync from 'lowdb/adapters/FileAsync';
 import { IDataPersist, IUserSession } from '.';
 
 export class LowDBDataPersist implements IDataPersist {
-	public client: Low<any>;
+	public client: lowdb.LowdbAsync<any>;
 	public async init() {
-		const adapter = new JSONFile('db.json');
-		this.client = new Low(adapter);
+		const adapter = new FileAsync('db.json');
+		this.client = await lowdb(adapter);
 		// TODO: identify db.json is empty
-		this.client.data ||= { usersSession: [] };
-		await this.client.write();
+		this.client.defaults({ usersSession: [] }).write();
 	}
 
 	public async insertUserSession(dto: IUserSession) {
-		await this.client.read();
-		const { usersSession } = this.client.data;
-		usersSession.push(dto);
-		await this.client.write();
+		return (this.client.get('usersSession') as any).push(dto).write();
 	}
 
 	public async findUserSession(where: any): Promise<IUserSession> {
-		await this.client.read();
-		const { usersSession } = this.client.data;
-
-		return (usersSession as any[]).find(where);
+		return (this.client.get('usersSession') as any).find(where).value();
 	}
 }
