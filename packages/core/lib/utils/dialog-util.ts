@@ -89,7 +89,8 @@ export class DialogUtil {
 			step: 0,
 			input,
 			output: { type: MessageType.textAdd, value: '', action: null },
-			history: []
+			history: [],
+			replyToId: context.activity.replyToId
 		};
 	}
 
@@ -118,15 +119,22 @@ export class DialogUtil {
 
 	private static getInput(context: TurnContext): MessageInput | never {
 		if (context.activity.text) {
+			BotKitLogger.getLogger().info(
+				`input message: ${context.activity.text}, tyoe: 'text'`
+			);
+
 			return {
 				type: context.activity.replyToId
 					? MessageType.textEdit
 					: MessageType.textAdd,
 				value: context.activity.text,
-				action: null,
-				replyToId: context.activity.replyToId
+				action: null
 			};
 		} else if (context.activity.value) {
+			BotKitLogger.getLogger().info(
+				`input message: ${JSON.stringify(context.activity.value)}, tyoe: 'card'`
+			);
+
 			return {
 				type: context.activity.replyToId
 					? MessageType.cardEdit
@@ -135,8 +143,7 @@ export class DialogUtil {
 					typeof context.activity.value === 'string'
 						? context.activity.value
 						: JSON.stringify(context.activity.value),
-				action: null,
-				replyToId: context.activity.replyToId
+				action: null
 			};
 		}
 	}

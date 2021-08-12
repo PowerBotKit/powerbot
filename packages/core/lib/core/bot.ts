@@ -56,7 +56,6 @@ export interface MessageInput {
 	type: MessageType;
 	action?: MessageAction;
 	value: string | any;
-	replyToId?: string;
 }
 
 export interface MessageOutput {
@@ -89,6 +88,7 @@ export interface GDUserSession {
 	input?: MessageInput;
 	output?: MessageOutput;
 	history?: Event[];
+	replyToId?: string;
 }
 
 /**
