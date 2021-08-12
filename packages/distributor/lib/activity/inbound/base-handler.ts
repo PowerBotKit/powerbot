@@ -64,7 +64,7 @@ export class InboundHandlerBase extends ActivityHandler {
 		await context.sendActivity(MessageFactory.text(welcome));
 	}
 
-	public async publish(context: TurnContext, topic?: string) {
+	public async publish(context: TurnContext, topic?: string): Promise<string> {
 		const { dialogKey, dialog } = await this.setupCustomizedDialog(context);
 		if (this.inboundMiddleware) {
 			await this.inboundMiddleware.process(dialog);
@@ -73,6 +73,8 @@ export class InboundHandlerBase extends ActivityHandler {
 			dialog.worker.topic || 'inbound',
 			JSON.stringify(dialog)
 		);
+
+		return dialogKey;
 	}
 
 	public async handleMemberAdded(context: TurnContext) {
