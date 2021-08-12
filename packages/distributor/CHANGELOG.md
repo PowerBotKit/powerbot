@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.0.2-alpha.13](https://github.com/PowerBotKit/powerbot/compare/v0.0.2-alpha.12...v0.0.2-alpha.13) (2021-08-12)
+
+
+### Features
+
+* **distributor:** return dialogKey afther publish turncontext ([a9f16db](https://github.com/PowerBotKit/powerbot/commit/a9f16db49354582ad66b5d1ea5d175fc110e72f6))
+
+
+
+
+
 ## [0.0.2-alpha.12](https://github.com/PowerBotKit/powerbot/compare/v0.0.2-alpha.11...v0.0.2-alpha.12) (2021-08-12)
 
 
