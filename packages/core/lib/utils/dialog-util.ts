@@ -30,6 +30,7 @@ import {
 	CoreSessionUtil,
 	GDUserSession,
 	InitiatorType,
+	MessageInput,
 	MessageType
 } from '../core';
 
@@ -39,7 +40,9 @@ export class DialogUtil {
 	}
 
 	// get user information
-	public static async getUserInfo(context: any): Promise<TeamsChannelAccount> {
+	public static async getUserInfo(
+		context: TurnContext
+	): Promise<TeamsChannelAccount> {
 		BotKitLogger.getLogger().info('Query Teams user information');
 		let userDetails: TeamsChannelAccount;
 		if (process.env.MicrosoftAppId && process.env.MicrosoftAppId !== '') {
@@ -72,6 +75,7 @@ export class DialogUtil {
 			context.activity
 		);
 		const userInfo = await this.getUserInfo(context);
+		const input = this.getInput(context);
 
 		return {
 			id: context.activity.recipient.id,
@@ -83,11 +87,7 @@ export class DialogUtil {
 			},
 			service: '',
 			step: 0,
-			input: {
-				type: MessageType.textAdd,
-				value: context.activity.text || context.activity.value,
-				action: null
-			},
+			input,
 			output: { type: MessageType.textAdd, value: '', action: null },
 			history: []
 		};
@@ -114,6 +114,28 @@ export class DialogUtil {
 		);
 
 		return session;
+	}
+
+	private static getInput(context: TurnContext): MessageInput | never {
+		if (context.activity.text) {
+			return {
+				type: MessageType.textAdd,
+				value: context.activity.text,
+				action: null
+			};
+		} else if (context.activity.value) {
+			return {
+				type: context.activity.replyToId
+					? MessageType.cardEdit
+					: MessageType.cardAdd,
+				value:
+					typeof context.activity.value === 'string'
+						? context.activity.value
+						: JSON.stringify(context.activity.value),
+				action: null,
+				replyToId: context.activity.replyToId
+			};
+		}
 	}
 
 	public static addHistory(

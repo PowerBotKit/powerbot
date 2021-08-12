@@ -56,6 +56,7 @@ export interface MessageInput {
 	type: MessageType;
 	action?: MessageAction;
 	value: string | any;
+	replyToId?: string;
 }
 
 export interface MessageOutput {
