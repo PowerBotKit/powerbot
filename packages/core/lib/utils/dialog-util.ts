@@ -119,9 +119,12 @@ export class DialogUtil {
 	private static getInput(context: TurnContext): MessageInput | never {
 		if (context.activity.text) {
 			return {
-				type: MessageType.textAdd,
+				type: context.activity.replyToId
+					? MessageType.textEdit
+					: MessageType.textAdd,
 				value: context.activity.text,
-				action: null
+				action: null,
+				replyToId: context.activity.replyToId
 			};
 		} else if (context.activity.value) {
 			return {
