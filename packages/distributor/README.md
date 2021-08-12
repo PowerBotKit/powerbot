@@ -15,3 +15,12 @@ using yarn:
 ```shellscript
 yarn add @powerbotkit/distributor
 ```
+
+## Cache
+
+`distributor` need a cache. 
+
+Now we provide some cache
+
+1. MemoryCache
+2. RedisCache
