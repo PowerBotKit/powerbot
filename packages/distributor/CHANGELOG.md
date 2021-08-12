@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.0.2-alpha.12](https://github.com/PowerBotKit/powerbot/compare/v0.0.2-alpha.11...v0.0.2-alpha.12) (2021-08-12)
+
+
+### Reverts
+
+* Revert "build(deps): bump lowdb from 1.0.0 to 2.1.0 (#152)" (#163) ([e4b22e1](https://github.com/PowerBotKit/powerbot/commit/e4b22e1a68fb31c20eadf7da240a4d4f2eef1f32)), closes [#152](https://github.com/PowerBotKit/powerbot/issues/152) [#163](https://github.com/PowerBotKit/powerbot/issues/163)
+
+
+
+
+
 ## [0.0.2-alpha.11](https://github.com/PowerBotKit/powerbot/compare/v0.0.2-alpha.10...v0.0.2-alpha.11) (2021-08-11)
 
 
