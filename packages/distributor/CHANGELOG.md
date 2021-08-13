@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.0.2-alpha.15](https://github.com/PowerBotKit/powerbot/compare/v0.0.2-alpha.14...v0.0.2-alpha.15) (2021-08-13)
+
+
+### Features
+
+* add delete card/text support ([0ef86d4](https://github.com/PowerBotKit/powerbot/commit/0ef86d4aa81c2df2bc7f59cdae7ab1c516e83d6d))
+
+
+
+
+
 ## [0.0.2-alpha.14](https://github.com/PowerBotKit/powerbot/compare/v0.0.2-alpha.13...v0.0.2-alpha.14) (2021-08-12)
 
 
