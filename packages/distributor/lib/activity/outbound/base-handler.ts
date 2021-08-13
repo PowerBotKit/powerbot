@@ -55,7 +55,10 @@ export class OutboundHandlerBase {
 						const { id } = await turnContext.sendActivity(message);
 						response.id = id;
 					}
-				} else if (dialog.output.type === MessageType.cardEdit) {
+				} else if (
+					dialog.output.type === MessageType.cardEdit ||
+					dialog.output.type === MessageType.textEdit
+				) {
 					// https://docs.microsoft.com/en-us/microsoftteams/platform/bots/how-to/update-and-delete-bot-messages?tabs=typescript#updating-messages
 					const message = dialog.output.value;
 					if (Array.isArray(message)) {
@@ -64,11 +67,23 @@ export class OutboundHandlerBase {
 						);
 					} else if (typeof message === 'string') {
 						BotKitLogger.getLogger().error(
-							'Batch update card is non supported'
+							'update text message is non supported'
 						);
 					} else {
 						await turnContext.updateActivity(message);
 						response.id = message.id;
+					}
+				} else if (
+					dialog.output.type === MessageType.textDelete ||
+					dialog.output.type === MessageType.cardDelete
+				) {
+					const message = dialog.output.value;
+					if (Array.isArray(message)) {
+						BotKitLogger.getLogger().error(
+							'Batch delete activity is non supported'
+						);
+					} else if (typeof message === 'string') {
+						turnContext.deleteActivity(message);
 					}
 				} else {
 					BotKitLogger.getLogger().error('Can not identify message type');
