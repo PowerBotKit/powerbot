@@ -73,10 +73,6 @@ export class OutboundHandlerBase {
 				} else {
 					BotKitLogger.getLogger().error('Can not identify message type');
 				}
-				// TODO(arthur): add toggle
-				// if (!turnContext.responded) {
-				// 	await turnContext.sendActivity("I'm sorry. I didn't understand.");
-				// }
 				if ((this as unknown as OnPostrReceiveMessage).onPostReceiveMessage) {
 					if (response.id) {
 						await (
