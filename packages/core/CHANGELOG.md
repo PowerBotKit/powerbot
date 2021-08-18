@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.0.2-alpha.16](https://github.com/PowerBotKit/powerbot/compare/v0.0.2-alpha.15...v0.0.2-alpha.16) (2021-08-18)
+
+
+### Features
+
+* **core:** debug some log in mq ([b9c14fa](https://github.com/PowerBotKit/powerbot/commit/b9c14fa9ff6ae66fefebf82770d9bbb2af1b977a))
+* **core:** use the LOGGER_LEVEL environment variable to control the log display level ([1544051](https://github.com/PowerBotKit/powerbot/commit/15440517ff93508357844dbad4d95030aa56944a))
+
+
+
+
+
 ## [0.0.2-alpha.14](https://github.com/PowerBotKit/powerbot/compare/v0.0.2-alpha.13...v0.0.2-alpha.14) (2021-08-12)
 
 
