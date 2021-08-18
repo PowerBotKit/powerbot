@@ -35,7 +35,7 @@ export const BotKitLogger = {
 				json()
 			);
 			logger = createLogger({
-				level: 'info',
+				level: process.env.LOGGER_LEVEL || 'info',
 				format: formatOpts,
 				transports: transportsOpt
 			});
