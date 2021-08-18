@@ -22,6 +22,7 @@ import { createClient, RedisClient } from 'redis';
 import { BotKitLogger, IMQ } from '../core';
 
 export class RedisMQ implements IMQ {
+	private logger = BotKitLogger.getLogger();
 	public client: RedisClient;
 	public async init(): Promise<void> {
 		return new Promise((resolve, reject) => {
@@ -45,7 +46,12 @@ export class RedisMQ implements IMQ {
 		});
 	}
 	public publish(channel: string, data: string) {
-		return this.client.publish(channel, data);
+		const result = this.client.publish(channel, data);
+		this.logger.debug(
+			`publish ${data} to channel: ${channel}, result is ${result}`
+		);
+
+		return result;
 	}
 
 	public subscribe(channel: string) {
@@ -62,6 +68,12 @@ export class RedisMQ implements IMQ {
 		callback: (channel: string, data: any) => Promise<void>
 	) {
 		this.client.on('message', async (channel, data: any): Promise<void> => {
+			this.logger.debug(
+				`received message channel: ${channel}, data is ${
+					typeof data === 'string' ? data : JSON.stringify(data)
+				}`
+			);
+
 			return callback(channel, data);
 		});
 	}

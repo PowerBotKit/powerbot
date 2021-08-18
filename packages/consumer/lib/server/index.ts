@@ -68,7 +68,9 @@ export class ConsumerServer implements IConsumerServer {
 		await this.listenerAdaptor.init();
 		await this.publisher.init();
 		this.listenerAdaptor.onSubscribed(channel => {
-			BotKitLogger.getLogger().info('🚗 Consumer listen to outbound broker');
+			BotKitLogger.getLogger().info(
+				`🚗 Consumer listen to ${channel || 'outbound'} broker`
+			);
 		});
 
 		this.listenerAdaptor.onMessage(async (channel: string, data: any) => {
