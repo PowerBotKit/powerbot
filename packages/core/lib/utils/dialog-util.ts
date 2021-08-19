@@ -49,7 +49,7 @@ export class DialogUtil {
 			// connect to online teams bot
 			userDetails = await TeamsInfo.getMember(
 				context,
-				context.activity.from.id
+				context.activity?.from?.id
 			);
 		} else {
 			// for local bot emulator
