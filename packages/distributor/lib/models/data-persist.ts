@@ -26,7 +26,7 @@ import { IUserSession } from './user-session';
 /**
  * a store interface user session
  */
-export interface IDataPersist<T> {
+export interface IDataPersist<T = any> {
 	client: T;
 	init(): Promise<void>;
 	insertUserSession(dto: IUserSession): void;

@@ -18,5 +18,40 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-export * from './distributor-server';
-export * from './server';
+import { IMQ } from '@powerbotkit/core';
+import { ActivityHandler, BotFrameworkAdapter } from 'botbuilder';
+import {
+	InboundHandlerBase,
+	IMiddlewareInbound,
+	IMiddlewareOutbound
+} from 'lib/activity';
+import { ICache } from 'lib/cache';
+import { IDataPersist } from 'lib/models/data-persist';
+
+export interface TBotConfig {
+	appId?: string;
+	appSecret?: string;
+}
+
+export interface TMiddlewareConfig {
+	listenerAdaptor?: IMQ;
+	publisherAdaptor?: IMQ;
+	cacheAdaptor?: ICache;
+	dataPersistAdaptor?: IDataPersist<any>;
+	inboundInterceptor?: IMiddlewareInbound;
+	outboundInterceptor?: IMiddlewareOutbound;
+}
+
+export interface BotInstance {
+	adapter: BotFrameworkAdapter;
+	activityManager: ActivityHandler;
+}
+
+export interface IBotServer {
+	setUpBotServer(
+		botConfig: TBotConfig,
+		middlewareConfig?: TMiddlewareConfig,
+		inboundHandler?: InboundHandlerBase
+	);
+	listen(port?: string | number);
+}

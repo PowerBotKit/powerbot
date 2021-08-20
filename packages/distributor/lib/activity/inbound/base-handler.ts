@@ -32,7 +32,7 @@ import {
 	TurnContext
 } from 'botbuilder';
 import { ICache } from '../../cache';
-import { IDataPersist } from '../../models';
+import { IDataPersist } from '../../models/data-persist';
 import { IMiddlewareInbound } from './middleware';
 
 export class InboundHandlerBase extends ActivityHandler {
@@ -89,8 +89,8 @@ export class InboundHandlerBase extends ActivityHandler {
 					context
 				);
 				this.dataStore.insertUserSession({
-					Email: userInfo.email,
-					ConversationReference: TurnContext.getConversationReference(
+					email: userInfo.email,
+					conversationReference: TurnContext.getConversationReference(
 						context.activity
 					)
 				});

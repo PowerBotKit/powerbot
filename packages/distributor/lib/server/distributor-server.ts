@@ -31,21 +31,19 @@ import {
 } from '../activity/inbound';
 import { IMiddlewareOutbound, OutBoundHandler } from '../activity/outbound';
 import { ICache } from '../cache';
-import { RedisCache } from '../cache/redis-cache';
-import { IDataPersist } from '../models';
-import { LowDBDataPersist } from '../models/low-db-model';
+import { IDataPersist } from '../models/data-persist';
 
 export class DistributorServer implements IBotServer {
 	// operation conversion saving
-	public db?: IDataPersist;
-	public cache?: ICache; // types define
-	public listener?: IMQ;
-	public publisher?: IMQ;
-	public app?: restify.Server;
-	public botInstance: BotInstance;
-	public middlewareInbound: IMiddlewareInbound;
-	public middlewareOutbound: IMiddlewareOutbound;
-	public inboundHandler: InboundHandlerBase;
+	private db: IDataPersist;
+	private cache: ICache;
+	private listener: IMQ;
+	private publisher: IMQ;
+	protected app: restify.Server;
+	private botInstance: BotInstance;
+	private middlewareInbound: IMiddlewareInbound;
+	private middlewareOutbound: IMiddlewareOutbound;
+	private inboundHandler: InboundHandlerBase;
 
 	public async setUpBotServer(
 		botConfig: TBotConfig,
@@ -53,28 +51,28 @@ export class DistributorServer implements IBotServer {
 		inboundHandler?: InboundHandlerBase
 	) {
 		// below 3 steps need be configurable
-		if (middlewareConfig && middlewareConfig.DataPersistAdaptor) {
-			this.db = middlewareConfig.DataPersistAdaptor;
+		if (middlewareConfig && middlewareConfig.dataPersistAdaptor) {
+			this.db = middlewareConfig.dataPersistAdaptor;
 			await this.db.init();
 		} else {
 			await this.setupDB();
 		}
 
-		if (middlewareConfig && middlewareConfig.CacheAdaptor) {
-			this.cache = middlewareConfig.CacheAdaptor;
+		if (middlewareConfig && middlewareConfig.cacheAdaptor) {
+			this.cache = middlewareConfig.cacheAdaptor;
 			await this.cache.init();
 		} else {
 			await this.setupCache();
 		}
-		if (middlewareConfig && middlewareConfig.ListenerAdaptor) {
-			this.listener = middlewareConfig.ListenerAdaptor;
+		if (middlewareConfig && middlewareConfig.listenerAdaptor) {
+			this.listener = middlewareConfig.listenerAdaptor;
 			await this.listener.init();
 		} else {
 			await this.setupListener();
 		}
 
-		if (middlewareConfig && middlewareConfig.PublisherAdaptor) {
-			this.publisher = middlewareConfig.PublisherAdaptor;
+		if (middlewareConfig && middlewareConfig.publisherAdaptor) {
+			this.publisher = middlewareConfig.publisherAdaptor;
 			await this.publisher.init();
 		} else {
 			await this.setupPublisher();
@@ -91,36 +89,39 @@ export class DistributorServer implements IBotServer {
 		await this.setupBot(botConfig);
 	}
 
-	private async setupDB() {
-		this.db = new LowDBDataPersist();
+	public async setupDB(db: IDataPersist) {
+		// this.db = new LowDBFileAsyncDataPersist();
+		this.db = db;
 		await this.db.init();
 	}
 
-	private async setupCache() {
-		this.cache = new RedisCache({
-			port: process.env.CACHE_REDIS_PORT
-				? parseInt(process.env.CACHE_REDIS_PORT, 10)
-				: 6379,
-			host: process.env.CACHE_REDIS_HOST || '127.0.0.1'
-		});
+	public async setupCache(cache: ICache) {
+		// this.cache = new RedisCache({
+		// 	port: process.env.CACHE_REDIS_PORT
+		// 		? parseInt(process.env.CACHE_REDIS_PORT, 10)
+		// 		: 6379,
+		// 	host: process.env.CACHE_REDIS_HOST || '127.0.0.1'
+		// });
+		this.cache = cache;
 		await this.cache.init();
 	}
 
-	private async setupListener() {
-		this.listener = new RedisMQ();
+	public async setupListener(listener: IMQ) {
+		// this.listener = new RedisMQ();
+		this.listener = listener;
 		await this.listener.init();
 	}
-	private async setupPublisher() {
+	public async setupPublisher(publisher: IMQ) {
 		this.publisher = new RedisMQ();
 		await this.publisher.init();
 	}
 
-	private async setupApp() {
+	public async setupApp() {
 		this.app = restify.createServer();
 		this.app.use(restify.plugins.queryParser());
 	}
 
-	private async setupBot(config: TBotConfig) {
+	public async setupBot(config: TBotConfig) {
 		const adapter = new BotFrameworkAdapter({
 			appId: config.appId || process.env.MicrosoftAppId,
 			appPassword: config.appSecret || process.env.MicrosoftAppPassword
@@ -160,4 +161,67 @@ export const createDistributorServer = async (
 	await server.setUpBotServer(botConfig, middlewareConfig, inboundHandler);
 
 	return server;
+};
+
+/**
+ * This is an experimental class and may be deleted.
+ */
+/* tslint:disable-next-line:max-classes-per-file */
+class RestifyDistributorServer extends DistributorServer {
+	constructor(private distributorServer: DistributorServer) {
+		super();
+	}
+
+	public get AppServer(): restify.Server {
+		return (this.distributorServer as unknown as { app: restify.Server }).app;
+	}
+
+	public setUpBotServer(
+		botConfig: TBotConfig,
+		middlewareConfig?: TMiddlewareConfig,
+		inboundHandler?: InboundHandlerBase
+	): Promise<void> {
+		return this.distributorServer.setUpBotServer(
+			botConfig,
+			middlewareConfig,
+			inboundHandler
+		);
+	}
+	public setupDB(db: IDataPersist<any>): Promise<void> {
+		return this.distributorServer.setupDB(db);
+	}
+	public setupCache(cache: ICache): Promise<void> {
+		return this.distributorServer.setupCache(cache);
+	}
+	public setupListener(listener: IMQ): Promise<void> {
+		return this.distributorServer.setupListener(listener);
+	}
+	public setupPublisher(publisher: IMQ): Promise<void> {
+		return this.distributorServer.setupPublisher(publisher);
+	}
+	public setupApp(): Promise<void> {
+		return this.distributorServer.setupApp();
+	}
+	public setupBot(config: TBotConfig): Promise<void> {
+		return this.distributorServer.setupBot(config);
+	}
+	public listen(port?: string | number): Promise<void> {
+		return this.distributorServer.listen(port);
+	}
+	public addInboundMiddleware(mwi: IMiddlewareInbound): void {
+		this.distributorServer.addInboundMiddleware(mwi);
+	}
+	public addOutboundMiddleware(mwo: IMiddlewareOutbound): void {
+		this.distributorServer.addOutboundMiddleware(mwo);
+	}
+}
+
+/**
+ * This is an experimental method and may be deleted.
+ * @param server DistributorServer
+ */
+export const getRestifyDistributorServer = (
+	server: DistributorServer
+): RestifyDistributorServer => {
+	return new RestifyDistributorServer(server);
 };

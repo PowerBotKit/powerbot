@@ -20,7 +20,7 @@
 
 import { IMQ } from '@powerbotkit/core';
 import { ICache } from '../../cache';
-import { IDataPersist } from '../../models';
+import { IDataPersist } from '../../models/data-persist';
 import { InboundHandlerBase } from './base-handler';
 import {
 	OnPostMembersAdded,
