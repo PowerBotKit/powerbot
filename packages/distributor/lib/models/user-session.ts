@@ -18,28 +18,10 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-import * as lowdb from 'lowdb';
-import * as FileAsync from 'lowdb/adapters/FileAsync';
-import { IDataPersist } from './data-persist';
-import { IUserSession } from './user-session';
-
 /**
- * @deprecated it will be removed. please use {@link LowDBFileAsyncDataPersist}
+ * An object relating to maintain the relationship of user email and bot's ConversationReference
  */
-export class LowDBDataPersist implements IDataPersist<lowdb.LowdbAsync> {
-	public client: lowdb.LowdbAsync<any>;
-	public async init() {
-		const adapter = new FileAsync('db.json');
-		this.client = await lowdb(adapter);
-		// TODO: identify db.json is empty
-		this.client.defaults({ usersSession: [] }).write();
-	}
-
-	public async insertUserSession(dto: IUserSession) {
-		return (this.client.get('usersSession') as any).push(dto).write();
-	}
-
-	public async findUserSession(where: any): Promise<IUserSession> {
-		return (this.client.get('usersSession') as any).find(where).value();
-	}
+export interface IUserSession {
+	email: string;
+	conversationReference;
 }

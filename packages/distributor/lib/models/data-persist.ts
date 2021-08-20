@@ -20,13 +20,25 @@
 
 import * as lowdb from 'lowdb';
 import * as FileAsync from 'lowdb/adapters/FileAsync';
-import { IDataPersist } from './data-persist';
+
 import { IUserSession } from './user-session';
 
 /**
- * @deprecated it will be removed. please use {@link LowDBFileAsyncDataPersist}
+ * a store interface user session
  */
-export class LowDBDataPersist implements IDataPersist<lowdb.LowdbAsync> {
+export interface IDataPersist<T> {
+	client: T;
+	init(): Promise<void>;
+	insertUserSession(dto: IUserSession): void;
+	findUserSession(where: any): Promise<IUserSession>;
+}
+
+/**
+ * a store class user session based on db file async
+ */
+export class LowDBFileAsyncDataPersist
+	implements IDataPersist<lowdb.LowdbAsync>
+{
 	public client: lowdb.LowdbAsync<any>;
 	public async init() {
 		const adapter = new FileAsync('db.json');
