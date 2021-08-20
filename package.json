@@ -18,6 +18,7 @@
     "create": "lerna create",
     "tslint": "tslint --format verbose -c tslint.json \"+(packages|tools|examples)/**/*.+(ts)\"",
     "format": "prettier --check --parser typescript \"{packages,tools,examples}/**/*.{t,j}s?(x)\"",
+    "prettify": "prettier --write --parser typescript \"{packages,tools,examples}/**/*.{t,j}s?(x)\"",
     "lint": "yarn tslint && yarn format",
     "build": "lerna run --stream --sort build",
     "check:license": "license-check-and-add check",
