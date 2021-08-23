@@ -14,10 +14,6 @@
     "types": ["node", "jest"],
     "allowSyntheticDefaultImports": true,
     "resolveJsonModule": true,
-    "paths": {
-      "lib/*": ["lib/*"],
-      "test/*": ["test/*"]
-    }
   },
   "files": ["lib/index.ts"],
   "exclude": ["node_modules"]

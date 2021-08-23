@@ -24,9 +24,9 @@ import {
 	InboundHandlerBase,
 	IMiddlewareInbound,
 	IMiddlewareOutbound
-} from 'lib/activity';
-import { ICache } from 'lib/cache';
-import { IDataPersist } from 'lib/models/data-persist';
+} from '../../lib/activity';
+import { ICache } from '../../lib/cache';
+import { IDataPersist } from '../../lib/models/data-persist';
 
 export interface TBotConfig {
 	appId?: string;
