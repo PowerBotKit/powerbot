@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.0.2-alpha.17](https://github.com/PowerBotKit/powerbot/compare/v0.0.2-alpha.16...v0.0.2-alpha.17) (2021-08-24)
+
+
+### Bug Fixes
+
+* **core:** check wheter context.activity is null or undefined in get member from TeamsInfo ([3edccc9](https://github.com/PowerBotKit/powerbot/commit/3edccc9b9261fb3a0c4129e23aa86c4cd30820a7))
+* **distributor:** fix setup error ([21bcd62](https://github.com/PowerBotKit/powerbot/commit/21bcd62b1566243a54dc12e6561079afba393dd1))
+
+
+### Features
+
+* **distributor:** use RestifyDistributorServer to export restify.Server ([eea1b6b](https://github.com/PowerBotKit/powerbot/commit/eea1b6bb03652bf37025d467d74097bb74612ad3))
+* **distributor:** use RestifyDistributorServer to export restify.Server ([a8d8f3a](https://github.com/PowerBotKit/powerbot/commit/a8d8f3a8bc68996f33184000894146dabbe2569d))
+
+
+
+
+
 ## [0.0.2-alpha.16](https://github.com/PowerBotKit/powerbot/compare/v0.0.2-alpha.15...v0.0.2-alpha.16) (2021-08-18)
 
 
