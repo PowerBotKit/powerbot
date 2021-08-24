@@ -19,4 +19,5 @@
 // THE SOFTWARE.
 
 export * from './intent';
+export * from './json-intent';
 export * from './wildcard';

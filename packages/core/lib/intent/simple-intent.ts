@@ -18,5 +18,13 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-export * from './dialog-util';
-export * from './json';
+import { Intent } from './intent';
+
+export class SimpleIntent implements Intent {
+	process(input: string): string {
+		return input;
+	}
+	processAsync(input: string): Promise<string> {
+		return Promise.resolve(input);
+	}
+}

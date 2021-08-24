@@ -18,5 +18,20 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-export * from './dialog-util';
-export * from './json';
+import { BotKitLogger } from '../core/logger';
+
+export function isJson(str: any): boolean {
+	if (typeof str === 'string') {
+		try {
+			const d = JSON.parse(str);
+
+			return !!d;
+		} catch (e) {
+			BotKitLogger.getLogger().error(e);
+
+			return false;
+		}
+	}
+
+	return false;
+}

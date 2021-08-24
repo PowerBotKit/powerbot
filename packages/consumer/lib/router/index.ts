@@ -1,3 +1,4 @@
+import { JsonIntent } from './../../../core/lib/intent/json-intent';
 // Copyright (c) 2020-present PowerBotKit Team
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -80,20 +81,20 @@ export class WorkerRouterHandler implements IWorkerRouterHandler {
 		this.defaultWorker = defaultWorker;
 	}
 
-	setUpIntent(intent: string | object) {
+	setUpIntent(intent: string | Intent) {
 		BotKitLogger.getLogger().info('set up intent file', intent);
 		if (typeof intent === 'string') {
 			this.setUpIntentFile(intent);
+		} else {
+			this.intent = intent;
 		}
-		throw new Error('only support intent file path set');
 	}
 
 	getWorkerNameByIntent(intent: string): string {
 		let workerName = null;
 		if (this.intent) {
-			// if intent yaml file has been set
 			const intentStackName = this.intent.process(intent);
-			workerName = this.intentStack[intentStackName];
+			workerName = this.intentStack[intentStackName] || intentStackName;
 		}
 		if (!workerName) {
 			workerName = this.defaultWorker;
@@ -145,20 +146,21 @@ export class WorkerRouterHandler implements IWorkerRouterHandler {
 
 	private setUpIntentFile(intentFilePath: string) {
 		const extname = path.extname(intentFilePath);
-		if (extname !== '.yaml') {
-			throw new Error('no yml file is unsupported');
-		}
-		const config = readYamlFromFilePath<IntentYAMLConfig>(intentFilePath);
-		if (config.type !== 'wildcard') {
-			throw new Error('wildcard yml file is only unsupported');
-		}
-		const wildCardConfig = config as IntentYAMLWildcardConfig;
-		if (wildCardConfig.intents) {
-			const map = new Map<string, string[]>();
-			wildCardConfig.intents.forEach(intent => {
-				map.set(intent.name, intent.wildcards);
-			});
-			this.intent = new WildcardIntent(map);
+		if (extname === '.yaml') {
+			const config = readYamlFromFilePath<IntentYAMLConfig>(intentFilePath);
+			if (config.type !== 'wildcard') {
+				throw new Error('wildcard yml file is only unsupported');
+			}
+			const wildCardConfig = config as IntentYAMLWildcardConfig;
+			if (wildCardConfig.intents) {
+				const map = new Map<string, string[]>();
+				wildCardConfig.intents.forEach(intent => {
+					map.set(intent.name, intent.wildcards);
+				});
+				this.intent = new WildcardIntent(map);
+			}
+		} else if (extname === '.json') {
+			this.intent = new JsonIntent(intentFilePath);
 		}
 	}
 }
