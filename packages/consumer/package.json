@@ -2,6 +2,10 @@
   "name": "@powerbotkit/consumer",
   "version": "0.0.2-alpha.16",
   "description": "powerbot-consumer",
+  "keywords": [
+    "bot",
+    "framework"
+  ],
   "author": "Power Bot Kit Team",
   "homepage": "https://github.com/PowerBotKit/powerbot/tree/develop/packages/consumer#readme",
   "license": "MIT",
@@ -21,7 +25,6 @@
   ],
   "scripts": {
     "build": "tsc --build",
-    "start": "tsc --build && node ./dist/lib/index.js",
     "test": "jest"
   },
   "dependencies": {

@@ -18,8 +18,4 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-export * from './middleware';
-export * from './router';
-export * from './server';
-export * from './worker';
-export * from './utils';
+export * from './lib';

@@ -66,7 +66,7 @@ class EchoWorker extends BaseWorker {
 		};
 		const result = super.getRenderCard(card, userInput);
 		const outputMessage: MessageOutput = {
-			type: MessageType.card_add,
+			type: MessageType.cardAdd,
 			value: result
 		};
 

@@ -2,19 +2,19 @@
   "extends": "../../tsconfig.json",
   "compilerOptions": {
     "baseUrl": ".",
-    "target": "es6",
+    "target": "esnext",
     "lib": ["es6", "esnext", "dom"],
     "module": "commonjs",
     "moduleResolution": "node",
-    "sourceMap": true,
+    "sourceMap": false,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
-    "declaration": false,
     "outDir": "dist",
     "types": ["node", "jest"],
     "allowSyntheticDefaultImports": true,
+    "downlevelIteration": true,
     "resolveJsonModule": true
   },
-  "files": ["index.ts", "distributor.ts", "consumer.ts"],
-  "exclude": ["node_modules"]
+  "include": ["quickstart/**/*.ts"],
+  "exclude": ["node_modules", "**/__tests__/**/*.ts"]
 }

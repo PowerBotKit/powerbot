@@ -1,0 +1,23 @@
+{
+  "name": "examples",
+  "version": "0.0.2-alpha.16",
+  "description": "> TODO: description",
+  "keywords": [
+    "examples"
+  ],
+  "private": true,
+  "author": "Arthur Ming <guobin.ming@pwc.com>",
+  "homepage": "https://github.com/PowerBotKit/powerbot#readme",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PowerBotKit/powerbot.git"
+  },
+  "scripts": {
+    "build": "tsc --build",
+    "test": "echo \"Error: run tests from root\" && exit 1"
+  },
+  "bugs": {
+    "url": "https://github.com/PowerBotKit/powerbot/issues"
+  }
+}

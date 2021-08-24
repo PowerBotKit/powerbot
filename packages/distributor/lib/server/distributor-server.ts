@@ -67,7 +67,8 @@ export class DistributorServer implements IBotServer {
 			await this.setupPublisher(middlewareConfig.publisherAdaptor);
 		}
 
-		this.inboundHandler = inboundHandler || new InboundHandler();
+		this.inboundHandler =
+			inboundHandler || (new InboundHandler() as InboundHandlerBase);
 		this.inboundHandler.init(
 			this.cache,
 			this.publisher,

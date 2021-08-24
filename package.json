@@ -16,7 +16,7 @@
   "scripts": {
     "bootstrap": "lerna bootstrap --npm-client yarn --use-workspaces",
     "create": "lerna create",
-    "tslint": "tslint --format verbose -c tslint.json \"+(packages|tools|examples)/**/*.+(ts)\"",
+    "tslint": "tslint --format verbose -c tslint.json \"+(packages|tools|examples)/**/*.+(ts)\" -e \"**/node_modules/**\"",
     "format": "prettier --check --parser typescript \"{packages,tools,examples}/**/*.{t,j}s?(x)\"",
     "prettify": "prettier --write --parser typescript \"{packages,tools,examples}/**/*.{t,j}s?(x)\"",
     "lint": "yarn tslint && yarn format",
