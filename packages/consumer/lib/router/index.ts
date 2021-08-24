@@ -90,10 +90,10 @@ export class WorkerRouterHandler implements IWorkerRouterHandler {
 		}
 	}
 
-	getWorkerNameByIntent(intent: string): string {
+	getWorkerNameByIntent(intentInput: string): string {
 		let workerName = null;
 		if (this.intent) {
-			const intentStackName = this.intent.process(intent);
+			const intentStackName = this.intent.process(intentInput);
 			workerName = this.intentStack[intentStackName] || intentStackName;
 		}
 		if (!workerName) {
@@ -129,18 +129,18 @@ export class WorkerRouterHandler implements IWorkerRouterHandler {
 	}
 
 	register(
-		filepath: string,
+		workerName: string,
 		worker: any,
 		middlewareIn?: InputMiddleware,
 		middlewareOut?: OutputMiddleware
 	) {
 		BotKitLogger.getLogger().info('register');
-		this.routeStack[filepath] = worker;
+		this.routeStack[workerName] = worker;
 		if (middlewareIn) {
-			this.inboundMiddlewareStack[filepath] = middlewareIn;
+			this.inboundMiddlewareStack[workerName] = middlewareIn;
 		}
 		if (middlewareOut) {
-			this.outboundMiddlewareStack[filepath] = middlewareOut;
+			this.outboundMiddlewareStack[workerName] = middlewareOut;
 		}
 	}
 
