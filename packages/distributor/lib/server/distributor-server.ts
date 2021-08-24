@@ -103,7 +103,7 @@ export class DistributorServer implements IBotServer {
 		await this.listener.init();
 	}
 	public async setupPublisher(publisher: IMQ) {
-		this.publisher = new RedisMQ();
+		this.publisher = publisher;
 		await this.publisher.init();
 	}
 
