@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.0.2-alpha.20](https://github.com/PowerBotKit/powerbot/compare/v0.0.2-alpha.19...v0.0.2-alpha.20) (2021-08-25)
+
+
+### Bug Fixes
+
+* use 'INFO' commaned to check redis connection RedisMQ when execute init process ([b4cbb3a](https://github.com/PowerBotKit/powerbot/commit/b4cbb3a562a2b014c203ce0b25ac65273c959df4))
+* use 'INFO' commaned to check whether redis is reday when execute init process ([a6924e8](https://github.com/PowerBotKit/powerbot/commit/a6924e8d3fd40e0c7c8c0099bfc4167ac6f7e39c))
+
+
+
+
+
 ## [0.0.2-alpha.19](https://github.com/PowerBotKit/powerbot/compare/v0.0.2-alpha.18...v0.0.2-alpha.19) (2021-08-25)
 
 **Note:** Version bump only for package root
