@@ -24,7 +24,7 @@
     "README.md"
   ],
   "scripts": {
-    "build": "tsc --build",
+    "build": "rimraf dist && tsc --build",
     "test": "jest"
   },
   "dependencies": {
