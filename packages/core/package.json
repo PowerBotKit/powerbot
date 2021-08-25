@@ -24,7 +24,7 @@
     "README.md"
   ],
   "scripts": {
-    "build": "tsc",
+    "build": "tsc --build",
     "test": "jest"
   },
   "dependencies": {
