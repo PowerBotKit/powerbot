@@ -23,6 +23,7 @@ import {
 	DialogUtil,
 	GDUserSession,
 	GDWorker,
+	InitiatorType,
 	IMQ
 } from '@powerbotkit/core';
 import {
@@ -111,7 +112,9 @@ export class InboundHandlerBase extends ActivityHandler {
 			BotKitLogger.getLogger().info('found dialog');
 			updatedDialog = DialogUtil.updateDialogInput(
 				context.activity,
-				dialogInCache
+				dialogInCache,
+				InitiatorType.user,
+				updatedDialog.input.type
 			);
 		} else {
 			// new dialog

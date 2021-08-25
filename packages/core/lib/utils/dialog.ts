@@ -96,7 +96,9 @@ export class DialogUtil {
 
 	public static updateDialogInput(
 		activity: Activity,
-		session: GDUserSession
+		session: GDUserSession,
+		initiatorType: InitiatorType,
+		messageType: MessageType
 	): GDUserSession {
 		if (typeof activity.text === 'string') {
 			session.input.type = MessageType.textAdd;
@@ -106,10 +108,10 @@ export class DialogUtil {
 			session.input.value = activity.value;
 		}
 
-		this.addHistory(
+		DialogUtil.addHistory(
 			session,
-			InitiatorType.user,
-			MessageType.textAdd,
+			initiatorType,
+			messageType,
 			activity.text,
 			activity.id
 		);

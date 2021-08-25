@@ -65,6 +65,11 @@ export class BaseWorker implements IBotWorker {
 		const func: Function = this[dialog.service || this.defaultService];
 		const output: MessageOutput = await func.call(this, dialog);
 		this.setBotOutput(output, dialog);
+		BotKitLogger.getLogger().debug(
+			`woker: ${this.constructor?.name || BaseWorker.name}, service: ${
+				dialog.service || this.defaultService
+			}, output: ${output.type} ->${output.value}`
+		);
 	}
 
 	dummyService(dialog: GDUserSession): MessageOutput {
