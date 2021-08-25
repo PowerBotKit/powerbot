@@ -81,24 +81,16 @@ export class DistributorServer implements IBotServer {
 	}
 
 	public async setupDB(db: IDataPersist) {
-		// this.db = new LowDBFileAsyncDataPersist();
 		this.db = db;
 		await this.db.init();
 	}
 
 	public async setupCache(cache: ICache) {
-		// this.cache = new RedisCache({
-		// 	port: process.env.CACHE_REDIS_PORT
-		// 		? parseInt(process.env.CACHE_REDIS_PORT, 10)
-		// 		: 6379,
-		// 	host: process.env.CACHE_REDIS_HOST || '127.0.0.1'
-		// });
 		this.cache = cache;
 		await this.cache.init();
 	}
 
 	public async setupListener(listener: IMQ) {
-		// this.listener = new RedisMQ();
 		this.listener = listener;
 		await this.listener.init();
 	}
