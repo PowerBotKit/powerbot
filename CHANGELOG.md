@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.0.2-alpha.18](https://github.com/PowerBotKit/powerbot/compare/v0.0.2-alpha.17...v0.0.2-alpha.18) (2021-08-25)
+
+
+### Bug Fixes
+
+* **distributor:** the publisher alaways be reds mq because setupPublisher method doesn't work ([90b846c](https://github.com/PowerBotKit/powerbot/commit/90b846c03c601148e683984356ceb778b59fb102))
+
+
+### Features
+
+* intent need simple and json way ([be3704d](https://github.com/PowerBotKit/powerbot/commit/be3704d1a41b5a5e5e87ecb66c0301f731e956ce))
+* RedisTlsMQ is removed and redis client need be setup  when create RedisMQ ([25a7a60](https://github.com/PowerBotKit/powerbot/commit/25a7a60efff31c236535d07c1769ebaa09a88932))
+
+
+
+
+
 ## [0.0.2-alpha.17](https://github.com/PowerBotKit/powerbot/compare/v0.0.2-alpha.16...v0.0.2-alpha.17) (2021-08-24)
 
 

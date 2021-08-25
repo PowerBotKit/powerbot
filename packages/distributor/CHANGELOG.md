@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.0.2-alpha.18](https://github.com/PowerBotKit/powerbot/compare/v0.0.2-alpha.17...v0.0.2-alpha.18) (2021-08-25)
+
+
+### Bug Fixes
+
+* **distributor:** the publisher alaways be reds mq because setupPublisher method doesn't work ([90b846c](https://github.com/PowerBotKit/powerbot/commit/90b846c03c601148e683984356ceb778b59fb102))
+
+
+
+
+
 ## [0.0.2-alpha.17](https://github.com/PowerBotKit/powerbot/compare/v0.0.2-alpha.16...v0.0.2-alpha.17) (2021-08-24)
 
 
