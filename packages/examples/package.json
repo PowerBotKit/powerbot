@@ -14,7 +14,7 @@
     "url": "git+https://github.com/PowerBotKit/powerbot.git"
   },
   "scripts": {
-    "build": "tsc --build",
+    "start": "tsc --build",
     "test": "echo \"Error: run tests from root\" && exit 1"
   },
   "bugs": {
