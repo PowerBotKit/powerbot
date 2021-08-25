@@ -38,6 +38,16 @@ export class RedisCache implements ICache {
 				BotKitLogger.getLogger().info('Redis Cache connection established!');
 				resolve();
 			});
+			this.client.info(info => {
+				BotKitLogger.getLogger().info(
+					`Redis Cache connection established!:\t${info}`
+				);
+				if (info) {
+					reject(info);
+				} else {
+					resolve();
+				}
+			});
 			this.client.on('error', err => {
 				BotKitLogger.getLogger().error(err);
 				reject(err);
