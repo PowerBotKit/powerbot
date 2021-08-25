@@ -28,7 +28,7 @@
     "test": "jest"
   },
   "dependencies": {
-    "@powerbotkit/core": "^0.0.2-alpha.18",
+    "@powerbotkit/core": "^0.0.2-alpha.19",
     "botbuilder": "^4.10.3",
     "dotenv": "^10.0.0",
     "lodash": "^4.17.20",
