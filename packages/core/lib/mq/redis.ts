@@ -17,29 +17,27 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
-/* tslint:disable:max-classes-per-file */
-import { createClient, RedisClient } from 'redis';
-import { BotKitLogger, IMQ } from '../core';
 
-export class RedisMQ implements IMQ {
+import { RedisClient } from 'redis';
+import { BotKitLogger } from '../core';
+import { IMQ } from './mq';
+
+export class RedisMQ implements IMQ<RedisClient> {
 	private logger = BotKitLogger.getLogger();
+
 	public client: RedisClient;
+
+	constructor(client: RedisClient) {
+		this.client = client;
+	}
+
 	public async init(): Promise<void> {
 		return new Promise((resolve, reject) => {
-			const client = createClient({
-				port: process.env.REDISPORT
-					? parseInt(process.env.REDISPORT, 10)
-					: 6379,
-				host: process.env.REDISCACHEHOSTNAME,
-				password: process.env.REDISCACHEKEY,
-				tls: null
-			});
-			client.on('ready', () => {
-				this.client = client;
+			this.client.on('ready', () => {
 				BotKitLogger.getLogger().info('Redis MQ connection established!');
 				resolve();
 			});
-			client.on('error', err => {
+			this.client.on('error', err => {
 				BotKitLogger.getLogger().error(err);
 				reject(err);
 			});
@@ -79,26 +77,26 @@ export class RedisMQ implements IMQ {
 	}
 }
 
-export class RedisTlsMQ extends RedisMQ {
-	public async init(): Promise<void> {
-		return new Promise((resolve, reject) => {
-			const client = createClient(
-				process.env.REDISPORT ? parseInt(process.env.REDISPORT, 10) : 6380,
-				process.env.REDISCACHEHOSTNAME,
-				{
-					auth_pass: process.env.REDISCACHEKEY,
-					tls: { servername: process.env.REDISCACHEHOSTNAME }
-				}
-			);
-			client.on('ready', () => {
-				this.client = client;
-				BotKitLogger.getLogger().info('Redis MQ connection established!');
-				resolve();
-			});
-			client.on('error', err => {
-				BotKitLogger.getLogger().error(err);
-				reject(err);
-			});
-		});
-	}
-}
+// export class RedisTlsMQ extends RedisMQ {
+// 	public async init(): Promise<void> {
+// 		return new Promise((resolve, reject) => {
+// 			const client = createClient(
+// 				process.env.REDISPORT ? parseInt(process.env.REDISPORT, 10) : 6380,
+// 				process.env.REDISCACHEHOSTNAME,
+// 				{
+// 					auth_pass: process.env.REDISCACHEKEY,
+// 					tls: { servername: process.env.REDISCACHEHOSTNAME }
+// 				}
+// 			);
+// 			client.on('ready', () => {
+// 				this.client = client;
+// 				BotKitLogger.getLogger().info('Redis MQ connection established!');
+// 				resolve();
+// 			});
+// 			client.on('error', err => {
+// 				BotKitLogger.getLogger().error(err);
+// 				reject(err);
+// 			});
+// 		});
+// 	}
+// }

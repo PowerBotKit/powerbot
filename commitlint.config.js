@@ -43,6 +43,7 @@ module.exports = {
 		'subject-full-stop': [0, 'never'],
 		'subject-case': [0, 'never'],
 		'header-max-length': [2, 'always', '120'],
-		'scope-case': [0, 'never']
+		'scope-case': [0, 'never'],
+		'body-max-length': [0]
 	}
 };

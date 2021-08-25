@@ -18,5 +18,40 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-export * from './mq';
-export * from './redis';
+import { createClient, RedisClient } from 'redis';
+
+export interface IRedisConfig {
+	port: string | number;
+	host: string;
+	password: string;
+}
+
+export interface IRedisTlsConfig {
+	port: string | number;
+	host: string;
+	key: string;
+}
+
+export function buildSimpleRedisClient(config: IRedisConfig): RedisClient {
+	const { port, host, password } = config;
+
+	return createClient({
+		port: typeof port === 'string' ? parseInt(port, 10) : port,
+		host,
+		password,
+		tls: null
+	});
+}
+
+export function buildRedisTlsClient(config: IRedisTlsConfig): RedisClient {
+	const { port, host, key } = config;
+
+	return createClient(
+		typeof port === 'string' ? parseInt(port, 10) : port,
+		host,
+		{
+			auth_pass: key,
+			tls: { servername: host }
+		}
+	);
+}

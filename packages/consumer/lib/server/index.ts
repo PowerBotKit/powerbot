@@ -18,7 +18,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-import { BotKitLogger, GDUserSession, IMQ, RedisMQ } from '@powerbotkit/core';
+import { BotKitLogger, GDUserSession, IMQ } from '@powerbotkit/core';
 import { InputMiddleware, OutputMiddleware } from '../middleware';
 import { IWorkerRouterHandler } from '../router';
 
@@ -54,8 +54,8 @@ export class ConsumerServer implements IConsumerServer {
 		middlewareConfig?: TMiddlewareConfig
 	) {
 		this.routerHandler = serverConfig.routerHandler;
-		this.listenerAdaptor = serverConfig.listenerAdaptor || new RedisMQ();
-		this.publisher = serverConfig.publisherAdaptor || new RedisMQ();
+		this.listenerAdaptor = serverConfig.listenerAdaptor;
+		this.publisher = serverConfig.publisherAdaptor;
 		if (middlewareConfig && middlewareConfig.inputMiddleware) {
 			this.inputMiddleware = middlewareConfig.inputMiddleware;
 		}

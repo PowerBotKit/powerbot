@@ -18,5 +18,6 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-export * from './dialog-util';
+export * from './dialog';
 export * from './json';
+export * from './redis';

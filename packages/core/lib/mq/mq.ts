@@ -18,5 +18,14 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-export * from './mq';
-export * from './redis';
+/**
+ * A interface for PubSub features, you can implement this interface to integrate your Message Queue tool
+ */
+export interface IMQ<T = any> {
+	client: T;
+	init(): Promise<void>;
+	publish(channel: string, data: string): boolean;
+	subscribe(channel: string): void;
+	onSubscribed(cb: (channel: string) => void): void;
+	onMessage(cb: (channel: string, data: any) => Promise<void>): void;
+}
