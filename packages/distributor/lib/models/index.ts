@@ -18,26 +18,6 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-/**
- * An object relating to maintain the relationship of user email and bot's ConversationReference
- * @deprecated it will removed
- */
-export interface IUserSession {
-	Email: string;
-	ConversationReference;
-}
-
-/**
- * A interface for data persist, you can implment this interface to integrate your data storage system
- * @deprecated it will removed
- */
-export interface IDataPersist {
-	client: any;
-	init(): Promise<void>;
-	insertUserSession(dto: IUserSession): void;
-	findUserSession(where: any): Promise<IUserSession>;
-}
-
 export * from './data-persist';
 export * from './low-db-model';
 export * from './user-session';

@@ -22,39 +22,23 @@ import { promisify } from 'util';
 import { ICache } from './index';
 
 import { BotKitLogger } from '@powerbotkit/core';
-import { createClient, RedisClient } from 'redis';
-
-export interface IRedisCacheConfig {
-	port?: number;
-	host?: string;
-	password?: string;
-}
-
-const defaultRedisCacheConfig: IRedisCacheConfig = {
-	port: 6379,
-	host: '127.0.0.1'
-};
-
+import { RedisClient } from 'redis';
 export class RedisCache implements ICache {
 	public lockTime: number = 60;
 
-	private config: IRedisCacheConfig;
-
 	public client: RedisClient;
 
-	constructor(config?: IRedisCacheConfig) {
-		this.config = { ...config, ...defaultRedisCacheConfig };
+	constructor(client: RedisClient, lockTime = 60) {
+		this.client = client;
+		this.lockTime = lockTime;
 	}
-
-	public async init(): Promise<void> {
+	public init(): Promise<void> {
 		return new Promise((resolve, reject) => {
-			const client = createClient(this.config);
-			client.on('ready', () => {
-				this.client = client;
+			this.client.on('ready', () => {
 				BotKitLogger.getLogger().info('Redis Cache connection established!');
 				resolve();
 			});
-			client.on('error', err => {
+			this.client.on('error', err => {
 				BotKitLogger.getLogger().error(err);
 				reject(err);
 			});
