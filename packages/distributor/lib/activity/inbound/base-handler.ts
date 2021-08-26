@@ -24,7 +24,8 @@ import {
 	GDUserSession,
 	GDWorker,
 	InitiatorType,
-	IMQ
+	IMQ,
+	MessageType
 } from '@powerbotkit/core';
 import {
 	ActivityHandler,
@@ -114,15 +115,15 @@ export class InboundHandlerBase extends ActivityHandler {
 				context.activity,
 				dialogInCache,
 				InitiatorType.user,
-				updatedDialog.input.type
+				updatedDialog?.input?.type ?? MessageType.textAdd
 			);
 		} else {
 			// new dialog
 			BotKitLogger.getLogger().info('new dialog');
 			updatedDialog = await DialogUtil.newDialog(context);
 		}
-		// lock redis
-		await this.cache.lock(dialogKey, JSON.stringify(updatedDialog));
+		// store redis
+		await this.cache.set(dialogKey, updatedDialog);
 
 		return {
 			dialogKey,

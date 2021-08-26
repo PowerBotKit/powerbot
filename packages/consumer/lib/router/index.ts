@@ -27,6 +27,7 @@ import {
 	IntentYAMLConfig,
 	IntentYAMLWildcardConfig,
 	JsonIntent,
+	MessageAction,
 	WildcardIntent
 } from '@powerbotkit/core';
 
@@ -117,12 +118,19 @@ export class WorkerRouterHandler implements IWorkerRouterHandler {
 			await inMDW.process(context);
 		}
 
-		const workerClass: IBotWorker = this.routeStack[workerName];
-		await workerClass.process(context);
+		if (this.routeStack[workerName]) {
+			const workerClass: IBotWorker = this.routeStack[workerName];
+			await workerClass.process(context);
+		}
 
 		if (this.outboundMiddlewareStack[workerName]) {
 			const outMDW: OutputMiddleware = this.outboundMiddlewareStack[workerName];
 			await outMDW.process(context);
+		}
+
+		if (context.output?.action === MessageAction.delete) {
+			context.worker.workerName = '';
+			context.history = [];
 		}
 
 		return context;

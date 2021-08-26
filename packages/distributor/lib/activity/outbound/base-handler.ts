@@ -18,7 +18,12 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-import { BotKitLogger, GDUserSession, MessageType } from '@powerbotkit/core';
+import {
+	BotKitLogger,
+	DialogUtil,
+	GDUserSession,
+	MessageType
+} from '@powerbotkit/core';
 import { BotFrameworkAdapter } from 'botbuilder';
 import { ICache } from '../../cache';
 import { OnPostrReceiveMessage } from './hook';
@@ -109,7 +114,9 @@ export class OutboundHandlerBase {
 						);
 					}
 				}
-				await cache.unlock(dialog.id);
+				const dialogKey = DialogUtil.getDialogKey(dialog.id);
+				await cache.set(dialogKey, dialog);
+				// await cache.unlock(dialog.id);
 			}
 		);
 	}
