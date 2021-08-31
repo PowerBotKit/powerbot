@@ -47,7 +47,7 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{secrets.npm_token}}
       - name: publish @powerbotkit/distributor package
-        run: cd ./packages/distributor publish
+        run: cd ./packages/distributor && npm publish
         env:
           NODE_AUTH_TOKEN: ${{secrets.npm_token}}
 
