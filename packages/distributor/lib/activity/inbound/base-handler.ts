@@ -124,6 +124,7 @@ export class InboundHandlerBase extends ActivityHandler {
 		}
 		// store redis
 		await this.cache.set(dialogKey, updatedDialog, 60 * 60 * 24);
+		await this.cache.lock(dialogKey, updatedDialog);
 
 		return {
 			dialogKey,
