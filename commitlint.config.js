@@ -44,6 +44,6 @@ module.exports = {
 		'subject-case': [0, 'never'],
 		'header-max-length': [2, 'always', '120'],
 		'scope-case': [0, 'never'],
-		'body-max-length': [0]
+		'body-max-line-length': [0]
 	}
 };
