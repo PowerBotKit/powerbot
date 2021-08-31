@@ -78,7 +78,7 @@ export class DialogUtil {
 		const input = this.getInput(context);
 
 		return {
-			id: context.activity.recipient.id,
+			id: context.activity.conversation.id,
 			user: userInfo,
 			botConversion: conversationReference,
 			worker: {

@@ -84,7 +84,7 @@ export class InboundHandlerBase extends ActivityHandler {
 		for (const member of membersAdded) {
 			if (member.id !== context.activity.recipient.id) {
 				const dialogKey = DialogUtil.getDialogKey(
-					context.activity.recipient.id
+					context.activity.conversation.id
 				);
 				await this.cache.delete(dialogKey);
 				const userInfo: TeamsChannelAccount = await DialogUtil.getUserInfo(
@@ -105,7 +105,7 @@ export class InboundHandlerBase extends ActivityHandler {
 		context: TurnContext,
 		worker?: GDWorker
 	): Promise<{ dialogKey: string; dialog: GDUserSession }> {
-		const dialogKey = DialogUtil.getDialogKey(context.activity.recipient.id);
+		const dialogKey = DialogUtil.getDialogKey(context.activity.conversation.id);
 		const dialogInCache: GDUserSession = await this.cache.get(dialogKey);
 		let updatedDialog: GDUserSession;
 		if (dialogInCache) {
