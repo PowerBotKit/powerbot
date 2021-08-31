@@ -123,7 +123,7 @@ export class InboundHandlerBase extends ActivityHandler {
 			updatedDialog = await DialogUtil.newDialog(context);
 		}
 		// store redis
-		await this.cache.set(dialogKey, updatedDialog);
+		await this.cache.set(dialogKey, updatedDialog, 60 * 60 * 24);
 
 		return {
 			dialogKey,

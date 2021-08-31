@@ -115,7 +115,7 @@ export class OutboundHandlerBase {
 					}
 				}
 				const dialogKey = DialogUtil.getDialogKey(dialog.id);
-				await cache.set(dialogKey, dialog);
+				await cache.set(dialogKey, dialog, 60 * 60 * 24);
 				// await cache.unlock(dialog.id);
 			}
 		);

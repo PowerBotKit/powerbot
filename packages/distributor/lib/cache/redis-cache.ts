@@ -81,7 +81,7 @@ export class RedisCache implements ICache {
 	}
 
 	public async set(key: string, value: any, expireTime: number) {
-		if (expireTime) {
+		if (expireTime > 0) {
 			return this.promisify('set')(
 				key,
 				JSON.stringify(value),
@@ -89,6 +89,10 @@ export class RedisCache implements ICache {
 				expireTime
 			);
 		} else {
+			BotKitLogger.getLogger().warn(
+				'It is necessary to set the expiration time'
+			);
+
 			return this.promisify('set')(key, JSON.stringify(value));
 		}
 	}

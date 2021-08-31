@@ -86,27 +86,3 @@ export class RedisMQ implements IMQ<RedisClient> {
 		});
 	}
 }
-
-// export class RedisTlsMQ extends RedisMQ {
-// 	public async init(): Promise<void> {
-// 		return new Promise((resolve, reject) => {
-// 			const client = createClient(
-// 				process.env.REDISPORT ? parseInt(process.env.REDISPORT, 10) : 6380,
-// 				process.env.REDISCACHEHOSTNAME,
-// 				{
-// 					auth_pass: process.env.REDISCACHEKEY,
-// 					tls: { servername: process.env.REDISCACHEHOSTNAME }
-// 				}
-// 			);
-// 			client.on('ready', () => {
-// 				this.client = client;
-// 				BotKitLogger.getLogger().info('Redis MQ connection established!');
-// 				resolve();
-// 			});
-// 			client.on('error', err => {
-// 				BotKitLogger.getLogger().error(err);
-// 				reject(err);
-// 			});
-// 		});
-// 	}
-// }
