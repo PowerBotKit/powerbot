@@ -32,7 +32,7 @@ import {
 } from '@powerbotkit/core';
 
 import { InputMiddleware, OutputMiddleware } from '../middleware';
-import { readYamlFromFilePath } from '../utils';
+import { isPromise, readYamlFromFilePath } from '../utils';
 import { IBotWorker } from '../worker';
 
 export interface IWorkerRouterHandler {
@@ -47,7 +47,7 @@ export interface IWorkerRouterHandler {
 		middlewareIn?: InputMiddleware,
 		middlewareOut?: OutputMiddleware
 	);
-	getWorkerNameByIntent(intent: string): string;
+	getWorkerNameByIntent(intent: string): string | Promise<string>;
 }
 
 export interface RouteStackMeta {
@@ -91,10 +91,16 @@ export class WorkerRouterHandler implements IWorkerRouterHandler {
 		}
 	}
 
-	getWorkerNameByIntent(intentInput: string): string {
+	async getWorkerNameByIntent(intentInput: string): Promise<string> {
 		let workerName = null;
 		if (this.intent) {
-			const intentStackName = this.intent.process(intentInput);
+			let intentStackName = '';
+			const intentStackNameP = this.intent.process(intentInput);
+			if (isPromise(intentStackNameP)) {
+				intentStackName = await intentStackNameP;
+			} else {
+				intentStackName = intentStackNameP;
+			}
 			workerName = this.intentStack[intentStackName] || intentStackName;
 		}
 		if (!workerName) {
@@ -107,7 +113,7 @@ export class WorkerRouterHandler implements IWorkerRouterHandler {
 	async redirect(context: GDUserSession): Promise<GDUserSession> {
 		BotKitLogger.getLogger().info('redirect');
 		if (context.worker && context.worker.workerName === '') {
-			context.worker.workerName = this.getWorkerNameByIntent(
+			context.worker.workerName = await this.getWorkerNameByIntent(
 				context.input.value
 			);
 		}
