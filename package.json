@@ -26,7 +26,7 @@
     "test": "jest --runInBand --detectOpenHandles --forceExit",
     "test:coverage": "jest --runInBand --detectOpenHandles --forceExit --coverage",
     "prerelease": "yarn build",
-    "release": "lerna publish --conventional-commits",
+    "release": "lerna version --force-publish",
     "release:alpha": "yarn release prerelease",
     "prepare": "npx husky install",
     "publish-npm": "node scripts/publish.js "
