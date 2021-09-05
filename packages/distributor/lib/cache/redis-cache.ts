@@ -31,6 +31,7 @@ export interface IRedisCacheSerializer<T = any> {
 	deserialize(value: string): T;
 }
 
+// tslint:disable-next-line: max-classes-per-file
 export class NoopRedisCacheSerializer implements IRedisCacheSerializer<any> {
 	serialize(key: any): string {
 		return key;
