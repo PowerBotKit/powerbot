@@ -18,12 +18,51 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-import { promisify } from 'util';
-import { ICache } from './index';
-
 import { BotKitLogger } from '@powerbotkit/core';
+
 import { RedisClient } from 'redis';
+import { promisify } from 'util';
+
+import { ICache } from './cache';
+
+export interface IRedisCacheSerializer<T = any> {
+	serialize(key: T): string;
+
+	deserialize(value: string): T;
+}
+
+// tslint:disable-next-line: max-classes-per-file
+export class NoopRedisCacheSerializer implements IRedisCacheSerializer<any> {
+	serialize(key: any): string {
+		return key;
+	}
+
+	deserialize(value: any) {
+		return value;
+	}
+}
+
+// tslint:disable-next-line: max-classes-per-file
+export class JsonRedisCacheSerializer implements IRedisCacheSerializer<any> {
+	serialize(key: any): string {
+		return typeof key === 'string' ? key : JSON.stringify(key);
+	}
+
+	deserialize(value: string) {
+		try {
+			return JSON.parse(value);
+		} catch (e) {
+			return value;
+		}
+	}
+}
+
+// tslint:disable-next-line: max-classes-per-file
 export class RedisCache implements ICache {
+	private _keySerializer: IRedisCacheSerializer;
+
+	private _valueSerializer: IRedisCacheSerializer;
+
 	public lockTime: number = 60;
 
 	public client: RedisClient;
@@ -31,7 +70,18 @@ export class RedisCache implements ICache {
 	constructor(client: RedisClient, lockTime = 60) {
 		this.client = client;
 		this.lockTime = lockTime;
+		this._keySerializer = new JsonRedisCacheSerializer();
+		this._valueSerializer = new JsonRedisCacheSerializer();
 	}
+
+	public set keySerializer(_keySerializer: IRedisCacheSerializer) {
+		this._keySerializer = _keySerializer;
+	}
+
+	public set valueSerializer(_valueSerializer: IRedisCacheSerializer) {
+		this._valueSerializer = _valueSerializer;
+	}
+
 	public init(): Promise<void> {
 		return new Promise((resolve, reject) => {
 			this.client.on('ready', () => {
@@ -56,23 +106,25 @@ export class RedisCache implements ICache {
 	}
 
 	public async lock(key: string, value: string) {
-		const v = typeof value === 'string' ? value : JSON.stringify(value);
+		const k = this._keySerializer.serialize(key);
+		const v = this._valueSerializer.serialize(value);
 
-		return this.client.set(key, v, 'EX', this.lockTime, 'NX');
+		return this.client.set(k, v, 'EX', this.lockTime, 'NX');
 	}
 
 	public async unlock(key: string, expireTime?: number) {
-		const value = await this.promisify('get')(key);
+		const k = this._keySerializer.serialize(key);
+		const value = await this.promisify('get')(k);
 		let multiOp;
 		if (expireTime) {
 			multiOp = [
-				['del', key],
-				['set', key, value, 'EX', expireTime]
+				['del', k],
+				['set', k, value, 'EX', expireTime]
 			];
 		} else {
 			multiOp = [
-				['del', key],
-				['set', key, value]
+				['del', k],
+				['set', k, value]
 			];
 		}
 		this.client.multi(multiOp).exec((err, _) => {
@@ -83,28 +135,30 @@ export class RedisCache implements ICache {
 	}
 
 	public async set(key: string, value: any, expireTime: number) {
+		const k = this._keySerializer.serialize(key);
+		const v = this._valueSerializer.serialize(value);
+
 		if (expireTime > 0) {
-			return this.promisify('set')(
-				key,
-				JSON.stringify(value),
-				'EX',
-				expireTime
-			);
+			return this.promisify('set')(k, v, 'EX', expireTime);
 		} else {
 			BotKitLogger.getLogger().warn(
 				'It is necessary to set the expiration time'
 			);
 
-			return this.promisify('set')(key, JSON.stringify(value));
+			return this.promisify('set')(k, v);
 		}
 	}
 	public async get(key: string) {
-		const result = await this.promisify('get')(key);
+		const k = this._keySerializer.serialize(key);
+		const value = await this.promisify('get')(k);
+		const v = this._valueSerializer.serialize(value);
 
-		return JSON.parse(result);
+		return v;
 	}
 	public delete(key: string) {
-		return this.promisify('del')(key);
+		const k = this._keySerializer.serialize(key);
+
+		return this.promisify('del')(k);
 	}
 
 	private promisify(methodName: string) {
