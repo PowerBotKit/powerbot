@@ -151,7 +151,7 @@ export class RedisCache implements ICache {
 	public async get(key: string) {
 		const k = this._keySerializer.serialize(key);
 		const value = await this.promisify('get')(k);
-		const v = this._valueSerializer.serialize(value);
+		const v = this._valueSerializer.deserialize(value);
 
 		return v;
 	}
