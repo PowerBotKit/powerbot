@@ -23,25 +23,6 @@ const fs = require('fs-extra');
 const path = require('path');
 const shelljs = require('shelljs');
 
-// async function runParallel(maxConcurrency, source, iteratorFn) {
-// 	const ret = [];
-// 	const executing = [];
-// 	for (const item of source) {
-// 		const p = Promise.resolve().then(() => iteratorFn(item, source));
-// 		ret.push(p);
-
-// 		if (maxConcurrency <= source.length) {
-// 			const e = p.then(() => executing.splice(executing.indexOf(e), 1));
-// 			executing.push(e);
-// 			if (executing.length >= maxConcurrency) {
-// 				// eslint-disable-next-line no-await-in-loop
-// 				await Promise.race(executing);
-// 			}
-// 		}
-// 	}
-// 	return Promise.all(ret);
-// }
-
 function fetchTargets() {
 	return fs
 		.readdirSync('packages')
@@ -59,41 +40,69 @@ function fetchTargets() {
 		});
 }
 
-function publishNpm(target) {
-	try {
-		console.log(
-			`build ${chalk.red(target.name)}@${chalk.yellow(target.version)}`
+function fetchTopologicalSorting(targets) {
+	const nodes = new Map();
+	targets.forEach(target => {
+		const { name, dependencies } = target;
+		if (!nodes.has(name)) {
+			nodes.set(name, { target, indegree: 0, afters: [] });
+		}
+		const keys = Object.keys(dependencies).filter(dependency =>
+			dependency.startsWith('@powerbotkit')
 		);
-		shelljs.cd(target.location).exec('yarn build');
-		shelljs.cd(target.location).exec('npm publish');
+
+		keys.forEach(key => {
+			if (!nodes.has(key)) {
+				nodes.set(key, {
+					target: targets.find(t => t.name === key),
+					indegree: 0,
+					afters: []
+				});
+			}
+			nodes.get(name).indegree = nodes.get(key).indegree + 1;
+			nodes.get(key).afters.push(target);
+		});
+	});
+	return nodes;
+}
+
+function buildTarget(target) {
+	if (target.scripts && target.scripts.build) {
 		console.log(
-			`puslish ${chalk.red(target.name)}@${chalk.yellowBright(
-				target.version
-			)} ${chalk.green('successfully')}`
+			`${chalk.blue(target.name)}: $ ${chalk.cyan(target.scripts.build)}`
 		);
-	} catch (err) {
+		shelljs.cd(target.location).exec(target.scripts.build);
+		console.log(`${chalk.blue(target.name)} ${chalk.green('success')} 🚀`);
+	} else {
 		console.log(
-			`failed to puslish ${chalk.red(target.name)}@${chalk.yellowBright(
-				target.version
-			)}, error: ${chalk.blue(err.message)}`
+			`${chalk.blue(target.name)} ${chalk.cyan('skip')} for no build script`
 		);
 	}
 }
 
 async function run() {
-	const targets = fetchTargets();
-	targets.forEach(target => {
-		if (target.private === true) {
-			console.log(
-				`${chalk.red(target.name)} is ${chalk.cyan('private')}, ${chalk.green(
-					'skip'
-				)}`
-			);
-		} else {
-			// console.log(`publish ${chalk.red(target.name)}: ${target.location}`);
-			publishNpm(target);
+	const targets = await fetchTargets();
+	const nodes = fetchTopologicalSorting(targets);
+	const queue = [];
+	nodes.forEach((v, k) => {
+		if (v.indegree === 0) {
+			queue.push(k);
 		}
 	});
+	while (queue.length > 0) {
+		const name = queue.shift();
+		const node = nodes.get(name);
+		if (node && node.target) {
+			buildTarget(node.target);
+			node.afters.forEach(a => {
+				nodes.get(a.name).indegree--;
+				if (nodes.get(a.name).indegree === 0) {
+					queue.push(a.name);
+				}
+			});
+		}
+	}
+	shelljs.exit(0);
 }
 
 if (require.main === module) {
