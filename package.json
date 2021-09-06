@@ -21,6 +21,7 @@
     "prettify": "prettier --write --parser typescript \"{packages,tools,examples}/**/*.{t,j}s?(x)\"",
     "lint": "yarn tslint && yarn format",
     "build": "lerna run --stream --sort build",
+    "build:new": "node scripts/build.js",
     "check:license": "license-check-and-add check",
     "clean": "yarn workspaces run clean",
     "test": "jest --runInBand --detectOpenHandles --forceExit",
