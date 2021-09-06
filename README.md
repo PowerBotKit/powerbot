@@ -1,8 +1,18 @@
 # PowerBotKit
 
-![PowerBotKit Logo](logo.png)
+<p align="center">
+  <img src="logo.png" alt="PowerBotKit Logg"/>
+  <br>
+  <i>
+    PowerBotKit is a bot development framework to help developer to quickly build enterprise ready chat-bot solution, it based on <a href="https://github.com/Microsoft/botbuilder-js">botbuilder-js</a>, developed in a <a href="https://en.wikipedia.org/wiki/Monorep">monorepo</a>.
+ </i>
+</p>
 
-PowerBotKit is a bot development framework to help developer to quickly build enterprise ready chat-bot solution, it based on [botbuilder-js](https://github.com/Microsoft/botbuilder-js), developed in a [monorepo](https://en.wikipedia.org/wiki/Monorepo).
+<p align="center">
+  <a href="https://www.npmjs.com/package/@powerbotkit/core">
+    <img src="https://img.shields.io/npm/v/@powerbotkit/core.svg?logo=npm&logoColor=fff&label=NPM+package&color=limegreen" alt="Powerbotkit on npm" />
+  </a>&nbsp;
+</p>
 
 ## Contents
 
