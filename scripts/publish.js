@@ -65,7 +65,7 @@ function publishNpm(target) {
 			`build ${chalk.red(target.name)}@${chalk.yellow(target.version)}`
 		);
 		shelljs.cd(target.location).exec('yarn build');
-		shelljs.cd(target.location).exec('npm pulish');
+		shelljs.cd(target.location).exec('npm publish');
 		console.log(
 			`puslish ${chalk.red(target.name)}@${chalk.yellowBright(
 				target.version
