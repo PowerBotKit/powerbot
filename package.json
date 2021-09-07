@@ -28,7 +28,7 @@
     "test:ci": "jest --runInBand --detectOpenHandles --forceExit --coverage",
     "prerelease": "yarn build",
     "release": "lerna version --force-publish",
-    "release:alpha": "yarn release prerelease",
+    "release:alpha": "lerna version prerelease --force-publish",
     "prepare": "npx husky install",
     "publish-npm": "node scripts/publish.js "
   },
