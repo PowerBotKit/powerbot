@@ -59,18 +59,43 @@ function fetchTargets() {
 		});
 }
 
+function fetchTopologicalSorting(targets) {
+	const nodes = new Map();
+	targets.forEach(target => {
+		const { name, dependencies } = target;
+		if (!nodes.has(name)) {
+			nodes.set(name, { target, indegree: 0, afters: [] });
+		}
+		const keys = Object.keys(dependencies).filter(dependency =>
+			dependency.startsWith('@powerbotkit')
+		);
+
+		keys.forEach(key => {
+			if (!nodes.has(key)) {
+				nodes.set(key, {
+					target: targets.find(t => t.name === key),
+					indegree: 0,
+					afters: []
+				});
+			}
+			nodes.get(name).indegree = nodes.get(key).indegree + 1;
+			nodes.get(key).afters.push(target);
+		});
+	});
+	return nodes;
+}
+
 function publishNpm(target) {
 	try {
-		console.log(
-			`build ${chalk.red(target.name)}@${chalk.yellow(target.version)}`
-		);
-		shelljs.cd(target.location).exec('yarn build');
-		shelljs.cd(target.location).exec('npm publish');
-		console.log(
-			`puslish ${chalk.red(target.name)}@${chalk.yellowBright(
-				target.version
-			)} ${chalk.green('successfully')}`
-		);
+		if (target.private === true) {
+			console.log(
+				`${chalk.red(target.name)} is ${chalk.cyan('private')}, ${chalk.green(
+					'skip'
+				)}`
+			);
+		} else {
+			doPublishNpm(target);
+		}
 	} catch (err) {
 		console.log(
 			`failed to puslish ${chalk.red(target.name)}@${chalk.yellowBright(
@@ -80,20 +105,42 @@ function publishNpm(target) {
 	}
 }
 
+function doPublishNpm(target) {
+	console.log(
+		`build ${chalk.red(target.name)}@${chalk.yellow(target.version)}`
+	);
+	shelljs.cd(target.location).exec('yarn build');
+	shelljs.cd(target.location).exec('npm publish');
+	console.log(
+		`puslish ${chalk.red(target.name)}@${chalk.yellowBright(
+			target.version
+		)} ${chalk.green('successfully')}`
+	);
+}
+
 async function run() {
 	const targets = fetchTargets();
-	targets.forEach(target => {
-		if (target.private === true) {
-			console.log(
-				`${chalk.red(target.name)} is ${chalk.cyan('private')}, ${chalk.green(
-					'skip'
-				)}`
-			);
-		} else {
-			// console.log(`publish ${chalk.red(target.name)}: ${target.location}`);
-			publishNpm(target);
+	const nodes = fetchTopologicalSorting(targets);
+	const queue = [];
+	nodes.forEach((v, k) => {
+		if (v.indegree === 0) {
+			queue.push(k);
 		}
 	});
+	while (queue.length > 0) {
+		const name = queue.shift();
+		const node = nodes.get(name);
+		if (node && node.target) {
+			publishNpm(node.target);
+			node.afters.forEach(a => {
+				nodes.get(a.name).indegree--;
+				if (nodes.get(a.name).indegree === 0) {
+					queue.push(a.name);
+				}
+			});
+		}
+	}
+	shelljs.exit(0);
 }
 
 if (require.main === module) {
