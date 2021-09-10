@@ -18,51 +18,53 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-const chalk = require('chalk');
+const fs = require('fs-extra');
+const path = require('path');
 
-const shelljs = require('shelljs');
-
-const { fetchTargets, fetchTopologicalSorting } = require('./utils');
-
-function buildTarget(target) {
-	if (target.scripts && target.scripts.build) {
-		console.log(
-			`${chalk.blue(target.name)}: $ ${chalk.cyan(target.scripts.build)}`
-		);
-		shelljs.cd(target.location).exec(target.scripts.build);
-		console.log(`${chalk.blue(target.name)} ${chalk.green('success')} 🚀`);
-	} else {
-		console.log(
-			`${chalk.blue(target.name)} ${chalk.cyan('skip')} for no build script`
-		);
-	}
+function fetchTargets() {
+	return fs
+		.readdirSync('packages')
+		.filter(f => fs.statSync(`packages/${f}`).isDirectory())
+		.map(f => {
+			const pkg = require(path.join(
+				__dirname,
+				'..',
+				'packages',
+				f,
+				'package.json'
+			));
+			pkg.location = path.join(__dirname, '..', 'packages', f);
+			return pkg;
+		});
 }
 
-async function run() {
-	const targets = await fetchTargets();
-	const nodes = fetchTopologicalSorting(targets);
-	const queue = [];
-	nodes.forEach((v, k) => {
-		if (v.indegree === 0) {
-			queue.push(k);
+function fetchTopologicalSorting(targets) {
+	const nodes = new Map();
+	targets.forEach(target => {
+		const { name, dependencies } = target;
+		if (!nodes.has(name)) {
+			nodes.set(name, { target, indegree: 0, afters: [] });
 		}
+		const keys = Object.keys(dependencies).filter(dependency =>
+			dependency.startsWith('@powerbotkit')
+		);
+
+		keys.forEach(key => {
+			if (!nodes.has(key)) {
+				nodes.set(key, {
+					target: targets.find(t => t.name === key),
+					indegree: 0,
+					afters: []
+				});
+			}
+			nodes.get(name).indegree = nodes.get(key).indegree + 1;
+			nodes.get(key).afters.push(target);
+		});
 	});
-	while (queue.length > 0) {
-		const name = queue.shift();
-		const node = nodes.get(name);
-		if (node && node.target) {
-			buildTarget(node.target);
-			node.afters.forEach(a => {
-				nodes.get(a.name).indegree--;
-				if (nodes.get(a.name).indegree === 0) {
-					queue.push(a.name);
-				}
-			});
-		}
-	}
-	shelljs.exit(0);
+	return nodes;
 }
 
-if (require.main === module) {
-	run();
-}
+module.exports = {
+	fetchTargets,
+	fetchTopologicalSorting
+};

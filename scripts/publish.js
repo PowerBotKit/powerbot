@@ -19,71 +19,9 @@
 // THE SOFTWARE.
 
 const chalk = require('chalk');
-const fs = require('fs-extra');
-const path = require('path');
 const shelljs = require('shelljs');
 
-// async function runParallel(maxConcurrency, source, iteratorFn) {
-// 	const ret = [];
-// 	const executing = [];
-// 	for (const item of source) {
-// 		const p = Promise.resolve().then(() => iteratorFn(item, source));
-// 		ret.push(p);
-
-// 		if (maxConcurrency <= source.length) {
-// 			const e = p.then(() => executing.splice(executing.indexOf(e), 1));
-// 			executing.push(e);
-// 			if (executing.length >= maxConcurrency) {
-// 				// eslint-disable-next-line no-await-in-loop
-// 				await Promise.race(executing);
-// 			}
-// 		}
-// 	}
-// 	return Promise.all(ret);
-// }
-
-function fetchTargets() {
-	return fs
-		.readdirSync('packages')
-		.filter(f => fs.statSync(`packages/${f}`).isDirectory())
-		.map(f => {
-			const pkg = require(path.join(
-				__dirname,
-				'..',
-				'packages',
-				f,
-				'package.json'
-			));
-			pkg.location = path.join(__dirname, '..', 'packages', f);
-			return pkg;
-		});
-}
-
-function fetchTopologicalSorting(targets) {
-	const nodes = new Map();
-	targets.forEach(target => {
-		const { name, dependencies } = target;
-		if (!nodes.has(name)) {
-			nodes.set(name, { target, indegree: 0, afters: [] });
-		}
-		const keys = Object.keys(dependencies).filter(dependency =>
-			dependency.startsWith('@powerbotkit')
-		);
-
-		keys.forEach(key => {
-			if (!nodes.has(key)) {
-				nodes.set(key, {
-					target: targets.find(t => t.name === key),
-					indegree: 0,
-					afters: []
-				});
-			}
-			nodes.get(name).indegree = nodes.get(key).indegree + 1;
-			nodes.get(key).afters.push(target);
-		});
-	});
-	return nodes;
-}
+const { fetchTargets, fetchTopologicalSorting } = require('./utils');
 
 function publishNpm(target) {
 	try {
