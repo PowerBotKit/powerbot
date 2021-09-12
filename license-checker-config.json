@@ -1,6 +1,8 @@
 {
   "ignore": [
+    ".editorconfig",
     ".git",
+    ".gitignore",
     ".github/ISSUE_TEMPLATE",
     ".yarn",
     ".yarnrc",
@@ -19,7 +21,8 @@
     "**/.prettierrc",
     "**/.prettierignore",
     "**/OWNERS",
-    "**/*.lock"
+    "**/*.lock",
+    "**/.gitignore"
   ],
   "license": "LICENSE",
   "defaultFormat": {
