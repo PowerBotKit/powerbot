@@ -45,7 +45,7 @@
     "lerna": "^4.0.0",
     "license-check-and-add": "^4.0.2",
     "lint-staged": "^11.0.1",
-    "prettier": "^2.1.2",
+    "prettier": "^2.4.0",
     "rimraf": "^3.0.2",
     "shelljs": "^0.8.4",
     "ts-jest": "^27.0.5",
