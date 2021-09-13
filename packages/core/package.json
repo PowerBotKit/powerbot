@@ -28,10 +28,12 @@
     "test": "jest"
   },
   "dependencies": {
-    "@types/redis": "^2.8.28",
     "botbuilder": "^4.10.3",
     "redis": "^3.0.2",
     "wildcard": "^2.0.0",
     "winston": "^3.3.3"
+  },
+  "devDependencies": {
+    "@types/redis": "^2.8.32"
   }
 }
