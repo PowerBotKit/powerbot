@@ -10,10 +10,21 @@ import { BotKitLogger, GDUserSession, IMQ } from '@powerbotkit/core';
 import { InputMiddleware, OutputMiddleware } from '../middleware';
 import { IWorkerRouterHandler } from '../router';
 
+export interface IChanneConfig {
+	inboundChannel: string;
+	outboundChannel: string;
+}
+
+const defaultChanneConfig: IChanneConfig = {
+	inboundChannel: 'inbound',
+	outboundChannel: 'outbound'
+};
+
 export interface TConsumerServerConfig {
 	routerHandler: IWorkerRouterHandler;
 	listenerAdaptor?: IMQ;
 	publisherAdaptor?: IMQ;
+	channeConfig?: IChanneConfig;
 }
 
 export interface TMiddlewareConfig {
@@ -31,6 +42,7 @@ export interface IConsumerServer {
 }
 
 export class ConsumerServer implements IConsumerServer {
+	private channeConfig: IChanneConfig;
 	private routerHandler: IWorkerRouterHandler;
 	private listenerAdaptor: IMQ;
 	private publisher: IMQ;
@@ -44,6 +56,7 @@ export class ConsumerServer implements IConsumerServer {
 		this.routerHandler = serverConfig.routerHandler;
 		this.listenerAdaptor = serverConfig.listenerAdaptor;
 		this.publisher = serverConfig.publisherAdaptor;
+		this.channeConfig = serverConfig.channeConfig || defaultChanneConfig;
 		if (middlewareConfig && middlewareConfig.inputMiddleware) {
 			this.inputMiddleware = middlewareConfig.inputMiddleware;
 		}
@@ -56,9 +69,7 @@ export class ConsumerServer implements IConsumerServer {
 		await this.listenerAdaptor.init();
 		await this.publisher.init();
 		this.listenerAdaptor.onSubscribed(channel => {
-			BotKitLogger.getLogger().info(
-				`🚗 Consumer listen to ${channel || 'outbound'} broker`
-			);
+			BotKitLogger.getLogger().info(`🚗 Consumer listen to ${channel} broker`);
 		});
 
 		this.listenerAdaptor.onMessage(async (channel: string, data: any) => {
@@ -73,10 +84,13 @@ export class ConsumerServer implements IConsumerServer {
 			if (this.outputMiddleware) {
 				await this.outputMiddleware.process(updatedDialog);
 			}
-			this.sendToOutbound('outbound', JSON.stringify(updatedDialog));
+			this.sendToOutbound(
+				this.channeConfig.outboundChannel,
+				JSON.stringify(updatedDialog)
+			);
 		});
 
-		this.listenerAdaptor.subscribe('inbound');
+		this.listenerAdaptor.subscribe(this.channeConfig.inboundChannel);
 	}
 
 	public sendToOutbound(channel: string, data: string) {
