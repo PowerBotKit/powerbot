@@ -38,21 +38,36 @@ export class DistributorServer implements IBotServer {
 		middlewareConfig?: TMiddlewareConfig,
 		inboundHandler?: InboundHandlerBase
 	) {
-		// below 3 steps need be configurable
-		if (middlewareConfig && middlewareConfig.dataPersistAdaptor) {
-			await this.setupDB(middlewareConfig.dataPersistAdaptor);
-		}
+		if (middlewareConfig) {
+			const middlewareConfigQ = [];
+			if (middlewareConfig.dataPersistAdaptor) {
+				middlewareConfigQ.push(
+					this.setupDB(middlewareConfig.dataPersistAdaptor)
+				);
+			}
+			if (middlewareConfig.cacheAdaptor) {
+				middlewareConfigQ.push(this.setupCache(middlewareConfig.cacheAdaptor));
+			}
+			if (middlewareConfig.listenerAdaptor) {
+				middlewareConfigQ.push(
+					this.setupListener(middlewareConfig.listenerAdaptor)
+				);
+			}
+			if (middlewareConfig.publisherAdaptor) {
+				middlewareConfigQ.push(
+					this.setupPublisher(middlewareConfig.publisherAdaptor)
+				);
+			}
+			if (middlewareConfig.inboundInterceptor) {
+				this.addInboundMiddleware(middlewareConfig.inboundInterceptor);
+			}
+			if (middlewareConfig.outboundInterceptor) {
+				this.addOutboundMiddleware(middlewareConfig.outboundInterceptor);
+			}
 
-		if (middlewareConfig && middlewareConfig.cacheAdaptor) {
-			await this.setupCache(middlewareConfig.cacheAdaptor);
-		}
-
-		if (middlewareConfig && middlewareConfig.listenerAdaptor) {
-			await this.setupListener(middlewareConfig.listenerAdaptor);
-		}
-
-		if (middlewareConfig && middlewareConfig.publisherAdaptor) {
-			await this.setupPublisher(middlewareConfig.publisherAdaptor);
+			if (middlewareConfigQ.length > 0) {
+				await Promise.all(middlewareConfigQ);
+			}
 		}
 
 		this.inboundHandler =
