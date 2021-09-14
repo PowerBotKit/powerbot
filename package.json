@@ -15,7 +15,7 @@
   },
   "scripts": {
     "bootstrap": "lerna bootstrap --npm-client yarn --use-workspaces",
-    "changelog": "conventiona-l-changelog -p angular -i CHANGELOG.md -s",
+    "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s",
 		"changelog:all": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0",
     "tslint": "tslint --format verbose -c tslint.json \"+(packages|tools|examples)/**/*.+(ts)\" -e \"**/node_modules/**\"",
     "format": "prettier --check --parser typescript \"{packages,tools,examples}/**/*.{t,j}s?(x)\"",

@@ -1,3 +1,19 @@
+## [0.0.3-alpha.4](https://github.com/PowerBotKit/powerbot/compare/v0.0.3-alpha.3...v0.0.3-alpha.4) (2021-09-14)
+
+
+### Bug Fixes
+
+* chache unlock key should be dialogkey ([71abdb7](https://github.com/PowerBotKit/powerbot/commit/71abdb777b76aa5c70613daa85b9f17a39c48494))
+
+
+### Features
+
+* custom channel name for distributor module ([9ff626e](https://github.com/PowerBotKit/powerbot/commit/9ff626e8a1588be1e1635ec1139a7690ec478e89))
+* set up custom channel config ([101b07e](https://github.com/PowerBotKit/powerbot/commit/101b07ed28f0470e38ffbe5f8f9e66031ba2e847))
+* set up inbound/oubound interceptor when middlewareConfig#inboundInterceptor/outboundInterceptor exists ([86defc0](https://github.com/PowerBotKit/powerbot/commit/86defc0f2e996048710e5a96ca2851c6bac8c17e))
+
+
+
 ## [0.0.3-alpha.3](https://github.com/PowerBotKit/powerbot/compare/v0.0.3-alpha.2...v0.0.3-alpha.3) (2021-09-07)
 
 
