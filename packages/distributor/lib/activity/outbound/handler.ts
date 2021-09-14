@@ -12,22 +12,45 @@ import { ICache } from '../../cache';
 import { OutboundHandlerBase } from './base-handler';
 import { IMiddlewareOutbound } from './middleware';
 
+export interface IOutBoundHandlerConfig {
+	subscribeChannel: string;
+}
+
+const defaultOutBoundHandlerConfig: IOutBoundHandlerConfig = {
+	subscribeChannel: 'outbound'
+};
+
 export class OutBoundHandler extends OutboundHandlerBase {
+	private _outBoundHandlerConfig: IOutBoundHandlerConfig;
+
+	public set outBoundHandlerConfig(
+		_outBoundHandlerConfig: IOutBoundHandlerConfig
+	) {
+		if (this._outBoundHandlerConfig) {
+			throw new Error('outBoundHandlerConfig can only be initialized once');
+		}
+		this._outBoundHandlerConfig = _outBoundHandlerConfig;
+	}
+
+	public get outBoundHandlerConfig() {
+		return this._outBoundHandlerConfig || defaultOutBoundHandlerConfig;
+	}
+
 	constructor(outboundMiddleware?: IMiddlewareOutbound) {
 		super(outboundMiddleware);
 	}
 	public async listen(adapter: BotFrameworkAdapter, cache: ICache, mq: IMQ) {
 		mq.onSubscribed(channel => {
-			BotKitLogger.getLogger().info('🚗 Subscribed to outbound broker');
+			BotKitLogger.getLogger().info(`🚗 Subscribed to ${channel} broker`);
 		});
 
 		mq.onMessage(async (channel, data) => {
 			BotKitLogger.getLogger().info(
-				'Subscriber received message in channel: ' + channel
+				`Subscriber received message in channel:\t ${channel}`
 			);
 			await this.publish(adapter, cache, channel, data);
 		});
 
-		mq.subscribe('outbound');
+		mq.subscribe(this.outBoundHandlerConfig.subscribeChannel);
 	}
 }

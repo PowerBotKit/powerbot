@@ -18,14 +18,37 @@ import {
 } from './hook';
 import { IMiddlewareInbound } from './middleware';
 
+export interface IInBoundHandlerConfig {
+	publlisChannel: string;
+}
+
+const defaultInBoundHandlerConfig: IInBoundHandlerConfig = {
+	publlisChannel: 'inbound'
+};
+
 export class InboundHandler extends InboundHandlerBase {
+	private _inBoundHandlerConfig: IInBoundHandlerConfig;
+
+	public set inBoundHandlerConfig(
+		_inBoundHandlerConfig: IInBoundHandlerConfig
+	) {
+		if (this._inBoundHandlerConfig) {
+			throw new Error('inBoundHandlerConfig can only be initialized once');
+		}
+		this._inBoundHandlerConfig = _inBoundHandlerConfig;
+	}
+
+	public get inBoundHandlerConfig() {
+		return this._inBoundHandlerConfig || defaultInBoundHandlerConfig;
+	}
+
 	constructor() {
 		super();
 		this.onMessage(async (context, next) => {
 			if ((this as unknown as OnPreMessage).onPreMessage) {
 				await (this as unknown as OnPreMessage).onPreMessage(context);
 			}
-			await this.publish(context);
+			await this.publish(context, this.inBoundHandlerConfig?.publlisChannel);
 			await next();
 			if ((this as unknown as OnPostMessage).onPostMessage) {
 				await (this as unknown as OnPostMessage).onPostMessage(context);

@@ -6,6 +6,28 @@
 //
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-export * from './distributor-server';
-export * from './server-config';
-export * from './server';
+import { IChanneConfig, IMQ } from '@powerbotkit/core';
+
+import { IMiddlewareInbound } from './../activity/inbound/middleware';
+import { IMiddlewareOutbound } from './../activity/outbound/middleware';
+import { ICache } from './../cache/cache';
+import { IDataPersist } from './../models/data-persist';
+
+export interface TBotConfig {
+	appId?: string;
+	appSecret?: string;
+}
+
+export interface IBotServerConfig {
+	botConfig: TBotConfig;
+	channelConfig: IChanneConfig;
+}
+
+export interface TMiddlewareConfig {
+	listenerAdaptor?: IMQ;
+	publisherAdaptor?: IMQ;
+	cacheAdaptor?: ICache;
+	dataPersistAdaptor?: IDataPersist<any>;
+	inboundInterceptor?: IMiddlewareInbound;
+	outboundInterceptor?: IMiddlewareOutbound;
+}

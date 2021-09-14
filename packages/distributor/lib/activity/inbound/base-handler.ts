@@ -60,7 +60,7 @@ export class InboundHandlerBase extends ActivityHandler {
 			await this.inboundMiddleware.process(dialog);
 		}
 		this.publisher.publish(
-			dialog.worker.topic || 'inbound',
+			topic || dialog.worker.topic || 'inbound',
 			JSON.stringify(dialog)
 		);
 

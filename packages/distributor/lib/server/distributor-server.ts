@@ -11,7 +11,6 @@ import * as restify from 'restify';
 
 import { BotKitLogger, IMQ } from '@powerbotkit/core';
 
-import { BotInstance, IBotServer, TBotConfig, TMiddlewareConfig } from '.';
 import {
 	InboundHandler,
 	InboundHandlerBase,
@@ -20,6 +19,12 @@ import {
 import { IMiddlewareOutbound, OutBoundHandler } from '../activity/outbound';
 import { ICache } from '../cache';
 import { IDataPersist } from '../models/data-persist';
+import { BotInstance, IBotServer } from './server';
+import {
+	IBotServerConfig,
+	TBotConfig,
+	TMiddlewareConfig
+} from './server-config';
 
 export class DistributorServer implements IBotServer {
 	// operation conversion saving
@@ -34,7 +39,7 @@ export class DistributorServer implements IBotServer {
 	private inboundHandler: InboundHandlerBase;
 
 	public async setUpBotServer(
-		botConfig: TBotConfig,
+		botServerConfig: IBotServerConfig,
 		middlewareConfig?: TMiddlewareConfig,
 		inboundHandler?: InboundHandlerBase
 	) {
@@ -80,7 +85,7 @@ export class DistributorServer implements IBotServer {
 		);
 
 		await this.setupApp();
-		await this.setupBot(botConfig);
+		await this.setupBot(botServerConfig);
 	}
 
 	public async setupDB(db: IDataPersist) {
@@ -107,12 +112,21 @@ export class DistributorServer implements IBotServer {
 		this.app.use(restify.plugins.queryParser());
 	}
 
-	public async setupBot(config: TBotConfig) {
+	public async setupBot(config: IBotServerConfig) {
+		const botConfig = config.botConfig;
 		const adapter = new BotFrameworkAdapter({
-			appId: config.appId || process.env.MicrosoftAppId,
-			appPassword: config.appSecret || process.env.MicrosoftAppPassword
+			appId: botConfig.appId,
+			appPassword: botConfig.appSecret
 		});
 		const outboundHandler = new OutBoundHandler(this.middlewareOutbound);
+		if (config.channelConfig) {
+			outboundHandler.outBoundHandlerConfig = {
+				subscribeChannel: config.channelConfig.outboundChannel
+			};
+			(this.inboundHandler as InboundHandler).inBoundHandlerConfig = {
+				publlisChannel: config.channelConfig.inboundChannel
+			};
+		}
 		outboundHandler.listen(adapter, this.cache, this.listener);
 		this.app.post('/api/messages', (req, res) => {
 			adapter.processActivity(req, res, async context => {
@@ -139,12 +153,16 @@ export class DistributorServer implements IBotServer {
 }
 
 export const createDistributorServer = async (
-	botConfig?: TBotConfig,
+	botServerConfig?: IBotServerConfig,
 	middlewareConfig?: TMiddlewareConfig,
 	inboundHandler?: InboundHandlerBase
 ): Promise<IBotServer> => {
 	const server = new DistributorServer();
-	await server.setUpBotServer(botConfig, middlewareConfig, inboundHandler);
+	await server.setUpBotServer(
+		botServerConfig,
+		middlewareConfig,
+		inboundHandler
+	);
 
 	return server;
 };
@@ -163,12 +181,12 @@ class RestifyDistributorServer extends DistributorServer {
 	}
 
 	public setUpBotServer(
-		botConfig: TBotConfig,
+		botServerConfig: IBotServerConfig,
 		middlewareConfig?: TMiddlewareConfig,
 		inboundHandler?: InboundHandlerBase
 	): Promise<void> {
 		return this.distributorServer.setUpBotServer(
-			botConfig,
+			botServerConfig,
 			middlewareConfig,
 			inboundHandler
 		);
@@ -188,8 +206,8 @@ class RestifyDistributorServer extends DistributorServer {
 	public setupApp(): Promise<void> {
 		return this.distributorServer.setupApp();
 	}
-	public setupBot(config: TBotConfig): Promise<void> {
-		return this.distributorServer.setupBot(config);
+	public setupBot(botServerConfig: IBotServerConfig): Promise<void> {
+		return this.distributorServer.setupBot(botServerConfig);
 	}
 	public listen(port?: string | number): Promise<void> {
 		return this.distributorServer.listen(port);

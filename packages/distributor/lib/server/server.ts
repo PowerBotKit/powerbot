@@ -6,29 +6,10 @@
 //
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-import { IMQ } from '@powerbotkit/core';
 import { ActivityHandler, BotFrameworkAdapter } from 'botbuilder';
-import {
-	InboundHandlerBase,
-	IMiddlewareInbound,
-	IMiddlewareOutbound
-} from '../../lib/activity';
-import { ICache } from '../../lib/cache';
-import { IDataPersist } from '../../lib/models/data-persist';
 
-export interface TBotConfig {
-	appId?: string;
-	appSecret?: string;
-}
-
-export interface TMiddlewareConfig {
-	listenerAdaptor?: IMQ;
-	publisherAdaptor?: IMQ;
-	cacheAdaptor?: ICache;
-	dataPersistAdaptor?: IDataPersist<any>;
-	inboundInterceptor?: IMiddlewareInbound;
-	outboundInterceptor?: IMiddlewareOutbound;
-}
+import { InboundHandlerBase } from '../../lib/activity';
+import { IBotServerConfig, TMiddlewareConfig } from './server-config';
 
 export interface BotInstance {
 	adapter: BotFrameworkAdapter;
@@ -37,7 +18,7 @@ export interface BotInstance {
 
 export interface IBotServer {
 	setUpBotServer(
-		botConfig: TBotConfig,
+		botServerConfig: IBotServerConfig,
 		middlewareConfig?: TMiddlewareConfig,
 		inboundHandler?: InboundHandlerBase
 	);
