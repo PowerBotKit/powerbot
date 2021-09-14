@@ -83,3 +83,7 @@ this is [todo list](https://github.com/orgs/PowerBotKit/projects/1)
 ## License
 
 [MIT](LICENSE) © PowerBotKit Team
+
+## Thanks
+
+thanks for [jetbrains](https://www.jetbrains.com/) support.
