@@ -2,6 +2,7 @@
   "name": "root",
   "private": true,
   "license": "MIT",
+  "version": "0.0.3-alpha.4",
   "workspaces": [
     "packages/*"
   ],
@@ -16,7 +17,7 @@
   "scripts": {
     "bootstrap": "lerna bootstrap --npm-client yarn --use-workspaces",
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s",
-		"changelog:all": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0",
+    "changelog:all": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0",
     "tslint": "tslint --format verbose -c tslint.json \"+(packages|tools|examples)/**/*.+(ts)\" -e \"**/node_modules/**\"",
     "format": "prettier --check --parser typescript \"{packages,tools,examples}/**/*.{t,j}s?(x)\"",
     "prettify": "prettier --write --parser typescript \"{packages,tools,examples}/**/*.{t,j}s?(x)\"",
@@ -41,6 +42,7 @@
     "@types/node": "^16.9.1",
     "chalk": "^4.1.2",
     "conventional-changelog-cli": "^2.1.1",
+    "enquirer": "^2.3.6",
     "fs-extra": "^10.0.0",
     "husky": "^7.0.0",
     "jest": "^27.1.0",
@@ -49,6 +51,7 @@
     "lint-staged": "^11.0.1",
     "prettier": "^2.4.0",
     "rimraf": "^3.0.2",
+    "semver": "^7.3.5",
     "shelljs": "^0.8.4",
     "ts-jest": "^27.0.5",
     "tslint": "^6.1.3",
