@@ -1,21 +1,59 @@
-# Change Log
+## [0.0.3-alpha.3](https://github.com/PowerBotKit/powerbot/compare/v0.0.3-alpha.2...v0.0.3-alpha.3) (2021-09-07)
 
-All notable changes to this project will be documented in this file.
-See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+### Bug Fixes
+
+* deserialize value from redis in get method ([a7a4f0a](https://github.com/PowerBotKit/powerbot/commit/a7a4f0ac07aef9c65c0a1e7e87568b1508d27531))
+
+
+### Features
+
+* use `IRedisCacheSerializer` to serialize/deserialize value. ([#178](https://github.com/PowerBotKit/powerbot/issues/178)) ([0e12e10](https://github.com/PowerBotKit/powerbot/commit/0e12e104588520954f014ec537e31b6076abf19f))
+
+
+
+## [0.0.3-alpha.2](https://github.com/PowerBotKit/powerbot/compare/v0.0.3-alpha.1...v0.0.3-alpha.2) (2021-09-03)
+
+
+### Bug Fixes
+
+* stringify value when redis cache lock no-string value ([60640ea](https://github.com/PowerBotKit/powerbot/commit/60640eaa5e86b91cffaec25aae560f54b46a4170))
+
+
+
+## [0.0.3-alpha.1](https://github.com/PowerBotKit/powerbot/compare/v0.0.3-alpha.0...v0.0.3-alpha.1) (2021-09-02)
+
+
+### Features
+
+* intent process support promise result ([346e7b3](https://github.com/PowerBotKit/powerbot/commit/346e7b33fd9e4836a6dd1f91560d640c2c9e9105))
+
+
+
+## [0.0.3-alpha.0](https://github.com/PowerBotKit/powerbot/compare/v0.0.2...v0.0.3-alpha.0) (2021-08-31)
+
+
+### Bug Fixes
+
+* dialog key should not be the same for different users ([#171](https://github.com/PowerBotKit/powerbot/issues/171)) ([204b79f](https://github.com/PowerBotKit/powerbot/commit/204b79ffedeca3a46202a177087fa4bfd98bd302))
+
+
+### Features
+
+* set an expiration time when put value to redis and it will show warnning message without expire time ([#173](https://github.com/PowerBotKit/powerbot/issues/173)) ([b3eae5e](https://github.com/PowerBotKit/powerbot/commit/b3eae5ebf95fda62402d83eb3ef0d99a1f9bb504))
+
+
+### Reverts
+
+* fall back to lock user session ([#174](https://github.com/PowerBotKit/powerbot/issues/174)) ([4089a41](https://github.com/PowerBotKit/powerbot/commit/4089a41e0bb16d0cbe6e20270c57af4c1bab0b92))
+
+
 
 ## [0.0.2](https://github.com/PowerBotKit/powerbot/compare/v0.0.2-alpha.21...v0.0.2) (2021-08-29)
-
-**Note:** 0.0.2 is ready.
-
-
 
 
 
 ## [0.0.2-alpha.21](https://github.com/PowerBotKit/powerbot/compare/v0.0.2-alpha.20...v0.0.2-alpha.21) (2021-08-26)
-
-**Note:** Version bump only for package root
-
-
 
 
 
@@ -29,13 +67,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 
 
-
-
 ## [0.0.2-alpha.19](https://github.com/PowerBotKit/powerbot/compare/v0.0.2-alpha.18...v0.0.2-alpha.19) (2021-08-25)
-
-**Note:** Version bump only for package root
-
-
 
 
 
@@ -51,8 +83,6 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 * intent need simple and json way ([be3704d](https://github.com/PowerBotKit/powerbot/commit/be3704d1a41b5a5e5e87ecb66c0301f731e956ce))
 * RedisTlsMQ is removed and redis client need be setup  when create RedisMQ ([25a7a60](https://github.com/PowerBotKit/powerbot/commit/25a7a60efff31c236535d07c1769ebaa09a88932))
-
-
 
 
 
@@ -72,8 +102,6 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 
 
-
-
 ## [0.0.2-alpha.16](https://github.com/PowerBotKit/powerbot/compare/v0.0.2-alpha.15...v0.0.2-alpha.16) (2021-08-18)
 
 
@@ -84,16 +112,12 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 
 
-
-
 ## [0.0.2-alpha.15](https://github.com/PowerBotKit/powerbot/compare/v0.0.2-alpha.14...v0.0.2-alpha.15) (2021-08-13)
 
 
 ### Features
 
 * add delete card/text support ([0ef86d4](https://github.com/PowerBotKit/powerbot/commit/0ef86d4aa81c2df2bc7f59cdae7ab1c516e83d6d))
-
-
 
 
 
@@ -107,8 +131,6 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 
 
-
-
 ## [0.0.2-alpha.13](https://github.com/PowerBotKit/powerbot/compare/v0.0.2-alpha.12...v0.0.2-alpha.13) (2021-08-12)
 
 
@@ -116,8 +138,6 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 * add reply card action message ([8110b06](https://github.com/PowerBotKit/powerbot/commit/8110b061bb366153aad414aca49cfdbec12ffb87))
 * **distributor:** return dialogKey afther publish turncontext ([a9f16db](https://github.com/PowerBotKit/powerbot/commit/a9f16db49354582ad66b5d1ea5d175fc110e72f6))
-
-
 
 
 
@@ -130,8 +150,6 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 
 
-
-
 ## [0.0.2-alpha.11](https://github.com/PowerBotKit/powerbot/compare/v0.0.2-alpha.10...v0.0.2-alpha.11) (2021-08-11)
 
 
@@ -139,8 +157,6 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 * add mult message/cards ([#162](https://github.com/PowerBotKit/powerbot/issues/162)) ([e856d70](https://github.com/PowerBotKit/powerbot/commit/e856d70f7477677a2e788e0210391a10205b4428))
 * **distributor:** add OnPostrReceiveMessage hook ([154d065](https://github.com/PowerBotKit/powerbot/commit/154d065a85bd28efdde9288b4bae25ed48f7e843))
-
-
 
 
 
@@ -156,13 +172,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 
 
-
-
 ## [0.0.2-alpha.9](https://github.com/PowerBotKit/powerbot/compare/v0.0.2-alpha.8...v0.0.2-alpha.9) (2021-08-06)
-
-**Note:** Version bump only for package root
-
-
 
 
 
@@ -176,13 +186,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 
 
-
-
 ## [0.0.2-alpha.7](https://github.com/PowerBotKit/powerbot/compare/v0.0.2-alpha.6...v0.0.2-alpha.7) (2021-08-06)
-
-**Note:** Version bump only for package root
-
-
 
 
 
@@ -202,8 +206,6 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 
 
-
-
 ## [0.0.2-alpha.5](https://github.com/PowerBotKit/powerbot/compare/v0.0.2-alpha.4...v0.0.2-alpha.5) (2021-08-02)
 
 
@@ -219,8 +221,6 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 
 
-
-
 ## [0.0.2-alpha.4](https://github.com/PowerBotKit/powerbot/compare/v0.0.2-alpha.3...v0.0.2-alpha.4) (2021-07-30)
 
 
@@ -230,17 +230,12 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 
 
-
-
-
 ## [0.0.2-alpha.3](https://github.com/PowerBotKit/powerbot/compare/v0.0.2-alpha.2...v0.0.2-alpha.3) (2021-07-30)
 
 
 ### Reverts
 
 * Revert "build(deps): bump lowdb from 1.0.0 to 2.1.0 (#138)" (#150) ([a06cd5f](https://github.com/PowerBotKit/powerbot/commit/a06cd5f1a0b36f13a762633f0ea170c021f529c7)), closes [#138](https://github.com/PowerBotKit/powerbot/issues/138) [#150](https://github.com/PowerBotKit/powerbot/issues/150)
-
-
 
 
 
@@ -254,16 +249,12 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 
 
-
-
 ## [0.0.2-alpha.1](https://github.com/PowerBotKit/powerbot/compare/v0.0.2-alpha.0...v0.0.2-alpha.1) (2021-07-27)
 
 
 ### Bug Fixes
 
 * fix the customized adaptor init issue when the distributor server get created ([11c72c5](https://github.com/PowerBotKit/powerbot/commit/11c72c58a413b235ccbcf8b26f79e1e1322214fc))
-
-
 
 
 
@@ -277,14 +268,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 
 
-
-
-
 ## [0.0.1](https://github.com/PowerBotKit/powerbot/compare/v0.0.1-alpha.4...v0.0.1) (2021-07-23)
-
-**Note:** Version bump only for package root
-
-
 
 
 
@@ -315,13 +299,7 @@ stringg key from object arrays
 
 
 
-
-
 ## [0.0.1-alpha.3](https://github.com/PowerBotKit/powerbot/compare/v0.0.1-alpha.2...v0.0.1-alpha.3) (2020-10-29)
-
-**Note:** Version bump only for package root
-
-
 
 
 
@@ -360,8 +338,6 @@ stringg key from object arrays
 
 
 
-
-
 ## [0.0.1-alpha.1](https://github.com/PowerBotKit/powerbot/compare/v0.0.1-alpha.0...v0.0.1-alpha.1) (2020-10-15)
 
 
@@ -373,3 +349,22 @@ stringg key from object arrays
 ### BREAKING CHANGES
 
 * close ban-types rule
+
+
+
+## [0.0.1-alpha.0](https://github.com/PowerBotKit/powerbot/compare/7e4c5aa2b6bd46d4275e4361847819e776b65302...v0.0.1-alpha.0) (2020-10-13)
+
+
+### Bug Fixes
+
+* make distributor start successfully ([7e4c5aa](https://github.com/PowerBotKit/powerbot/commit/7e4c5aa2b6bd46d4275e4361847819e776b65302))
+
+
+### Features
+
+* change to send the whole session to pubsub for consuming ([1cb5ef2](https://github.com/PowerBotKit/powerbot/commit/1cb5ef2d62861af2e30f86257d29c64d8c23fcd3))
+* implement the inbound/outbond middleware ([74e8b23](https://github.com/PowerBotKit/powerbot/commit/74e8b2372e3c7c926e189b0b5f8b92f005692f31))
+* implement the persist userInfo when onMemberAdded ([58fa82c](https://github.com/PowerBotKit/powerbot/commit/58fa82c430abe89a06731ebbd3213ab1ccc7cfd7))
+
+
+
