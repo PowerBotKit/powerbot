@@ -6,19 +6,15 @@
 //
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-import { BotKitLogger, GDUserSession, IMQ } from '@powerbotkit/core';
+import {
+	getDefaultChanneConfig,
+	BotKitLogger,
+	GDUserSession,
+	IChanneConfig,
+	IMQ
+} from '@powerbotkit/core';
 import { InputMiddleware, OutputMiddleware } from '../middleware';
 import { IWorkerRouterHandler } from '../router';
-
-export interface IChanneConfig {
-	inboundChannel: string;
-	outboundChannel: string;
-}
-
-const defaultChanneConfig: IChanneConfig = {
-	inboundChannel: 'inbound',
-	outboundChannel: 'outbound'
-};
 
 export interface TConsumerServerConfig {
 	routerHandler: IWorkerRouterHandler;
@@ -56,7 +52,7 @@ export class ConsumerServer implements IConsumerServer {
 		this.routerHandler = serverConfig.routerHandler;
 		this.listenerAdaptor = serverConfig.listenerAdaptor;
 		this.publisher = serverConfig.publisherAdaptor;
-		this.channeConfig = serverConfig.channeConfig || defaultChanneConfig;
+		this.channeConfig = serverConfig.channeConfig || getDefaultChanneConfig();
 		if (middlewareConfig && middlewareConfig.inputMiddleware) {
 			this.inputMiddleware = middlewareConfig.inputMiddleware;
 		}
