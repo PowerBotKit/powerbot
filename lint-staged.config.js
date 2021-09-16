@@ -13,7 +13,7 @@ module.exports = {
 		const tslint =
 			filenames.length > 10
 				? 'yarn tslint --fix'
-				: `tslint --format verbose ${filenames.join(' ')}`;
+				: `tslint --format verbose ${filenames.join(' ')} --fix`;
 		const prettier = 'prettier --parser=typescript --write **/*.ts';
 		const git = `git add ${filenames.join(' ')}`;
 		return [tslint, prettier, git];
