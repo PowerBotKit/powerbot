@@ -225,7 +225,13 @@ class RestifyDistributorServer extends DistributorServer {
  * @param server DistributorServer
  */
 export const getRestifyDistributorServer = (
-	server: DistributorServer
+	server: DistributorServer,
+	plugins?: restify.RequestHandler[]
 ): RestifyDistributorServer => {
-	return new RestifyDistributorServer(server);
+	const restifyDistributorServer = new RestifyDistributorServer(server);
+	if (plugins && plugins.length > 0) {
+		restifyDistributorServer.AppServer.use(...plugins);
+	}
+
+	return restifyDistributorServer;
 };
