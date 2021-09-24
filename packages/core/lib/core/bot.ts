@@ -44,6 +44,7 @@ export interface MessageInput {
 	type: MessageType;
 	action?: MessageAction;
 	value: string | any;
+	payload?: any;
 }
 
 export interface MessageOutput {
