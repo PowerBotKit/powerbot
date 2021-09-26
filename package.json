@@ -49,7 +49,7 @@
     "lerna": "^4.0.0",
     "license-check-and-add": "^4.0.2",
     "lint-staged": "^11.0.1",
-    "prettier": "^2.4.0",
+    "prettier": "^2.4.1",
     "rimraf": "^3.0.2",
     "semver": "^7.3.5",
     "shelljs": "^0.8.4",
