@@ -122,7 +122,7 @@ export class WorkerRouterHandler implements IWorkerRouterHandler {
 			await outMDW.process(context);
 		}
 
-		if (context.output?.action === MessageAction.delete) {
+		if (context.output?.action === MessageAction.quit) {
 			context.worker.workerName = '';
 			context.history = [];
 		}
