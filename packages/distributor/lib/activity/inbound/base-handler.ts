@@ -110,6 +110,9 @@ export class InboundHandlerBase extends ActivityHandler {
 			BotKitLogger.getLogger().info('new dialog');
 			updatedDialog = await DialogUtil.newDialog(context);
 		}
+		if (context.activity.replyToId) {
+			updatedDialog.replyToId = context.activity.replyToId;
+		}
 		// store redis
 		await this.cache.set(dialogKey, updatedDialog, 60 * 60 * 24);
 		await this.cache.lock(dialogKey, updatedDialog);
