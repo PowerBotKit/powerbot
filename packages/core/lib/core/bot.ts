@@ -28,7 +28,8 @@ export interface GDUser {
 export enum MessageAction {
 	update,
 	cancel,
-	delete
+	delete,
+	quit
 }
 
 export enum MessageType {
