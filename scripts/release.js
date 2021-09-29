@@ -120,11 +120,6 @@ const updateRootPackage = targetVersion => {
 		path.resolve(__dirname, '..', 'package.json'),
 		targetVersion
 	);
-	// TODO: lerna, will be remove
-	updatePackageVersion(
-		path.resolve(__dirname, '..', 'lerna.json'),
-		targetVersion
-	);
 };
 
 const updatePackages = (targetVersion, targets) => {
@@ -174,7 +169,7 @@ async function main() {
 	run('yarn changelog');
 
 	step('\n commit');
-	run('git add package.json lerna.json');
+	run('git add package.json');
 	targets.forEach(target =>
 		run(`git add ${path.resolve(target.location, 'package.json')}`)
 	);

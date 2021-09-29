@@ -14,5 +14,4 @@
 yarn tslint
 yarn check:license
 yarn build
-yarn build:new
 # yarn audit // ignore
