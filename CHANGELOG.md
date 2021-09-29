@@ -1,3 +1,19 @@
+## [0.0.3-alpha.5](https://github.com/PowerBotKit/powerbot/compare/v0.0.3-alpha.4...v0.0.3-alpha.5) (2021-09-29)
+
+
+### Bug Fixes
+
+* reset reployToId when fetch a dialog ([d7f9e67](https://github.com/PowerBotKit/powerbot/commit/d7f9e67a413202fbac040c76b6c6279845cd1251))
+
+
+### Features
+
+* add 'payload' for MessageInput to store more data ([f0983f7](https://github.com/PowerBotKit/powerbot/commit/f0983f7a8b5f879f435384212ed65e8f91b5b9dc))
+* add `MessageAction.quit` to support quit the Intent ([#200](https://github.com/PowerBotKit/powerbot/issues/200)) ([7ad8056](https://github.com/PowerBotKit/powerbot/commit/7ad8056b3874bf4c59150adc6275821171e70b9f)), closes [#198](https://github.com/PowerBotKit/powerbot/issues/198)
+* support setting some restify request handler in getting restify distributor server ([f973e1a](https://github.com/PowerBotKit/powerbot/commit/f973e1ab5a682e7638b52e8574699cb35f36e4d9))
+
+
+
 ## [0.0.3-alpha.4](https://github.com/PowerBotKit/powerbot/compare/v0.0.3-alpha.3...v0.0.3-alpha.4) (2021-09-14)
 
 

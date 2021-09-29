@@ -167,6 +167,7 @@ async function main() {
 	targets.forEach(target =>
 		run(`git add ${path.resolve(target.location, 'package.json')}`)
 	);
+	run(`git add CHANGELOG.md`);
 	run(`git commit -m "chore(release): v${targetVersion}"`);
 
 	step(`\n publish github`);
