@@ -170,6 +170,9 @@ async function main() {
 	run(`git add CHANGELOG.md`);
 	run(`git commit -m "chore(release): v${targetVersion}"`);
 
+	step('\n tag');
+	run(`git tag "v${targetVersion}"`);
+
 	step(`\n publish github`);
 	run(`git push origin develop`);
 	run(`git push origin v${targetVersion}`);
