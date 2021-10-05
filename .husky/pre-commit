@@ -11,4 +11,6 @@
 . "$(dirname "$0")/_/husky.sh"
 . "$(dirname "$0")/common.sh"
 
-npx --no-install ls-lint && npx --no-install lint-staged
+npx --no-install ls-lint
+npx --no-install lint-staged
+npx --no-install license-check-and-add check
