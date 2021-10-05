@@ -10,10 +10,10 @@ import {
 	BotKitLogger,
 	DialogUtil,
 	GDUserSession,
+	ICache,
 	MessageType
 } from '@powerbotkit/core';
 import { BotFrameworkAdapter } from 'botbuilder';
-import { ICache } from '../../cache';
 import { OnPostrReceiveMessage } from './hook';
 import { IMiddlewareOutbound } from './middleware';
 
