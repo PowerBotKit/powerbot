@@ -27,5 +27,5 @@ function getGitRemoteRepos() {
 }
 
 module.exports = {
-	getGitRemoteRepo
+	getGitRemoteRepos
 };
