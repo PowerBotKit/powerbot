@@ -12,6 +12,7 @@ import {
 	GDUserSession,
 	GDWorker,
 	InitiatorType,
+	ICache,
 	IMQ,
 	MessageType
 } from '@powerbotkit/core';
@@ -21,7 +22,6 @@ import {
 	TeamsChannelAccount,
 	TurnContext
 } from 'botbuilder';
-import { ICache } from '../../cache';
 import { IDataPersist } from '../../models/data-persist';
 import { IMiddlewareInbound } from './middleware';
 

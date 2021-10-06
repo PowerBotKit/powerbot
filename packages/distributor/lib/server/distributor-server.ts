@@ -9,7 +9,7 @@
 import { BotFrameworkAdapter } from 'botbuilder';
 import * as restify from 'restify';
 
-import { BotKitLogger, IMQ } from '@powerbotkit/core';
+import { BotKitLogger, ICache, IMQ } from '@powerbotkit/core';
 
 import {
 	InboundHandler,
@@ -17,7 +17,6 @@ import {
 	IMiddlewareInbound
 } from '../activity/inbound';
 import { IMiddlewareOutbound, OutBoundHandler } from '../activity/outbound';
-import { ICache } from '../cache';
 import { IDataPersist } from '../models/data-persist';
 import { BotInstance, IBotServer } from './server';
 import {

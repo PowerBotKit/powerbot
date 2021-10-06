@@ -9,7 +9,9 @@
 import {
 	getDefaultChanneConfig,
 	BotKitLogger,
+	DialogUtil,
 	GDUserSession,
+	ICache,
 	IChanneConfig,
 	IMQ
 } from '@powerbotkit/core';
@@ -25,6 +27,7 @@ export interface TConsumerServerConfig {
 	listenerAdaptor?: IMQ;
 	publisherAdaptor?: IMQ;
 	channeConfig?: IChanneConfig;
+	cache?: ICache;
 }
 
 export interface IConsumerServer {
@@ -41,6 +44,7 @@ export class ConsumerServer implements IConsumerServer {
 	private routerHandler: IWorkerRouterHandler;
 	private listenerAdaptor: IMQ;
 	private publisher: IMQ;
+	private cache: ICache;
 	private inputMiddleware: InputMiddleware;
 	private outputMiddleware: OutputMiddleware;
 
@@ -52,6 +56,7 @@ export class ConsumerServer implements IConsumerServer {
 		this.listenerAdaptor = serverConfig.listenerAdaptor;
 		this.publisher = serverConfig.publisherAdaptor;
 		this.channeConfig = serverConfig.channeConfig || getDefaultChanneConfig();
+		this.cache = serverConfig.cache;
 		if (middlewareConfig && middlewareConfig.inputMiddleware) {
 			this.inputMiddleware = middlewareConfig.inputMiddleware;
 		}
@@ -72,6 +77,20 @@ export class ConsumerServer implements IConsumerServer {
 				'Consumer received message in channel: ' + channel
 			);
 			const dialog: GDUserSession = JSON.parse(data);
+			const dialogKey = 'consumer-' + DialogUtil.getDialogKey(dialog.id);
+			const dialogIncache = this.cache?.get(dialogKey);
+			if (dialogIncache) {
+				BotKitLogger.getLogger().info(
+					`dialog ${dialogKey} had been processed in the other worker`
+				);
+
+				return;
+			} else {
+				BotKitLogger.getLogger().info(
+					`dialog ${dialogKey} is never processed in the other worker`
+				);
+				await this.cache?.set(dialogKey, data);
+			}
 			if (this.inputMiddleware) {
 				await this.inputMiddleware.process(dialog);
 			}
@@ -83,6 +102,8 @@ export class ConsumerServer implements IConsumerServer {
 				this.channeConfig.outboundChannel,
 				JSON.stringify(updatedDialog)
 			);
+
+			await this.cache?.delete(dialogKey);
 		});
 
 		this.listenerAdaptor.subscribe(this.channeConfig.inboundChannel);
