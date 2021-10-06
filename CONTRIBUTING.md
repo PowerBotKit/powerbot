@@ -13,7 +13,7 @@ Hi! I'm really excited that you are interested in contributing to powerbot. Befo
 
 ## Development Setup
 
-You will need [Node.js](http://nodejs.org) **version 10+**, [lerna](https://lerna.js.org) and [Yarn 1.x](https://yarnpkg.com/en/docs/install).
+You will need [Node.js](http://nodejs.org) **version 10+** and [Yarn 1.x](https://yarnpkg.com/en/docs/install).
 
 ### Setup
 

@@ -33,7 +33,7 @@ Find more details from the [PowerBotKit website](https://powerbotkit.github.io)
 -
 -
 
-We use [yarn](https://classic.yarnpkg.com/) to bootstrap the project and use [lerna](https://lerna.js.org/) to run the publish command(s).
+We use [yarn](https://classic.yarnpkg.com/) to bootstrap the project.
 
 ## QuickStart
 
