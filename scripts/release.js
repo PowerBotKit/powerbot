@@ -15,7 +15,8 @@ const { prompt } = require('enquirer');
 const path = require('path');
 const fs = require('fs');
 
-const { fetchTargets, fetchTopologicalSorting } = require('./utils');
+const { getGitRemoteRepos } = require('./git');
+const { fetchTargets } = require('./utils');
 
 const preId =
 	args.preId ||
@@ -142,6 +143,16 @@ const updatePackages = (targetVersion, targets) => {
 	});
 };
 
+function publishGithub(targetVersion) {
+	const repos = getGitRemoteRepos();
+	repos.forEach(repo => {
+		if (repo.type === 'push') {
+			run(`git push ${repo.name} develop`);
+			run(`git push ${repo.name} v${targetVersion}`);
+		}
+	});
+}
+
 async function main() {
 	const targetVersion = await fetchTargetVersion();
 	const targets = fetchTargets();
@@ -174,8 +185,7 @@ async function main() {
 	run(`git tag "v${targetVersion}"`);
 
 	step(`\n publish github`);
-	run(`git push origin develop`);
-	run(`git push origin v${targetVersion}`);
+	publishGithub(targetVersion);
 }
 
 if (require.main === module) {
