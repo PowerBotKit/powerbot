@@ -1,3 +1,17 @@
+## [0.0.3-alpha.6](https://github.com/PowerBotKit/powerbot/compare/v0.0.3-alpha.5...v0.0.3-alpha.6) (2021-10-06)
+
+
+### Features
+
+* lock message from mq to prevent consumer server from consuming the same message multiple times ([#210](https://github.com/PowerBotKit/powerbot/issues/210)) ([23cb6df](https://github.com/PowerBotKit/powerbot/commit/23cb6df3b4f65a9a4ee2ded4c41a19d49b629c7c)), closes [#204](https://github.com/PowerBotKit/powerbot/issues/204)
+
+
+### BREAKING CHANGES
+
+* `ICache` has changed to import statement from `import { ICache } from '@powerbotkit/distributor' to `import { ICache } from '@powerbotkit/core'`
+
+
+
 ## [0.0.3-alpha.5](https://github.com/PowerBotKit/powerbot/compare/v0.0.3-alpha.4...v0.0.3-alpha.5) (2021-09-29)
 
 
