@@ -37,7 +37,6 @@
     "redis": "^3.0.2",
     "replace": "^1.2.0",
     "restify": "^8.6.0",
-    "serialize-instance": "^1.0.5",
     "winston": "^3.3.3"
   },
   "devDependencies": {

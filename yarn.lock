@@ -7321,11 +7321,6 @@ send@^0.16.2:
     range-parser "~1.2.0"
     statuses "~1.4.0"
 
-serialize-instance@^1.0.5:
-  version "1.0.5"
-  resolved "https://registry.yarnpkg.com/serialize-instance/-/serialize-instance-1.0.5.tgz#7c3924ca8c4ec00de256c66b13bf28561814093c"
-  integrity sha1-fDkkyoxOwA3iVsZrE78oVhgUCTw=
-
 set-blocking@^2.0.0, set-blocking@~2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/set-blocking/-/set-blocking-2.0.0.tgz#045f9782d011ae9a6803ddd382b24392b3d890f7"
