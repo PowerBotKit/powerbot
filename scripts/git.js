@@ -9,7 +9,7 @@
 const { exec } = require('shelljs');
 
 function getGitRemoteRepos() {
-	return exec('git remote -v')
+	return exec('git remote -v', { silent: true })
 		.stdout.split('\n')
 		.map(x => x.trim())
 		.filter(x => !!x)
