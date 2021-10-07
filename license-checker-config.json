@@ -1,6 +1,7 @@
 {
   "ignore": [
     ".editorconfig",
+    ".gitattributes",
     ".git",
     ".gitignore",
     ".github/ISSUE_TEMPLATE",
