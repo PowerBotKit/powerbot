@@ -78,7 +78,7 @@ export class ConsumerServer implements IConsumerServer {
 			);
 			const dialog: GDUserSession = JSON.parse(data);
 			const dialogKey = 'consumer-' + DialogUtil.getDialogKey(dialog.id);
-			const dialogIncache = this.cache?.get(dialogKey);
+			const dialogIncache = await this.cache?.get(dialogKey);
 			if (dialogIncache) {
 				BotKitLogger.getLogger().info(
 					`dialog ${dialogKey} had been processed in the other worker`
