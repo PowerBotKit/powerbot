@@ -1044,10 +1044,10 @@ adaptive-expressions@^4.14.1:
     xmldom "^0.5.0"
     xpath "^0.0.32"
 
-adaptivecards-templating@^2.1.0:
-  version "2.1.0"
-  resolved "https://registry.yarnpkg.com/adaptivecards-templating/-/adaptivecards-templating-2.1.0.tgz#248816b81d8db8f6f3cbc8a081869a7237d83401"
-  integrity sha512-XrO6PlGHT3Tfi8hlCYmholiwKUMOR5t/Y4pFqtNVKXJn5HUdE9A4LdZMhg9tnwjXqJ51t1XVHGm9nOLEDVICPg==
+adaptivecards-templating@^2.2.0:
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/adaptivecards-templating/-/adaptivecards-templating-2.2.0.tgz#7bcc549bf7378226d2269d75815e7b4ecff4d50b"
+  integrity sha512-xZy+g2DdI2xFvqGjGYqqcLYJ+373o1JlTX2g6Zclav3r+3ri40qsrKKwM3oNS61MbgicXsuvli2RbTOGsts1sw==
 
 add-stream@^1.0.0:
   version "1.0.0"
