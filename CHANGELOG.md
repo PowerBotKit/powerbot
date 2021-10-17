@@ -1,3 +1,12 @@
+## [0.0.3-beta.1](https://github.com/PowerBotKit/powerbot/compare/v0.0.3-beta.0...v0.0.3-beta.1) (2021-10-17)
+
+
+### Reverts
+
+* Revert "build(deps): bump adaptivecards-templating from 2.1.0 to 2.2.0 (#216)" (#221) ([ce2007b](https://github.com/PowerBotKit/powerbot/commit/ce2007b30418c88e34193e5d9530671e170fa289)), closes [#216](https://github.com/PowerBotKit/powerbot/issues/216) [#221](https://github.com/PowerBotKit/powerbot/issues/221)
+
+
+
 ## [0.0.3-beta.0](https://github.com/PowerBotKit/powerbot/compare/v0.0.3-alpha.6...v0.0.3-beta.0) (2021-10-17)
 
 
