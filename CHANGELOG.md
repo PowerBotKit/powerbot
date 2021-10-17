@@ -1,3 +1,12 @@
+## [0.0.3-beta.0](https://github.com/PowerBotKit/powerbot/compare/v0.0.3-alpha.6...v0.0.3-beta.0) (2021-10-17)
+
+
+### Bug Fixes
+
+* add `await` keywords because `ICache#get` return a promise ([e56082a](https://github.com/PowerBotKit/powerbot/commit/e56082affe53550a9a512475a81dbe60b4d6e232))
+
+
+
 ## [0.0.3-alpha.6](https://github.com/PowerBotKit/powerbot/compare/v0.0.3-alpha.5...v0.0.3-alpha.6) (2021-10-06)
 
 
