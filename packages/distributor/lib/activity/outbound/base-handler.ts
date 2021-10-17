@@ -91,14 +91,12 @@ export class OutboundHandlerBase {
 						});
 					} else if (response.ids && response.ids.length > 0) {
 						await Promise.all(
-							response.ids.map(async id => {
-								return (
-									this as unknown as OnPostrReceiveMessage
-								).onPostReceiveMessage(turnContext, {
-									dialog,
-									response: { id }
-								});
-							})
+							response.ids.map(async id => (
+								this as unknown as OnPostrReceiveMessage
+							).onPostReceiveMessage(turnContext, {
+								dialog,
+								response: { id }
+							}))
 						);
 					}
 				}

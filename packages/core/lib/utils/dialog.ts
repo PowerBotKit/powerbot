@@ -131,8 +131,8 @@ export class DialogUtil {
 					: MessageType.cardAdd,
 				value:
 					typeof context.activity.value === 'string'
-						? context.activity.value
-						: JSON.stringify(context.activity.value),
+					    ? context.activity.value
+					    : JSON.stringify(context.activity.value),
 				action: null
 			};
 		}

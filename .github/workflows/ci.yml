@@ -37,7 +37,7 @@ jobs:
         run: yarn
 
       - name: Lint
-        run: yarn tslint && yarn format
+        run: yarn eslint && yarn format
       - name: Build
         run: yarn build && yarn test:ci
       - name: Unit Test

@@ -9,16 +9,16 @@
 const path = require('path');
 
 module.exports = {
-	'*.ts?(x)': filenames => {
-		const tslint =
+	'packages/**/*.ts?(x)': filenames => {
+		const eslint =
 			filenames.length > 10
-				? 'yarn tslint --fix'
-				: `tslint --format verbose ${filenames.join(' ')} --fix`;
+				? 'yarn eslint --fix'
+				: `eslint --format stylish ${filenames.join(' ')}`;
 		const prettier = 'prettier --parser=typescript --write **/*.ts';
 		const git = `git add ${filenames.join(' ')}`;
-		return [tslint, prettier, git];
+		return [eslint, prettier, git];
 	},
-	'*.js': filenames => {
+	'*.{md,json,yml,js}': filenames => {
 		const prettier = 'prettier --write **/*.js';
 		const git = `git add ${filenames.join(' ')}`;
 		return [prettier, git];

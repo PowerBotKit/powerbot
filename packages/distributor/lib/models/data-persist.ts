@@ -24,10 +24,8 @@ export interface IDataPersist<T = any> {
 /**
  * a store class user session based on db file async
  */
-/* tslint:disable:one-line */
 export class LowDBFileAsyncDataPersist
-	implements IDataPersist<lowdb.LowdbAsync>
-{
+implements IDataPersist<lowdb.LowdbAsync> {
 	public client: lowdb.LowdbAsync<any>;
 	public async init() {
 		const adapter = new FileAsync('db.json');

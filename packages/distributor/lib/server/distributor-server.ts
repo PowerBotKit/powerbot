@@ -169,7 +169,6 @@ export const createDistributorServer = async (
 /**
  * This is an experimental class and may be deleted.
  */
-/* tslint:disable-next-line:max-classes-per-file */
 class RestifyDistributorServer extends DistributorServer {
 	constructor(private distributorServer: DistributorServer) {
 		super();

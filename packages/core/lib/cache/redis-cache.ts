@@ -18,7 +18,6 @@ export interface IRedisCacheSerializer<T = any> {
 	deserialize(value: string): T;
 }
 
-// tslint:disable-next-line: max-classes-per-file
 export class NoopRedisCacheSerializer implements IRedisCacheSerializer<any> {
 	serialize(key: any): string {
 		return key;
@@ -29,7 +28,6 @@ export class NoopRedisCacheSerializer implements IRedisCacheSerializer<any> {
 	}
 }
 
-// tslint:disable-next-line: max-classes-per-file
 export class JsonRedisCacheSerializer implements IRedisCacheSerializer<any> {
 	serialize(key: any): string {
 		return typeof key === 'string' ? key : JSON.stringify(key);
@@ -44,13 +42,12 @@ export class JsonRedisCacheSerializer implements IRedisCacheSerializer<any> {
 	}
 }
 
-// tslint:disable-next-line: max-classes-per-file
 export class RedisCache implements ICache {
 	private _keySerializer: IRedisCacheSerializer;
 
 	private _valueSerializer: IRedisCacheSerializer;
 
-	public lockTime: number = 60;
+	public lockTime = 60;
 
 	public client: RedisClient;
 

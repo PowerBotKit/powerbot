@@ -55,9 +55,7 @@ export class RedisMQ implements IMQ<RedisClient> {
 	}
 
 	public onSubscribed(callback: (channel: string) => void) {
-		this.client.on('subscribe', (channel: string) => {
-			return callback(channel);
-		});
+		this.client.on('subscribe', (channel: string) => callback(channel));
 	}
 
 	public async onMessage(
