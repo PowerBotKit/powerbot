@@ -14,34 +14,40 @@ const shelljs = require('shelljs');
 const { fetchTargets, fetchTopologicalSorting } = require('./utils');
 
 function buildTarget(target) {
-	shelljs.exec(
-		`yarn tsc --project ${path.join(
-			target.location,
-			'tsconfig.json'
-		)} --outDir ${path.resolve('./dist', target.folderName)}`
-	);
-	shelljs.exec(
-		`cp -f ${path.join(target.location, 'package.json')}  ${path.resolve(
-			'./dist',
-			target.folderName,
-			'package.json'
-		)}`
-	);
-	shelljs.exec(
-		`cp -f ${path.join(target.location, 'README.md')}  ${path.resolve(
-			'./dist',
-			target.folderName,
-			'README.md'
-		)}`
-	);
-	shelljs.exec(
-		`cp -f ${path.join(target.location, 'LICENSE')}  ${path.resolve(
-			'./dist',
-			target.folderName,
-			'LICENSE'
-		)}`
-	);
-	console.log(`${chalk.blue(target.name)} ${chalk.green('success')} 🚀`);
+	if (target.private !== true) {
+		shelljs.exec(
+			`yarn tsc --project ${path.join(
+				target.location,
+				'tsconfig.json'
+			)} --outDir ${path.resolve('./dist', target.folderName)}`
+		);
+		shelljs.exec(
+			`cp -f ${path.join(target.location, 'package.json')}  ${path.resolve(
+				'./dist',
+				target.folderName,
+				'package.json'
+			)}`
+		);
+		shelljs.exec(
+			`cp -f ${path.join(target.location, 'README.md')}  ${path.resolve(
+				'./dist',
+				target.folderName,
+				'README.md'
+			)}`
+		);
+		shelljs.exec(
+			`cp -f ${path.join(target.location, 'LICENSE')}  ${path.resolve(
+				'./dist',
+				target.folderName,
+				'LICENSE'
+			)}`
+		);
+		console.log(`${chalk.blue(target.name)} ${chalk.green('success')} 🚀`);
+	} else {
+		console.log(
+			`${chalk.blue(target.name)} ${chalk.cyan('skip')} for private module`
+		);
+	}
 }
 
 async function run() {
