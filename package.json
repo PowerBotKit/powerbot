@@ -15,6 +15,7 @@
     "npm": "Please use Yarn instead of NPM to install dependencies. See: https://yarnpkg.com/lang/en/docs/install/"
   },
   "scripts": {
+    "tsc": "./node_modules/.bin/tsc",
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s",
     "changelog:all": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0",
     "tslint": "tslint --format verbose -c tslint.json \"+(packages|tools|examples)/**/*.+(ts)\" -e \"**/node_modules/**\"",
