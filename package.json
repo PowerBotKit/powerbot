@@ -30,6 +30,7 @@
     "prerelease": "yarn build",
     "release": "node scripts/release.js",
     "release:alpha": "node scripts/release.js --preId alpha",
+    "release:beta": "node scripts/release.js --preId beta",
     "prepare": "npx husky install",
     "publish-npm": "node scripts/publish.js "
   },
