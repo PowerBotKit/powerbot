@@ -6,7 +6,6 @@
     "lib": ["es6", "esnext", "dom"],
     "module": "commonjs",
     "moduleResolution": "node",
-    "sourceMap": false,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
     "outDir": "dist",

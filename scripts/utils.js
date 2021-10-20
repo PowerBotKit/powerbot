@@ -21,6 +21,7 @@ function fetchTargets() {
 				f,
 				'package.json'
 			));
+			pkg.folderName = f;
 			pkg.location = path.join(__dirname, '..', 'packages', f);
 			return pkg;
 		});
