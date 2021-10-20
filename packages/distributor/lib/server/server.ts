@@ -8,7 +8,7 @@
 
 import { ActivityHandler, BotFrameworkAdapter } from 'botbuilder';
 
-import { InboundHandlerBase } from '../../lib/activity';
+import { InboundHandlerBase } from '../activity';
 import { IBotServerConfig, TMiddlewareConfig } from './server-config';
 
 export interface BotInstance {
