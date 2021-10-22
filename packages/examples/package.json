@@ -14,7 +14,7 @@
     "url": "git+https://github.com/PowerBotKit/powerbot.git"
   },
   "scripts": {
-    "start": "tsc --build",
+    "start": "ts-node-dev quickstart/index.ts",
     "test": "echo \"Error: run tests from root\" && exit 1"
   },
   "bugs": {
@@ -23,5 +23,8 @@
   "dependencies": {
     "@powerbotkit/consumer": "0.0.3-beta.2",
     "@powerbotkit/distributor": "0.0.3-beta.2"
+  },
+  "devDependencies": {
+    "ts-node-dev": "^1.1.8"
   }
 }
