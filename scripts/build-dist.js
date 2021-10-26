@@ -8,6 +8,7 @@
 
 const chalk = require('chalk');
 const path = require('path');
+const rimraf = require('rimraf');
 
 const shelljs = require('shelljs');
 
@@ -50,8 +51,22 @@ function buildTarget(target) {
 	}
 }
 
+function clean() {
+	const p = (resolve, reject) => {
+		rimraf(`${path.resolve('./dist')}`, err => {
+			if (err) {
+				return reject(err);
+			} else {
+				resolve();
+			}
+		});
+	};
+
+	return new Promise(p);
+}
+
 async function run() {
-	shelljs.exec(`rm -r -f ${path.resolve('./dist')}`);
+	await clean();
 	const targets = await fetchTargets();
 	const nodes = fetchTopologicalSorting(targets);
 	const queue = [];
