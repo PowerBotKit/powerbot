@@ -44,7 +44,7 @@
     "conventional-changelog-cli": "^2.1.1",
     "enquirer": "^2.3.6",
     "fs-extra": "^10.0.0",
-    "husky": "^7.0.0",
+    "husky": "^7.0.4",
     "jest": "^27.3.0",
     "license-check-and-add": "^4.0.2",
     "lint-staged": "^11.2.3",
