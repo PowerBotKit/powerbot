@@ -7,6 +7,7 @@
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 const chalk = require('chalk');
+const fs = require('fs/promises');
 const path = require('path');
 const rimraf = require('rimraf');
 
@@ -14,7 +15,7 @@ const shelljs = require('shelljs');
 
 const { fetchTargets, fetchTopologicalSorting } = require('./utils');
 
-function buildTarget(target) {
+async function buildTarget(target) {
 	if (target.private !== true) {
 		shelljs.exec(
 			`yarn tsc --project ${path.join(
@@ -29,20 +30,16 @@ function buildTarget(target) {
 				'package.json'
 			)}`
 		);
-		shelljs.exec(
-			`cp -f ${path.join(target.location, 'README.md')}  ${path.resolve(
-				'./dist',
-				target.folderName,
-				'README.md'
-			)}`
-		);
-		shelljs.exec(
-			`cp -f ${path.join(target.location, 'LICENSE')}  ${path.resolve(
-				'./dist',
-				target.folderName,
-				'LICENSE'
-			)}`
-		);
+		await Promise.all([
+			fs.copyFile(
+				path.join(target.location, 'README.md'),
+				path.resolve('./dist', target.folderName, 'README.md')
+			),
+			fs.copyFile(
+				path.join(target.location, 'LICENSE'),
+				path.resolve('./dist', target.folderName, 'LICENSE')
+			)
+		]);
 		console.log(`${chalk.blue(target.name)} ${chalk.green('success')} 🚀`);
 	} else {
 		console.log(
@@ -79,7 +76,7 @@ async function run() {
 		const name = queue.shift();
 		const node = nodes.get(name);
 		if (node && node.target) {
-			buildTarget(node.target);
+			await buildTarget(node.target);
 			node.afters.forEach(a => {
 				nodes.get(a.name).indegree--;
 				if (nodes.get(a.name).indegree === 0) {
