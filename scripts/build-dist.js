@@ -23,23 +23,16 @@ async function buildTarget(target) {
 				'tsconfig.json'
 			)} --outDir ${path.resolve('./dist', target.folderName)}`
 		);
-		shelljs.exec(
-			`cp -f ${path.join(target.location, 'package.json')}  ${path.resolve(
-				'./dist',
-				target.folderName,
-				'package.json'
-			)}`
-		);
-		await Promise.all([
-			fs.copyFile(
-				path.join(target.location, 'README.md'),
-				path.resolve('./dist', target.folderName, 'README.md')
-			),
-			fs.copyFile(
-				path.join(target.location, 'LICENSE'),
-				path.resolve('./dist', target.folderName, 'LICENSE')
-			)
-		]);
+		const files = ['package.json', 'README.md', 'LICENSE'];
+		const copyTasks = files
+			.map(file => {
+				return {
+					src: path.join(target.location, file),
+					dest: path.resolve('./dist', target.folderName, file)
+				};
+			})
+			.map(f => fs.copyFile(f.src, f.dest));
+		await Promise.all(copyTasks);
 		console.log(`${chalk.blue(target.name)} ${chalk.green('success')} 🚀`);
 	} else {
 		console.log(
