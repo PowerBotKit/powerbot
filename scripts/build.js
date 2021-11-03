@@ -7,26 +7,41 @@
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 const chalk = require('chalk');
+const fs = require('fs/promises');
+const path = require('path');
 
 const shelljs = require('shelljs');
 
 const { fetchTargets, fetchTopologicalSorting } = require('./utils');
 
-function buildTarget(target) {
-	if (target.scripts && target.scripts.build) {
-		console.log(
-			`${chalk.blue(target.name)}: $ ${chalk.cyan(target.scripts.build)}`
+async function buildTarget(target) {
+	if (target.private !== true) {
+		shelljs.exec(
+			`yarn tsc --project ${path.join(
+				target.location,
+				'tsconfig.json'
+			)} --outDir ${path.resolve('./dist', target.folderName)}`
 		);
-		shelljs.cd(target.location).exec(target.scripts.build);
+		const files = ['package.json', 'README.md', 'LICENSE'];
+		const copyTasks = files
+			.map(file => {
+				return {
+					src: path.join(target.location, file),
+					dest: path.resolve('./dist', target.folderName, file)
+				};
+			})
+			.map(f => fs.copyFile(f.src, f.dest));
+		await Promise.all(copyTasks);
 		console.log(`${chalk.blue(target.name)} ${chalk.green('success')} 🚀`);
 	} else {
 		console.log(
-			`${chalk.blue(target.name)} ${chalk.cyan('skip')} for no build script`
+			`${chalk.blue(target.name)} ${chalk.cyan('skip')} for private module`
 		);
 	}
 }
 
 async function run() {
+	await fs.rm(`${path.resolve('./dist')}`, { force: true, recursive: true });
 	const targets = await fetchTargets();
 	const nodes = fetchTopologicalSorting(targets);
 	const queue = [];
@@ -39,7 +54,7 @@ async function run() {
 		const name = queue.shift();
 		const node = nodes.get(name);
 		if (node && node.target) {
-			buildTarget(node.target);
+			await buildTarget(node.target);
 			node.afters.forEach(a => {
 				nodes.get(a.name).indegree--;
 				if (nodes.get(a.name).indegree === 0) {
