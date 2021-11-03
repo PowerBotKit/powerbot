@@ -8,6 +8,7 @@
 
 const chalk = require('chalk');
 const shelljs = require('shelljs');
+const path = require('path');
 
 const { fetchTargets, fetchTopologicalSorting } = require('./utils');
 
@@ -35,8 +36,8 @@ function doPublishNpm(target) {
 	console.log(
 		`build ${chalk.red(target.name)}@${chalk.yellow(target.version)}`
 	);
-	shelljs.cd(target.location).exec('yarn build');
-	shelljs.cd(target.location).exec('npm publish');
+	const packagePath = path.join(__dirname, '..', 'dist', target.folderName);
+	shelljs.cd(packagePath).exec('npm publish');
 	console.log(
 		`puslish ${chalk.red(target.name)}@${chalk.yellowBright(
 			target.version
