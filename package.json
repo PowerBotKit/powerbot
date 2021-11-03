@@ -46,7 +46,7 @@
     "fs-extra": "^10.0.0",
     "husky": "^7.0.4",
     "jest": "^27.3.0",
-    "license-check-and-add": "^4.0.2",
+    "license-check-and-add": "^4.0.3",
     "lint-staged": "^11.2.6",
     "prettier": "^2.4.1",
     "rimraf": "^3.0.2",
