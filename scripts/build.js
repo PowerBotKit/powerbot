@@ -16,12 +16,15 @@ const { fetchTargets, fetchTopologicalSorting } = require('./utils');
 
 async function buildTarget(target) {
 	if (target.private !== true) {
-		shelljs.exec(
+		const { code } = shelljs.exec(
 			`yarn tsc --project ${path.join(
 				target.location,
 				'tsconfig.json'
 			)} --outDir ${path.resolve('./dist', target.folderName)}`
 		);
+		if (code !== 0) {
+			throw new Error(`fail to compile the ${target.name}`);
+		}
 		const files = ['package.json', 'README.md', 'LICENSE'];
 		const copyTasks = files
 			.map(file => {
