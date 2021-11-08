@@ -37,6 +37,7 @@ function doPublishNpm(target) {
 		`build ${chalk.red(target.name)}@${chalk.yellow(target.version)}`
 	);
 	const packagePath = path.join(__dirname, '..', 'dist', target.folderName);
+	console.log(packagePath);
 	shelljs.cd(packagePath).exec('npm publish');
 	console.log(
 		`puslish ${chalk.red(target.name)}@${chalk.yellowBright(

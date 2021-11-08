@@ -8,6 +8,7 @@
 
 const chalk = require('chalk');
 const fs = require('fs/promises');
+const fsEx = require('fs-extra');
 const path = require('path');
 
 const shelljs = require('shelljs');
@@ -22,6 +23,7 @@ async function buildTarget(target) {
 				'tsconfig.json'
 			)} --outDir ${path.resolve('./dist', target.folderName)}`
 		);
+		// const { code } = shelljs.exec('yarn tsc --build');
 		if (code !== 0) {
 			throw new Error(`fail to compile the ${target.name}`);
 		}
@@ -36,6 +38,15 @@ async function buildTarget(target) {
 			.map(f => fs.copyFile(f.src, f.dest));
 		await Promise.all(copyTasks);
 		console.log(`${chalk.blue(target.name)} ${chalk.green('success')} 🚀`);
+
+		await fs.rm(`${path.resolve('./node_modules/' + target.name)}`, {
+			force: true,
+			recursive: true
+		});
+		await fsEx.copy(
+			path.resolve('./dist', target.folderName),
+			path.resolve('./node_modules/' + target.name)
+		);
 	} else {
 		console.log(
 			`${chalk.blue(target.name)} ${chalk.cyan('skip')} for private module`
