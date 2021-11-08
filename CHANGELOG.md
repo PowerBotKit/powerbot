@@ -1,3 +1,7 @@
+## [0.0.3-beta.4](https://github.com/PowerBotKit/powerbot/compare/v0.0.3-beta.3...v0.0.3-beta.4) (2021-11-08)
+
+
+
 ## [0.0.3-beta.3](https://github.com/PowerBotKit/powerbot/compare/v0.0.3-beta.2...v0.0.3-beta.3) (2021-11-03)
 
 
