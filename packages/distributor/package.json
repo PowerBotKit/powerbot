@@ -31,7 +31,7 @@
     "winston": "^3.3.3"
   },
   "devDependencies": {
-    "@types/restify": "^8.4.2",
+    "@types/restify": "^8.5.4",
     "nodemon": "^2.0.13"
   }
 }
