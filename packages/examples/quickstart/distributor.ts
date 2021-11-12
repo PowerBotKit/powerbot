@@ -8,6 +8,7 @@
 
 import { createDistributorServer, TBotConfig } from '@powerbotkit/distributor';
 
+// eslint-disable-next-line @typescript-eslint/no-floating-promises
 (async () => {
 	const config: TBotConfig = {
 		appId: '',

@@ -23,6 +23,7 @@ jest.mock('winston', () => ({
 	},
 	createLogger: jest.fn().mockReturnValue(mLogger),
 	transports: {
+		// eslint-disable-next-line @typescript-eslint/naming-convention
 		Console: jest.fn()
 	}
 }));

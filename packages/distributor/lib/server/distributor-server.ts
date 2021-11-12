@@ -6,6 +6,10 @@
 //
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+/* eslint-disable max-classes-per-file */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-unsafe-call */
 import { BotFrameworkAdapter } from 'botbuilder';
 import * as restify from 'restify';
 
@@ -19,11 +23,7 @@ import {
 import { IMiddlewareOutbound, OutBoundHandler } from '../activity/outbound';
 import { IDataPersist } from '../models/data-persist';
 import { BotInstance, IBotServer } from './server';
-import {
-	IBotServerConfig,
-	TBotConfig,
-	TMiddlewareConfig
-} from './server-config';
+import { IBotServerConfig, TMiddlewareConfig } from './server-config';
 
 export class DistributorServer implements IBotServer {
 	// operation conversion saving
@@ -106,11 +106,13 @@ export class DistributorServer implements IBotServer {
 		await this.publisher.init();
 	}
 
+	// eslint-disable-next-line @typescript-eslint/require-await
 	public async setupApp() {
 		this.app = restify.createServer();
 		this.app.use(restify.plugins.queryParser());
 	}
 
+	// eslint-disable-next-line @typescript-eslint/require-await
 	public async setupBot(config: IBotServerConfig) {
 		const botConfig = config.botConfig;
 		const adapter = new BotFrameworkAdapter({
@@ -126,15 +128,16 @@ export class DistributorServer implements IBotServer {
 				publlisChannel: config.channelConfig.inboundChannel
 			};
 		}
-		outboundHandler.listen(adapter, this.cache, this.listener);
-		this.app.post('/api/messages', (req, res) => {
-			adapter.processActivity(req, res, async context => {
+		await outboundHandler.listen(adapter, this.cache, this.listener);
+		this.app.post('/api/messages', async (req, res) => {
+			await adapter.processActivity(req, res, async context => {
 				// Route to main dialog.
 				await this.inboundHandler.run(context);
 			});
 		});
 	}
 
+	// eslint-disable-next-line @typescript-eslint/require-await
 	public async listen(port?: string | number) {
 		const por = port ? port : 3978;
 		this.app.listen(por, '0.0.0.0', () => {
@@ -174,6 +177,7 @@ class RestifyDistributorServer extends DistributorServer {
 		super();
 	}
 
+	// eslint-disable-next-line @typescript-eslint/naming-convention
 	public get AppServer(): restify.Server {
 		return (this.distributorServer as unknown as { app: restify.Server }).app;
 	}

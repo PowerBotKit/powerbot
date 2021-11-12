@@ -13,6 +13,7 @@ const { combine, json } = format;
 
 let logger: winston.Logger;
 
+// eslint-disable-next-line @typescript-eslint/naming-convention
 export const BotKitLogger = {
 	getLogger: () => {
 		if (!logger) {

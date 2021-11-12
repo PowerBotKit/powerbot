@@ -6,6 +6,9 @@
 //
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import {
 	BotKitLogger,
 	Event,
@@ -27,13 +30,16 @@ export interface IBotWorker {
 export class BaseWorker implements IBotWorker {
 	defaultService: string;
 	constructor(defaultService: string) {
+		// eslint-disable-next-line @typescript-eslint/no-unsafe-call
 		BotKitLogger.getLogger().info('Init the Base Worker');
 		this.defaultService = defaultService || 'dummyService';
 	}
 	async process(dialog: GDUserSession): Promise<GDUserSession> {
+		// eslint-disable-next-line @typescript-eslint/no-unsafe-call
 		BotKitLogger.getLogger().info('Start Base Bot Worker');
 		await this.redirect(dialog);
 
+		// eslint-disable-next-line @typescript-eslint/no-unsafe-return
 		return dialog;
 	}
 
@@ -50,20 +56,27 @@ export class BaseWorker implements IBotWorker {
 	}
 
 	async redirect(dialog: GDUserSession) {
+		// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
 		const func: Function = this[dialog.service || this.defaultService];
+		// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
 		const output: MessageOutput = await func.call(this, dialog);
 		this.setBotOutput(output, dialog);
+		// eslint-disable-next-line @typescript-eslint/no-unsafe-call
 		BotKitLogger.getLogger().debug(
 			`woker: ${this.constructor?.name || BaseWorker.name}, service: ${
+				// eslint-disable-next-line @typescript-eslint/restrict-template-expressions
 				dialog.service || this.defaultService
+				// eslint-disable-next-line @typescript-eslint/restrict-template-expressions
 			}, output: ${output.type} ->${output.value}`
 		);
 	}
 
 	dummyService(dialog: GDUserSession): MessageOutput {
-		BotKitLogger.getLogger().info('Start dummy service:' + dialog.input.value);
+		// eslint-disable-next-line @typescript-eslint/restrict-template-expressions
+		BotKitLogger.getLogger().info(`Start dummy service: ${dialog.input.value}`);
 
 		return {
+			// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
 			type: MessageType.textAdd,
 			value: 'dummy message for test'
 		};
@@ -87,6 +100,7 @@ export class BaseWorker implements IBotWorker {
 			$root: {}
 		};
 		context.$root = data;
+		// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
 		const content: object = template.expand(context);
 		const card: Attachment = CardFactory.adaptiveCard(content);
 

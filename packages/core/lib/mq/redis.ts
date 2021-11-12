@@ -27,6 +27,7 @@ export class RedisMQ implements IMQ<RedisClient> {
 			});
 			this.client.info(info => {
 				BotKitLogger.getLogger().info(
+					// eslint-disable-next-line @typescript-eslint/restrict-template-expressions
 					`Redis MQ connection established!:\t${info}`
 				);
 				if (info) {
@@ -44,6 +45,7 @@ export class RedisMQ implements IMQ<RedisClient> {
 	public publish(channel: string, data: string) {
 		const result = this.client.publish(channel, data);
 		this.logger.debug(
+			// eslint-disable-next-line @typescript-eslint/restrict-template-expressions
 			`publish ${data} to channel: ${channel}, result is ${result}`
 		);
 
@@ -58,9 +60,11 @@ export class RedisMQ implements IMQ<RedisClient> {
 		this.client.on('subscribe', (channel: string) => callback(channel));
 	}
 
+	// eslint-disable-next-line @typescript-eslint/require-await
 	public async onMessage(
 		callback: (channel: string, data: any) => Promise<void>
 	) {
+		// eslint-disable-next-line @typescript-eslint/no-misused-promises
 		this.client.on('message', async (channel, data: any): Promise<void> => {
 			this.logger.debug(
 				`received message channel: ${channel}, data is ${

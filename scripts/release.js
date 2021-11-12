@@ -159,7 +159,7 @@ async function main() {
 	step('\n run unit test');
 	run('yarn test:ci');
 
-	step("\n run build");
+	step('\n run build');
 	run('node scripts/build.js');
 
 	step('\n update version');
@@ -173,13 +173,13 @@ async function main() {
 	targets.forEach(target =>
 		run(`git add ${path.resolve(target.location, 'package.json')}`)
 	);
-	run("git add CHANGELOG.md");
+	run('git add CHANGELOG.md');
 	run(`git commit -m "chore(release): v${targetVersion}"`);
 
 	step('\n tag');
 	run(`git tag "v${targetVersion}"`);
 
-	step("\n publish github");
+	step('\n publish github');
 	publishGithub(targetVersion);
 }
 

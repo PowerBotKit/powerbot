@@ -35,11 +35,10 @@ jobs:
 
       - name: Install Dependencies
         run: yarn
-
+      - name: Build
+        run: yarn build
       - name: Lint
         run: yarn eslint && yarn format
-      - name: Build
-        run: yarn build && yarn test:ci
       - name: Unit Test
         run: yarn test:ci
       - name: License check

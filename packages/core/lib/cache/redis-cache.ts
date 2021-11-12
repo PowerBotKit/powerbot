@@ -6,8 +6,12 @@
 //
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-import { RedisClient } from 'redis';
+/* eslint-disable no-underscore-dangle,max-classes-per-file,@typescript-eslint/no-unsafe-assignment  */
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+/* eslint-disable @typescript-eslint/require-await */
+/* eslint-disable @typescript-eslint/no-unsafe-return */
 import { promisify } from 'util';
+import { RedisClient } from 'redis';
 
 import { BotKitLogger } from '../core/logger';
 import { ICache } from './cache';
@@ -20,10 +24,12 @@ export interface IRedisCacheSerializer<T = any> {
 
 export class NoopRedisCacheSerializer implements IRedisCacheSerializer<any> {
 	serialize(key: any): string {
+		// eslint-disable-next-line @typescript-eslint/no-unsafe-return
 		return key;
 	}
 
 	deserialize(value: any) {
+		// eslint-disable-next-line @typescript-eslint/no-unsafe-return
 		return value;
 	}
 }
@@ -35,6 +41,7 @@ export class JsonRedisCacheSerializer implements IRedisCacheSerializer<any> {
 
 	deserialize(value: string) {
 		try {
+			// eslint-disable-next-line @typescript-eslint/no-unsafe-return
 			return JSON.parse(value);
 		} catch (e) {
 			return value;
@@ -74,6 +81,7 @@ export class RedisCache implements ICache {
 			});
 			this.client.info(info => {
 				BotKitLogger.getLogger().info(
+					// eslint-disable-next-line @typescript-eslint/restrict-template-expressions
 					`Redis Cache connection established!:\t${info}`
 				);
 				if (info) {
@@ -111,6 +119,7 @@ export class RedisCache implements ICache {
 				['set', k, value]
 			];
 		}
+		// eslint-disable-next-line @typescript-eslint/no-unsafe-argument
 		this.client.multi(multiOp).exec((err, _) => {
 			if (err) {
 				BotKitLogger.getLogger().error('redis unlock error: ', err);
@@ -135,6 +144,7 @@ export class RedisCache implements ICache {
 	public async get(key: string) {
 		const k = this._keySerializer.serialize(key);
 		const value = await this.promisify('get')(k);
+		// eslint-disable-next-line @typescript-eslint/no-unsafe-argument
 		const v = this._valueSerializer.deserialize(value);
 
 		return v;
@@ -146,6 +156,7 @@ export class RedisCache implements ICache {
 	}
 
 	private promisify(methodName: string) {
+		// eslint-disable-next-line @typescript-eslint/no-unsafe-argument
 		return promisify(this.client[methodName]).bind(this.client);
 	}
 }

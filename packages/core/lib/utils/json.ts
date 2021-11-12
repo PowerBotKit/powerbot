@@ -8,9 +8,11 @@
 
 import { BotKitLogger } from '../core/logger';
 
+// eslint-disable-next-line prefer-arrow/prefer-arrow-functions
 export function isJson(str: any): boolean {
 	if (typeof str === 'string') {
 		try {
+			// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
 			const d = JSON.parse(str);
 
 			return !!d;

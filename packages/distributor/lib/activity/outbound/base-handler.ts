@@ -6,6 +6,10 @@
 //
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
+/* eslint-disable @typescript-eslint/no-unsafe-call */
 import {
 	BotKitLogger,
 	DialogUtil,
@@ -28,7 +32,10 @@ export class OutboundHandlerBase {
 		channel: string,
 		data: string
 	) {
-		const dialog: GDUserSession = JSON.parse(data);
+		const dialog =
+			typeof data === 'string'
+				? (JSON.parse(data) as GDUserSession)
+				: (data as GDUserSession);
 		if (this.outboundMiddleware) {
 			await this.outboundMiddleware.process(dialog);
 		}
@@ -76,7 +83,7 @@ export class OutboundHandlerBase {
 							'Batch delete activity is non supported'
 						);
 					} else if (typeof message === 'string') {
-						turnContext.deleteActivity(message);
+						await turnContext.deleteActivity(message);
 					}
 				} else {
 					BotKitLogger.getLogger().error('Can not identify message type');
@@ -91,12 +98,15 @@ export class OutboundHandlerBase {
 						});
 					} else if (response.ids && response.ids.length > 0) {
 						await Promise.all(
-							response.ids.map(async id => (
-								this as unknown as OnPostrReceiveMessage
-							).onPostReceiveMessage(turnContext, {
-								dialog,
-								response: { id }
-							}))
+							response.ids.map(async id =>
+								(this as unknown as OnPostrReceiveMessage).onPostReceiveMessage(
+									turnContext,
+									{
+										dialog,
+										response: { id }
+									}
+								)
+							)
 						);
 					}
 				}
