@@ -76,8 +76,12 @@ export class ConsumerServer implements IConsumerServer {
 			BotKitLogger.getLogger().info(
 				'Consumer received message in channel: ' + channel
 			);
-			const dialog: GDUserSession = JSON.parse(data);
+			const dialog =
+				typeof data === 'string'
+					? (JSON.parse(data) as GDUserSession)
+					: (data as GDUserSession);
 			const dialogKey = 'consumer-' + DialogUtil.getDialogKey(dialog.id);
+			// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
 			const dialogIncache = await this.cache?.get(dialogKey);
 			if (dialogIncache) {
 				BotKitLogger.getLogger().info(

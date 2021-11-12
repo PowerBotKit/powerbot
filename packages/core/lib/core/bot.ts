@@ -25,6 +25,7 @@ export interface GDUser {
 	surname?: string;
 }
 
+// eslint-disable-next-line no-shadow
 export enum MessageAction {
 	update,
 	cancel,
@@ -32,6 +33,7 @@ export enum MessageAction {
 	quit
 }
 
+// eslint-disable-next-line no-shadow
 export enum MessageType {
 	cardAdd,
 	textAdd,
@@ -54,6 +56,7 @@ export interface MessageOutput {
 	value: string | Partial<Activity> | Partial<Activity>[];
 }
 
+// eslint-disable-next-line no-shadow
 export enum InitiatorType {
 	bot,
 	user

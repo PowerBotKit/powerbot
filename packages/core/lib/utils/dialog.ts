@@ -93,6 +93,7 @@ export class DialogUtil {
 			session.input.value = activity.text;
 		} else {
 			session.input.type = MessageType.cardAdd;
+			// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
 			session.input.value = activity.value;
 		}
 

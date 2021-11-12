@@ -1,0 +1,5 @@
+packages/**/dist/
+packages/**/node_modules/
+packages/examples/
+**/*.d.ts
+scripts

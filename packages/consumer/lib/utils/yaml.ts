@@ -1,3 +1,4 @@
+/* eslint-disable prefer-arrow/prefer-arrow-functions */
 // Copyright (c) 2020-present PowerBotKit Team
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
@@ -15,5 +16,6 @@ export function readYamlFromFilePath<T>(
 ): T {
 	const fileContents = fs.readFileSync(path, charset);
 
+	// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access,@typescript-eslint/no-unsafe-call
 	return yaml.safeLoad(fileContents) as T;
 }

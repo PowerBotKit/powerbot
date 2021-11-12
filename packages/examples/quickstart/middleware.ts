@@ -5,26 +5,25 @@
 // The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 //
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-
-/* tslint:disable:max-classes-per-file */
+/* eslint-disable max-classes-per-file */
 import { InputMiddleware, OutputMiddleware } from '@powerbotkit/consumer';
 import { GDUserSession } from '@powerbotkit/core';
 
 export class InputMiddlewareGlobal implements InputMiddleware {
-	// tslint:disable-next-line:no-empty
+	// eslint-disable-next-line @typescript-eslint/no-empty-function, no-empty-function
 	async process(context: GDUserSession) {}
 }
 
 export class OutputMiddlewareGlobal implements OutputMiddleware {
-	// tslint:disable-next-line:no-empty
+	// eslint-disable-next-line @typescript-eslint/no-empty-function, no-empty-function
 	async process(context: GDUserSession) {}
 }
 export class InputMiddleware4Worker implements InputMiddleware {
-	// tslint:disable-next-line:no-empty
+	// eslint-disable-next-line @typescript-eslint/no-empty-function, no-empty-function
 	async process(context: GDUserSession) {}
 }
 
 export class OutputMiddleware4Worker implements OutputMiddleware {
-	// tslint:disable-next-line:no-empty
+	// eslint-disable-next-line @typescript-eslint/no-empty-function, no-empty-function
 	async process(context: GDUserSession) {}
 }

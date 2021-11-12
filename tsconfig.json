@@ -16,12 +16,12 @@
     "resolveJsonModule": true,
     "downlevelIteration": true,
     "paths": {
-      "@powerbotkit/consumer": ["./packages/consumer"],
-      "@powerbotkit/consumer/*": ["./packages/consumer/*"],
-      "@powerbotkit/core": ["./packages/core"],
-      "@powerbotkit/core/*": ["./packages/core/*"],
-      "@powerbotkit/distributor": ["./packages/distributor"],
-      "@powerbotkit/distributor/*": ["./packages/distributor/*"],
+      "@powerbotkit/consumer": ["./packages/consumer/lib"],
+      "@powerbotkit/consumer/*": ["./packages/consumer/lib/*"],
+      "@powerbotkit/core": ["./packages/core/lib/"],
+      "@powerbotkit/core/*": ["./packages/core/lib/*"],
+      "@powerbotkit/distributor": ["./packages/distributor/lib"],
+      "@powerbotkit/distributor/*": ["./packages/distributor/lib/*"],
     }
   }
 }

@@ -62,6 +62,7 @@ class EchoWorker extends BaseWorker {
 	}
 }
 
+// eslint-disable-next-line @typescript-eslint/no-floating-promises,@typescript-eslint/require-await
 (async () => {
 	const routerHandler: IWorkerRouterHandler = new WorkerRouterHandler(
 		'EchoWorker'
@@ -89,5 +90,5 @@ class EchoWorker extends BaseWorker {
 	};
 	const server = new ConsumerServer();
 	server.setup(serverConfig, middlewareConfig);
-	server.start();
+	await server.start();
 })();

@@ -9,8 +9,10 @@
 /**
  * Determine if the argument is shaped like a Promise
  */
+// eslint-disable-next-line prefer-arrow/prefer-arrow-functions
 export function isPromise<T = any>(obj: any): obj is Promise<T> {
 	// allow any Promise/A+ compliant thenable.
 	// It's up to the caller to ensure that obj.then conforms to the spec
+	// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
 	return !!obj && typeof obj.then === 'function';
 }

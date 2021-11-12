@@ -27,8 +27,8 @@ A high level overview of tools used:
 
 - [TypeScript](https://www.typescriptlang.org/) as the development language
 - [Jest](https://jestjs.io/) for unit testing
-- [TSlint](https://palantir.github.io/tslint/) and [Prettier](https://prettier.io/) for code formatting
-  > :warning: TSLint has been deprecated as of 2019. So we will support the migration to [ESLint](https://eslint.org/).
+- [ESlint](https://eslint.org/) and [Prettier](https://prettier.io/) for code formatting
+
 
 ### Add Dependencies
 

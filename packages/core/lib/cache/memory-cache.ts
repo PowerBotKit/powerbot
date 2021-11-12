@@ -30,6 +30,7 @@ export class MemoryCache implements ICache {
 		});
 	}
 	get(key: string): Promise<any> {
+		// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
 		const value = this.client.get(key);
 
 		return Promise.resolve(value);

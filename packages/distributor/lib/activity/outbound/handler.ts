@@ -6,6 +6,11 @@
 //
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+/* eslint-disable no-underscore-dangle */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
+/* eslint-disable @typescript-eslint/restrict-template-expressions */
 import { BotKitLogger, ICache, IMQ } from '@powerbotkit/core';
 import { BotFrameworkAdapter } from 'botbuilder';
 import { OutboundHandlerBase } from './base-handler';
@@ -38,6 +43,7 @@ export class OutBoundHandler extends OutboundHandlerBase {
 	constructor(outboundMiddleware?: IMiddlewareOutbound) {
 		super(outboundMiddleware);
 	}
+	// eslint-disable-next-line @typescript-eslint/require-await
 	public async listen(adapter: BotFrameworkAdapter, cache: ICache, mq: IMQ) {
 		mq.onSubscribed(channel => {
 			BotKitLogger.getLogger().info(`🚗 Subscribed to ${channel} broker`);
@@ -47,7 +53,7 @@ export class OutBoundHandler extends OutboundHandlerBase {
 			BotKitLogger.getLogger().info(
 				`Subscriber received message in channel:\t ${channel}`
 			);
-			await this.publish(adapter, cache, channel, data);
+			await this.publish(adapter, cache, channel, data as string);
 		});
 
 		mq.subscribe(this.outBoundHandlerConfig.subscribeChannel);

@@ -6,6 +6,9 @@
 //
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+/* eslint-disable @typescript-eslint/no-unsafe-call */
 import * as path from 'path';
 
 import {
@@ -13,7 +16,6 @@ import {
 	GDUserSession,
 	Intent,
 	IntentYAMLConfig,
-	IntentYAMLWildcardConfig,
 	JsonIntent,
 	MessageAction,
 	WildcardIntent
@@ -36,6 +38,7 @@ export interface IWorkerRouterHandler {
 	redirect(context: GDUserSession): Promise<GDUserSession>;
 	// register('SavingHours/welcomeMessage', dealWithWelcomeMessage)
 	register(
+		// eslint-disable-next-line no-shadow
 		path: string,
 		worker: any,
 		middlewareIn?: InputMiddleware,
@@ -61,6 +64,7 @@ export class WorkerRouterHandler implements IWorkerRouterHandler {
 	}
 
 	setUpIntent(intent: string | Intent) {
+		// eslint-disable-next-line @typescript-eslint/no-floating-promises
 		BotKitLogger.getLogger().info('set up intent file', intent);
 		if (typeof intent === 'string') {
 			this.setUpIntentFile(intent);
@@ -70,7 +74,7 @@ export class WorkerRouterHandler implements IWorkerRouterHandler {
 	}
 
 	async getWorkerNameByIntent(intentInput: string): Promise<string> {
-		let workerName = null;
+		let workerName = null as string;
 		if (this.intent) {
 			let intentStackName = '';
 			const intentStackNameP = this.intent.process(intentInput);
@@ -79,7 +83,8 @@ export class WorkerRouterHandler implements IWorkerRouterHandler {
 			} else {
 				intentStackName = intentStackNameP;
 			}
-			workerName = this.intentStack[intentStackName] || intentStackName;
+			workerName = (this.intentStack[intentStackName] ||
+				intentStackName) as string;
 		}
 		if (!workerName) {
 			workerName = this.defaultWorker;
@@ -92,6 +97,7 @@ export class WorkerRouterHandler implements IWorkerRouterHandler {
 		BotKitLogger.getLogger().info('redirect');
 		if (context.worker && context.worker.workerName === '') {
 			context.worker.workerName = await this.getWorkerNameByIntent(
+				// eslint-disable-next-line @typescript-eslint/no-unsafe-argument
 				context.input.value
 			);
 		}
@@ -117,6 +123,7 @@ export class WorkerRouterHandler implements IWorkerRouterHandler {
 			context.history = [];
 		}
 
+		// eslint-disable-next-line @typescript-eslint/no-unsafe-return
 		return context;
 	}
 
@@ -127,6 +134,7 @@ export class WorkerRouterHandler implements IWorkerRouterHandler {
 		middlewareOut?: OutputMiddleware
 	) {
 		BotKitLogger.getLogger().info('register');
+		// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
 		this.routeStack[workerName] = worker;
 		if (middlewareIn) {
 			this.inboundMiddlewareStack[workerName] = middlewareIn;
@@ -143,7 +151,7 @@ export class WorkerRouterHandler implements IWorkerRouterHandler {
 			if (config.type !== 'wildcard') {
 				throw new Error('wildcard yml file is only unsupported');
 			}
-			const wildCardConfig = config as IntentYAMLWildcardConfig;
+			const wildCardConfig = config;
 			if (wildCardConfig.intents) {
 				const map = new Map<string, string[]>();
 				wildCardConfig.intents.forEach(intent => {

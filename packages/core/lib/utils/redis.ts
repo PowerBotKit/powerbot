@@ -5,7 +5,7 @@
 // The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 //
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-
+/* eslint-disable prefer-arrow/prefer-arrow-functions */
 import { createClient, RedisClient } from 'redis';
 
 export interface IRedisConfig {
@@ -38,6 +38,7 @@ export function buildRedisTlsClient(config: IRedisTlsConfig): RedisClient {
 		typeof port === 'string' ? parseInt(port, 10) : port,
 		host,
 		{
+			// eslint-disable-next-line @typescript-eslint/naming-convention
 			auth_pass: key,
 			tls: { servername: host }
 		}

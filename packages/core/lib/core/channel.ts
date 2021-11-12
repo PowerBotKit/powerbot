@@ -16,6 +16,7 @@ const defaultChanneConfig: IChanneConfig = {
 	outboundChannel: 'outbound'
 };
 
+// eslint-disable-next-line prefer-arrow/prefer-arrow-functions
 export function getDefaultChanneConfig() {
 	return defaultChanneConfig;
 }

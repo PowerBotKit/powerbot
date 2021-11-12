@@ -23,8 +23,10 @@ export class WildcardIntent implements Intent {
 	public doProcess(input: string): string {
 		const keys = this.maps.keys();
 		for (const key of keys) {
+			// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
 			const values: string[] = this.maps[key];
 			for (const value of values) {
+				// eslint-disable-next-line @typescript-eslint/no-unsafe-call
 				if (wildcard(value, input)) {
 					return key;
 				}
