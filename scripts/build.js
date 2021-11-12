@@ -23,7 +23,7 @@ async function buildTarget(target) {
 				'tsconfig.json'
 			)} --outDir ${path.resolve('./dist', target.folderName)}`
 		);
-		// const { code } = shelljs.exec('yarn tsc --build');
+
 		if (code !== 0) {
 			throw new Error(`fail to compile the ${target.name}`);
 		}
@@ -68,7 +68,13 @@ async function run() {
 		const name = queue.shift();
 		const node = nodes.get(name);
 		if (node && node.target) {
-			await buildTarget(node.target);
+			try {
+				await buildTarget(node.target);
+			} catch (e) {
+				console.error(e.message);
+				shelljs.exit(2);
+			}
+
 			node.afters.forEach(a => {
 				nodes.get(a.name).indegree--;
 				if (nodes.get(a.name).indegree === 0) {
