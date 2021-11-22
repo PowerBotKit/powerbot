@@ -56,7 +56,7 @@
     "husky": "^7.0.4",
     "jest": "^27.3.0",
     "license-check-and-add": "^4.0.3",
-    "lint-staged": "^12.0.2",
+    "lint-staged": "^12.1.1",
     "prettier": "^2.4.1",
     "rimraf": "^3.0.2",
     "semver": "^7.3.5",
