@@ -93,7 +93,7 @@ export class ConsumerServer implements IConsumerServer {
 				BotKitLogger.getLogger().info(
 					`dialog ${dialogKey} is never processed in the other worker`
 				);
-				await this.cache?.set(dialogKey, data);
+				await this.cache?.set(dialogKey, data, 3);
 			}
 			if (this.inputMiddleware) {
 				await this.inputMiddleware.process(dialog);
