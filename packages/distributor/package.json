@@ -1,6 +1,6 @@
 {
   "name": "@powerbotkit/distributor",
-  "version": "0.0.3-beta.5",
+  "version": "0.0.3-beta.6",
   "description": "powerbot-distributor",
   "keywords": [
     "bot",
@@ -20,7 +20,7 @@
     "test": "jest"
   },
   "dependencies": {
-    "@powerbotkit/core": "0.0.3-beta.5",
+    "@powerbotkit/core": "0.0.3-beta.6",
     "botbuilder": "^4.10.3",
     "dotenv": "^10.0.0",
     "lodash": "^4.17.20",

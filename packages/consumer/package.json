@@ -1,6 +1,6 @@
 {
   "name": "@powerbotkit/consumer",
-  "version": "0.0.3-beta.5",
+  "version": "0.0.3-beta.6",
   "description": "powerbot-consumer",
   "keywords": [
     "bot",
@@ -20,7 +20,7 @@
     "test": "jest"
   },
   "dependencies": {
-    "@powerbotkit/core": "0.0.3-beta.5",
+    "@powerbotkit/core": "0.0.3-beta.6",
     "adaptive-expressions": "^4.14.1",
     "adaptivecards": "^2.10.0",
     "adaptivecards-templating": "^2.2.0",

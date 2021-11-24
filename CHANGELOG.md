@@ -1,3 +1,12 @@
+## [0.0.3-beta.6](https://github.com/PowerBotKit/powerbot/compare/v0.0.3-beta.5...v0.0.3-beta.6) (2021-11-24)
+
+
+### Bug Fixes
+
+* dialogKey lock will expired in 3s ([#254](https://github.com/PowerBotKit/powerbot/issues/254)) ([026ecb2](https://github.com/PowerBotKit/powerbot/commit/026ecb29df2ad7d1418961cf2771ac0e7737d735))
+
+
+
 ## [0.0.3-beta.5](https://github.com/PowerBotKit/powerbot/compare/v0.0.3-beta.4...v0.0.3-beta.5) (2021-11-12)
 
 
