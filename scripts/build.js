@@ -6,12 +6,13 @@
 //
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-const chalk = require('chalk');
 const fs = require('fs/promises');
 const fsEx = require('fs-extra');
 const path = require('path');
 
 const shelljs = require('shelljs');
+
+let chalk;
 
 const { fetchTargets, fetchTopologicalSorting } = require('./utils');
 
@@ -55,6 +56,7 @@ async function buildTarget(target) {
 }
 
 async function run() {
+	chalk = (await import('chalk')).default;
 	await fs.rm(`${path.resolve('./dist')}`, { force: true, recursive: true });
 	const targets = await fetchTargets();
 	const nodes = fetchTopologicalSorting(targets);
