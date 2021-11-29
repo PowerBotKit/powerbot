@@ -21,7 +21,7 @@
   },
   "dependencies": {
     "botbuilder": "^4.10.3",
-    "redis": "^3.0.2",
+    "redis": "^4.0.0",
     "wildcard": "^2.0.0",
     "winston": "^3.3.3"
   },

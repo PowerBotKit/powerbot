@@ -25,6 +25,6 @@
     "adaptivecards": "^2.10.0",
     "adaptivecards-templating": "^2.2.0",
     "js-yaml": "^4.1.0",
-    "redis": "^3.0.2"
+    "redis": "^4.0.0"
   }
 }
