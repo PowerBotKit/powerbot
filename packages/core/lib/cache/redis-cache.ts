@@ -101,7 +101,9 @@ export class RedisCache implements ICache {
 		const k = this._keySerializer.serialize(key);
 		const v = this._valueSerializer.serialize(value);
 
-		return this.client.set(k, v, 'EX', this.lockTime, 'NX');
+		return Promise.resolve(
+			this.promisify('set')(k, v, 'NX', 'EX', this.lockTime)
+		);
 	}
 
 	public async unlock(key: string, expireTime?: number) {
