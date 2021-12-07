@@ -39,7 +39,7 @@
     "@commitlint/config-conventional": "^15.0.0",
     "@ls-lint/ls-lint": "^1.9.2",
     "@types/jest": "^27.0.3",
-    "@types/node": "^16.11.10",
+    "@types/node": "^16.11.12",
     "@typescript-eslint/eslint-plugin": "^5.4.0",
     "@typescript-eslint/eslint-plugin-tslint": "^5.4.0",
     "@typescript-eslint/parser": "^5.4.0",
