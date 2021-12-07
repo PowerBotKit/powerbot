@@ -82,8 +82,8 @@ export class ConsumerServer implements IConsumerServer {
 					: (data as GDUserSession);
 			const dialogKey = 'consumer-' + DialogUtil.getDialogKey(dialog.id);
 			// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-			const dialogIncache = await this.cache?.get(dialogKey);
-			if (dialogIncache) {
+			const dialogIncache = await this.cache?.lock(dialogKey, 1);
+			if (dialogIncache === null) {
 				BotKitLogger.getLogger().info(
 					`dialog ${dialogKey} had been processed in the other worker`
 				);
@@ -93,7 +93,6 @@ export class ConsumerServer implements IConsumerServer {
 				BotKitLogger.getLogger().info(
 					`dialog ${dialogKey} is never processed in the other worker`
 				);
-				await this.cache?.set(dialogKey, data, 3);
 			}
 			if (this.inputMiddleware) {
 				await this.inputMiddleware.process(dialog);
@@ -107,7 +106,7 @@ export class ConsumerServer implements IConsumerServer {
 				JSON.stringify(updatedDialog)
 			);
 
-			await this.cache?.delete(dialogKey);
+			await this.cache?.unlock(dialogKey, 1);
 		});
 
 		this.listenerAdaptor.subscribe(this.channeConfig.inboundChannel);

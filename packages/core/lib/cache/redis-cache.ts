@@ -121,7 +121,7 @@ export class RedisCache implements ICache {
 				['set', k, value]
 			];
 		}
-		// eslint-disable-next-line @typescript-eslint/no-unsafe-argument
+		// eslint-disable-next-line @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-member-access
 		this.client.multi(multiOp).exec((err, _) => {
 			if (err) {
 				BotKitLogger.getLogger().error('redis unlock error: ', err);
