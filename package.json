@@ -2,7 +2,7 @@
   "name": "root",
   "private": true,
   "license": "MIT",
-  "version": "0.0.3-beta.6",
+  "version": "0.0.3-beta.7",
   "workspaces": [
     "packages/*"
   ],

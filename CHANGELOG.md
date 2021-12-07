@@ -1,3 +1,18 @@
+## [0.0.3-beta.7](https://github.com/PowerBotKit/powerbot/compare/v0.0.3-beta.6...v0.0.3-beta.7) (2021-12-07)
+
+
+### Bug Fixes
+
+* redis cache lock work in a short time ([#260](https://github.com/PowerBotKit/powerbot/issues/260)) ([052110a](https://github.com/PowerBotKit/powerbot/commit/052110a7e53b4568ce4594157ecfb6f14f751155))
+* use unlock insteand del to remove lock ([#271](https://github.com/PowerBotKit/powerbot/issues/271)) ([e6eb91e](https://github.com/PowerBotKit/powerbot/commit/e6eb91eceefa0cc84acaab86cf0e5a959b09affb))
+
+
+### Reverts
+
+* Revert "build(deps-dev): bump chalk from 4.1.2 to 5.0.0 (#258)" (#277) ([0e7c007](https://github.com/PowerBotKit/powerbot/commit/0e7c0079a4d533140e9650f9aaa266ba5f53dc9c)), closes [#258](https://github.com/PowerBotKit/powerbot/issues/258) [#277](https://github.com/PowerBotKit/powerbot/issues/277)
+
+
+
 ## [0.0.3-beta.6](https://github.com/PowerBotKit/powerbot/compare/v0.0.3-beta.5...v0.0.3-beta.6) (2021-11-24)
 
 

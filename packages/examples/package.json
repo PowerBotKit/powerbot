@@ -1,6 +1,6 @@
 {
   "name": "@powerbotkit/examples",
-  "version": "0.0.3-beta.6",
+  "version": "0.0.3-beta.7",
   "description": "> TODO: description",
   "keywords": [
     "examples"
@@ -21,7 +21,7 @@
     "url": "https://github.com/PowerBotKit/powerbot/issues"
   },
   "dependencies": {
-    "@powerbotkit/consumer": "0.0.3-beta.6",
-    "@powerbotkit/distributor": "0.0.3-beta.6"
+    "@powerbotkit/consumer": "0.0.3-beta.7",
+    "@powerbotkit/distributor": "0.0.3-beta.7"
   }
 }
