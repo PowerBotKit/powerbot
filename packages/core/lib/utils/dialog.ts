@@ -154,4 +154,8 @@ export class DialogUtil {
 			activityId
 		);
 	}
+
+	public static getReplyToId(dialog: GDUserSession): string | null | undefined {
+		return dialog.replyToId;
+	}
 }
