@@ -1,3 +1,12 @@
+## [0.0.3](https://github.com/PowerBotKit/powerbot/compare/v0.0.3-beta.7...v0.0.3) (2021-12-19)
+
+
+### Features
+
+* add a new method to fetch replyToId ([#283](https://github.com/PowerBotKit/powerbot/issues/283)) ([4a8fed4](https://github.com/PowerBotKit/powerbot/commit/4a8fed4c6804594df7d6a5db117666b213bc1520))
+
+
+
 ## [0.0.3-beta.7](https://github.com/PowerBotKit/powerbot/compare/v0.0.3-beta.6...v0.0.3-beta.7) (2021-12-07)
 
 
