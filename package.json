@@ -67,5 +67,8 @@
   },
   "resolutions": {
     "**/**/axios": ">=0.21.1"
+  },
+  "dependencies": {
+    "tslib": "^2.3.1"
   }
 }

@@ -15,6 +15,7 @@
     "allowSyntheticDefaultImports": true,
     "resolveJsonModule": true,
     "downlevelIteration": true,
+    "importHelpers": true,
     "paths": {
       "@powerbotkit/consumer": ["./packages/consumer/lib"],
       "@powerbotkit/consumer/*": ["./packages/consumer/lib/*"],
