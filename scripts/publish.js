@@ -6,7 +6,7 @@
 //
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-const chalk = require('chalk');
+const colors = require('colors/safe');
 const shelljs = require('shelljs');
 const path = require('path');
 
@@ -16,33 +16,33 @@ function publishNpm(target) {
 	try {
 		if (target.private === true) {
 			console.log(
-				`${chalk.red(target.name)} is ${chalk.cyan('private')}, ${chalk.green(
-					'skip'
-				)}`
+				`${colors.red(target.name)} is ${colors.cyan(
+					'private'
+				)}, ${colors.green('skip')}`
 			);
 		} else {
 			doPublishNpm(target);
 		}
 	} catch (err) {
 		console.log(
-			`failed to puslish ${chalk.red(target.name)}@${chalk.yellowBright(
+			`failed to puslish ${colors.red(target.name)}@${colors.brightYellow(
 				target.version
-			)}, error: ${chalk.blue(err.message)}`
+			)}, error: ${colors.blue(err.message)}`
 		);
 	}
 }
 
 function doPublishNpm(target) {
 	console.log(
-		`build ${chalk.red(target.name)}@${chalk.yellow(target.version)}`
+		`build ${colors.red(target.name)}@${colors.yellow(target.version)}`
 	);
 	const packagePath = path.join(__dirname, '..', 'dist', target.folderName);
 	console.log(packagePath);
 	shelljs.cd(packagePath).exec('npm publish');
 	console.log(
-		`puslish ${chalk.red(target.name)}@${chalk.yellowBright(
+		`puslish ${colors.red(target.name)}@${colors.brightYellow(
 			target.version
-		)} ${chalk.green('successfully')}`
+		)} ${colors.green('successfully')}`
 	);
 }
 

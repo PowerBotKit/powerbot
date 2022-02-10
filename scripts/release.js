@@ -7,9 +7,9 @@
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 const args = require('minimist')(process.argv.slice(2));
-const chalk = require('chalk');
+const colors = require('colors/safe');
 const semver = require('semver');
-const { exec, set } = require('shelljs');
+const { exec } = require('shelljs');
 const currentVersion = require('../package.json').version;
 const { prompt } = require('enquirer');
 const path = require('path');
@@ -34,11 +34,11 @@ const versionIncrements = [
 const inc = i => semver.inc(currentVersion, i, preId);
 
 const realRun = command => exec(command);
-const dryRun = command => console.log(chalk.blue(`[dry run]: ${command}`));
+const dryRun = command => console.log(colors.blue(`[dry run]: ${command}`));
 
 const run = isDryRun ? dryRun : realRun;
 
-const step = msg => console.log(chalk.cyan(msg));
+const step = msg => console.log(colors.cyan(msg));
 
 const fetchTargetVersion = async () => {
 	let targetVersion = args._[0];
@@ -74,9 +74,9 @@ const fetchTargetVersion = async () => {
 const confirmUpdateTargetVersion = async (targetVersion, targets) => {
 	targets.forEach(target => {
 		console.log(
-			`${chalk.blue(target.name)}@${chalk.cyan(target.version)} => ${chalk.red(
-				'v' + targetVersion
-			)}`
+			`${colors.blue(target.name)}@${colors.cyan(
+				target.version
+			)} => ${colors.red('v' + targetVersion)}`
 		);
 	});
 	const { yes } = await prompt({
@@ -92,7 +92,7 @@ const updatePackageVersion = (pkgPath, version) => {
 	const pkg = JSON.parse(fs.readFileSync(pkgPath, 'utf-8'));
 	pkg.version = version;
 	if (isDryRun) {
-		console.log(`${chalk.bgCyan(pkg.name + '@' + pkg.version)}`);
+		console.log(`${colors.bgCyan(pkg.name + '@' + pkg.version)}`);
 	} else {
 		fs.writeFileSync(pkgPath, JSON.stringify(pkg, null, 2) + '\n');
 	}
@@ -107,7 +107,7 @@ const updatePackageDeps = (pkgPath, version) => {
 			dependencies[dependency] = version;
 		});
 	if (isDryRun) {
-		console.log(`${chalk.bgCyan(pkg.name + '@' + pkg.version)}`);
+		console.log(`${colors.bgCyan(pkg.name + '@' + pkg.version)}`);
 		console.log(pkg);
 	} else {
 		fs.writeFileSync(pkgPath, JSON.stringify(pkg, null, 2) + '\n');
