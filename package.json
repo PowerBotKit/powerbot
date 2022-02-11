@@ -32,7 +32,10 @@
     "release:alpha": "node scripts/release.js --preId alpha",
     "release:beta": "node scripts/release.js --preId beta",
     "prepare": "npx husky install",
-    "publish-npm": "node scripts/publish.js "
+    "publish-npm": "node scripts/publish.js"
+  },
+  "dependencies": {
+    "tslib": "^2.3.1"
   },
   "devDependencies": {
     "@commitlint/cli": "^16.0.1",
@@ -43,7 +46,7 @@
     "@typescript-eslint/eslint-plugin": "^5.6.0",
     "@typescript-eslint/eslint-plugin-tslint": "^5.6.0",
     "@typescript-eslint/parser": "^5.6.0",
-    "chalk": "^4.1.2",
+    "colors": "1.4.0",
     "conventional-changelog-cli": "^2.2.2",
     "enquirer": "^2.3.6",
     "eslint": "^8.6.0",
@@ -67,8 +70,5 @@
   },
   "resolutions": {
     "**/**/axios": ">=0.21.1"
-  },
-  "dependencies": {
-    "tslib": "^2.3.1"
   }
 }

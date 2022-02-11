@@ -6,7 +6,7 @@
 //
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-const chalk = require('chalk');
+const colors = require('colors/safe');
 const fs = require('fs/promises');
 const fsEx = require('fs-extra');
 const path = require('path');
@@ -37,7 +37,7 @@ async function buildTarget(target) {
 			})
 			.map(f => fs.copyFile(f.src, f.dest));
 		await Promise.all(copyTasks);
-		console.log(`${chalk.blue(target.name)} ${chalk.green('success')} 🚀`);
+		console.log(`${colors.blue(target.name)} ${colors.green('success')} 🚀`);
 
 		await fs.rm(`${path.resolve('./node_modules/' + target.name)}`, {
 			force: true,
@@ -49,7 +49,7 @@ async function buildTarget(target) {
 		);
 	} else {
 		console.log(
-			`${chalk.blue(target.name)} ${chalk.cyan('skip')} for private module`
+			`${colors.blue(target.name)} ${colors.cyan('skip')} for private module`
 		);
 	}
 }
