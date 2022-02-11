@@ -1,9 +1,9 @@
 {
   "compilerOptions": {
     "baseUrl": ".",
-    "target": "es5",
+    "target": "es6",
     "lib": ["es6", "esnext", "dom"],
-    "module": "commonjs",
+    "module": "es6",
     "moduleResolution": "node",
     "sourceMap": false,
     "experimentalDecorators": true,
