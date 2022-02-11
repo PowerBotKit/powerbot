@@ -9,8 +9,6 @@
   "author": "Power Bot Kit Team",
   "homepage": "https://github.com/PowerBotKit/powerbot/tree/develop/packages/distributor#readme",
   "license": "MIT",
-  "main": "./index.js",
-  "types": "./index.d.ts",
   "publishConfig": {
     "access": "public",
     "registry": "https://registry.npmjs.org"

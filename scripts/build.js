@@ -15,18 +15,57 @@ const shelljs = require('shelljs');
 
 const { fetchTargets, fetchTopologicalSorting } = require('./utils');
 
+function buildES6(target) {
+	const { code } = shelljs.exec(
+		`yarn tsc --project ${path.join(
+			target.location,
+			'tsconfig.json'
+		)} --outDir ${path.resolve('./dist', target.folderName, 'lib')}`
+	);
+
+	if (code !== 0) {
+		throw new Error(`fail to compile the ${target.name}`);
+	}
+}
+
+function buildCommonjs(target) {
+	const { code } = shelljs.exec(
+		`yarn tsc --project ${path.join(
+			target.location,
+			'tsconfig.json'
+		)} --outDir ${path.resolve(
+			'./dist',
+			target.folderName,
+			'src'
+		)} --module commonjs`
+	);
+
+	if (code !== 0) {
+		throw new Error(`fail to compile the ${target.name}`);
+	}
+}
+
+async function updatePackageJson(target) {
+	const packageJsonPath = `${path.resolve(
+		'./dist',
+		target.folderName,
+		'package.json'
+	)}`;
+	const json = await fsEx.readJson(packageJsonPath);
+	json.main = './src/index.js';
+	json.types = './src/index.d.ts';
+	json.module = './lib/index.js';
+	json.exports = {
+		require: './src/index.js',
+		import: './lib/index.js'
+	};
+	await fsEx.writeJson(packageJsonPath, json, { spaces: 2 });
+}
+
 async function buildTarget(target) {
 	if (target.private !== true) {
-		const { code } = shelljs.exec(
-			`yarn tsc --project ${path.join(
-				target.location,
-				'tsconfig.json'
-			)} --outDir ${path.resolve('./dist', target.folderName)}`
-		);
-
-		if (code !== 0) {
-			throw new Error(`fail to compile the ${target.name}`);
-		}
+		buildES6(target);
+		buildCommonjs(target);
 		const files = ['package.json', 'README.md', 'LICENSE'];
 		const copyTasks = files
 			.map(file => {
@@ -38,7 +77,7 @@ async function buildTarget(target) {
 			.map(f => fs.copyFile(f.src, f.dest));
 		await Promise.all(copyTasks);
 		console.log(`${colors.blue(target.name)} ${colors.green('success')} 🚀`);
-
+		updatePackageJson(target);
 		await fs.rm(`${path.resolve('./node_modules/' + target.name)}`, {
 			force: true,
 			recursive: true
