@@ -21,7 +21,7 @@
     "eslint": "eslint \"packages/**/*.ts\" -c .eslintrc.js",
     "format": "prettier --check --parser typescript \"{packages,tools,examples,scripts}/**/*.{t,j}s?(x)\"",
     "prettify": "prettier --write --parser typescript \"{packages,tools,examples,scripts}/**/*.{t,j}s?(x)\"",
-    "lint": "yarn tslint && yarn format",
+    "lint": "yarn eslint && yarn format",
     "build": "node scripts/build.js",
     "check:license": "license-check-and-add check",
     "clean": "yarn workspaces run clean",
