@@ -39,7 +39,7 @@
   },
   "devDependencies": {
     "@commitlint/cli": "^16.0.1",
-    "@commitlint/config-conventional": "^16.0.0",
+    "@commitlint/config-conventional": "^16.2.1",
     "@ls-lint/ls-lint": "^1.9.2",
     "@types/jest": "^27.0.3",
     "@types/node": "^16.11.12",
