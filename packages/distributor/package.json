@@ -31,5 +31,11 @@
   "devDependencies": {
     "@types/restify": "^8.5.4",
     "nodemon": "^2.0.13"
+  },
+  "exports": {
+    ".": {
+      "require": "./src/index.js",
+      "import": "./lib/index.js"
+    }
   }
 }

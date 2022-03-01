@@ -25,5 +25,26 @@
   },
   "devDependencies": {
     "@types/redis": "^2.8.32"
+  },
+  "exports": {
+    ".": {
+      "require": "./src/index.js",
+      "import": "./lib/index.js"
+    },
+    "./template": {
+      "types": "./src/template/index.d.ts",
+      "require": "./src/template/index.js",
+      "import": "./lib/template/index.js"
+    }
+  },
+  "typesVersions": {
+    "*": {
+      "*": [
+        "./src/index.d.ts"
+      ],
+      "template": [
+        "./src/template/index.d.ts"
+      ]
+    }
   }
 }

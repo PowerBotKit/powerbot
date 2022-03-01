@@ -24,5 +24,11 @@
     "adaptivecards-templating": "^2.2.0",
     "js-yaml": "^4.1.0",
     "redis": "^3.0.2"
+  },
+  "exports": {
+    ".": {
+      "require": "./src/index.js",
+      "import": "./lib/index.js"
+    }
   }
 }

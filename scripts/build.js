@@ -55,10 +55,6 @@ async function updatePackageJson(target) {
 	json.main = './src/index.js';
 	json.types = './src/index.d.ts';
 	json.module = './lib/index.js';
-	json.exports = {
-		require: './src/index.js',
-		import: './lib/index.js'
-	};
 	await fsEx.writeJson(packageJsonPath, json, { spaces: 2 });
 }
 
