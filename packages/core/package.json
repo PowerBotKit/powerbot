@@ -23,7 +23,7 @@
     "botbuilder": "^4.15.0",
     "redis": "^3.0.2",
     "wildcard": "^2.0.0",
-    "winston": "^3.3.3"
+    "winston": "^3.7.2"
   },
   "devDependencies": {
     "@types/redis": "^2.8.32"
