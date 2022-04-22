@@ -9,8 +9,6 @@
   "author": "Power Bot Kit Team",
   "homepage": "https://github.com/PowerBotKit/powerbot/tree/develop/packages/consumer#readme",
   "license": "MIT",
-  "main": "./index.js",
-  "types": "./index.d.ts",
   "publishConfig": {
     "access": "public",
     "registry": "https://registry.npmjs.org"
@@ -26,5 +24,11 @@
     "adaptivecards-templating": "^2.2.0",
     "js-yaml": "^4.1.0",
     "redis": "^3.0.2"
+  },
+  "exports": {
+    ".": {
+      "require": "./src/index.js",
+      "import": "./lib/index.js"
+    }
   }
 }

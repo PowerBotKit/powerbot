@@ -4,7 +4,6 @@
     "baseUrl": ".",
     "target": "esnext",
     "lib": ["es6", "esnext", "dom"],
-    "module": "commonjs",
     "moduleResolution": "node",
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
