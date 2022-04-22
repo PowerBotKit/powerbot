@@ -21,7 +21,7 @@
   },
   "dependencies": {
     "@powerbotkit/core": "0.0.3",
-    "botbuilder": "^4.15.0",
+    "botbuilder": "^4.16.0",
     "dotenv": "^16.0.0",
     "lodash": "^4.17.20",
     "lowdb": "^1.0.0",

@@ -20,7 +20,7 @@
     "test": "jest"
   },
   "dependencies": {
-    "botbuilder": "^4.15.0",
+    "botbuilder": "^4.16.0",
     "redis": "^3.0.2",
     "wildcard": "^2.0.0",
     "winston": "^3.7.2"
