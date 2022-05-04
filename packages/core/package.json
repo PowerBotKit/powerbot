@@ -26,6 +26,6 @@
     "winston": "^3.7.2"
   },
   "devDependencies": {
-    "@types/redis": "^2.8.32"
+    "@types/redis": "^4.0.11"
   }
 }
