@@ -38,14 +38,14 @@
     "tslib": "^2.4.0"
   },
   "devDependencies": {
-    "@commitlint/cli": "^16.2.4",
+    "@commitlint/cli": "^17.0.0",
     "@commitlint/config-conventional": "^16.2.4",
     "@ls-lint/ls-lint": "^1.11.0",
     "@types/jest": "^27.4.1",
     "@types/node": "^16.11.12",
     "@typescript-eslint/eslint-plugin": "^5.22.0",
     "@typescript-eslint/eslint-plugin-tslint": "^5.22.0",
-    "@typescript-eslint/parser": "^5.20.0",
+    "@typescript-eslint/parser": "^5.26.0",
     "colors": "1.4.0",
     "conventional-changelog-cli": "^2.2.2",
     "enquirer": "^2.3.6",
