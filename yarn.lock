@@ -1888,41 +1888,41 @@ binary-extensions@^2.0.0:
   resolved "https://registry.yarnpkg.com/binary-extensions/-/binary-extensions-2.2.0.tgz#75f502eeaf9ffde42fc98829645be4ea76bd9e2d"
   integrity sha512-jDctJ/IVQbZoJykoeHbhXpOlNBqGNcwXJKJog42E5HDPUwQTSdjCHdihjj0DlnheQ7blbT6dHOafNAiS8ooQKA==
 
-botbuilder-core@4.16.0:
-  version "4.16.0"
-  resolved "https://registry.yarnpkg.com/botbuilder-core/-/botbuilder-core-4.16.0.tgz#2d64b00f91eb52572e10bb671e79938fa1141580"
-  integrity sha512-TCSzCSa+zypwKJcRXMJ0LBPA9jrU2RVq7DdesNudZ9ymv19MdRHGhhOkV8cHn2/gIZnPSyon9ExRqCWe30PCRw==
+botbuilder-core@4.17.0:
+  version "4.17.0"
+  resolved "https://registry.yarnpkg.com/botbuilder-core/-/botbuilder-core-4.17.0.tgz#1b012eb08c193b339d593df996138b0ef122cecf"
+  integrity sha512-1mWHHL4brJ8+HUUqdkbhjBLcte6fBjN7TpDeWQL3oS2Mu/cHB7ner6AEoB+WxwSw7eRbb3Y28tx/BXNW9LwB+g==
   dependencies:
-    botbuilder-dialogs-adaptive-runtime-core "4.16.0-preview"
-    botbuilder-stdlib "4.16.0-internal"
-    botframework-connector "4.16.0"
-    botframework-schema "4.16.0"
+    botbuilder-dialogs-adaptive-runtime-core "4.17.0-preview"
+    botbuilder-stdlib "4.17.0-internal"
+    botframework-connector "4.17.0"
+    botframework-schema "4.17.0"
     uuid "^8.3.2"
     zod "~1.11.17"
 
-botbuilder-dialogs-adaptive-runtime-core@4.16.0-preview:
-  version "4.16.0-preview"
-  resolved "https://registry.yarnpkg.com/botbuilder-dialogs-adaptive-runtime-core/-/botbuilder-dialogs-adaptive-runtime-core-4.16.0-preview.tgz#a3e903d361299e4b82b1b3a2e39721d52457593a"
-  integrity sha512-sxMgON4vrT2qmRDHHFqdHdnBd+jsDaEPYObpYNZPc37aZALWfvqGos0r0LKXYm40ctw9PwD3cxFUDyQXd/94yw==
+botbuilder-dialogs-adaptive-runtime-core@4.17.0-preview:
+  version "4.17.0-preview"
+  resolved "https://registry.yarnpkg.com/botbuilder-dialogs-adaptive-runtime-core/-/botbuilder-dialogs-adaptive-runtime-core-4.17.0-preview.tgz#ebb8b46482ed437a12c3ddb17554df31e65dff36"
+  integrity sha512-rQfzt2TsfJxdIGnxwnfT74P8LSWWilb+da8tCGVy5XyHo8YLR8+UnXNGEijEzGygRHLwf35m/lTOt3Wk88R4Jg==
   dependencies:
     dependency-graph "^0.10.0"
 
-botbuilder-stdlib@4.16.0-internal:
-  version "4.16.0-internal"
-  resolved "https://registry.yarnpkg.com/botbuilder-stdlib/-/botbuilder-stdlib-4.16.0-internal.tgz#78199b2585972428b8b2030ae578e29a15cd1171"
-  integrity sha512-o5Er+hh56m+1vRmn47wfqZRayNiKBi9jR7DFxlG9AMz/PbggrgAm+F0MLc4a1R/+NyVd+URz/9GAbXW49PMq8w==
+botbuilder-stdlib@4.17.0-internal:
+  version "4.17.0-internal"
+  resolved "https://registry.yarnpkg.com/botbuilder-stdlib/-/botbuilder-stdlib-4.17.0-internal.tgz#02786a469e445adf3bee859b049c1bacd360cd50"
+  integrity sha512-TG1w4xcVYFC2+KV8qpGyJMw4hkepktG6wF7PaKM43DcHL68wcVSehvPho+D9kBrweItqFepDCMDDyF/VkuwRqA==
 
-botbuilder@^4.16.0:
-  version "4.16.0"
-  resolved "https://registry.yarnpkg.com/botbuilder/-/botbuilder-4.16.0.tgz#12dcac12ffb82df13435b7e903628c76be9f44ae"
-  integrity sha512-i6GXh/iZVe+YTZ5eeIAO3HyL74CZGFteOYb2S7zoj2DFAmtLgSShGvVzT6PmSCE0v/a2kEXL+rcb7xaGv/9aFA==
+botbuilder@^4.17.0:
+  version "4.17.0"
+  resolved "https://registry.yarnpkg.com/botbuilder/-/botbuilder-4.17.0.tgz#e000e302527114687b15f2dfb6dd5d0c9608a0ee"
+  integrity sha512-1+evc6DZk9CA9ITYv8nlyizPhdTMaSHwqD2Q+w6VkUVSRquwOa+AbFx5U4pErsZO8ygh6MR33DddJgHUqtafzA==
   dependencies:
     "@azure/ms-rest-js" "1.9.1"
     axios "^0.25.0"
-    botbuilder-core "4.16.0"
-    botbuilder-stdlib "4.16.0-internal"
-    botframework-connector "4.16.0"
-    botframework-streaming "4.16.0"
+    botbuilder-core "4.17.0"
+    botbuilder-stdlib "4.17.0-internal"
+    botframework-connector "4.17.0"
+    botframework-streaming "4.17.0"
     dayjs "^1.10.3"
     filenamify "^4.1.0"
     fs-extra "^7.0.1"
@@ -1930,10 +1930,10 @@ botbuilder@^4.16.0:
     uuid "^8.3.2"
     zod "~1.11.17"
 
-botframework-connector@4.16.0:
-  version "4.16.0"
-  resolved "https://registry.yarnpkg.com/botframework-connector/-/botframework-connector-4.16.0.tgz#11165981d6a211b5697ed9db8a53a3572aaa17fa"
-  integrity sha512-Gho1mwVOeoPslGKI0XaXWRfTKqv+URUOj5toQSXoZVvFdZuzyNRbYuNxBTuPO1T/RTAcVtkwXemLkcQFWx+3rw==
+botframework-connector@4.17.0:
+  version "4.17.0"
+  resolved "https://registry.yarnpkg.com/botframework-connector/-/botframework-connector-4.17.0.tgz#af5fbfe431e33094fc8265eea1a23223ae962aeb"
+  integrity sha512-mG+Eat7oimCvM+Ge/qjZrPrfqQbya5tyTGH79FlcUzgnGV9Kt9QYQ+rQzWnJofWyaKfSv/yu+2l75TJ/t6b3GQ==
   dependencies:
     "@azure/identity" "2.0.0-beta.6"
     "@azure/ms-rest-js" "1.9.1"
@@ -1942,25 +1942,25 @@ botframework-connector@4.16.0:
     adal-node "0.2.3"
     axios "^0.25.0"
     base64url "^3.0.0"
-    botbuilder-stdlib "4.16.0-internal"
-    botframework-schema "4.16.0"
+    botbuilder-stdlib "4.17.0-internal"
+    botframework-schema "4.17.0"
     cross-fetch "^3.0.5"
     jsonwebtoken "8.0.1"
     rsa-pem-from-mod-exp "^0.8.4"
     zod "~1.11.17"
 
-botframework-schema@4.16.0:
-  version "4.16.0"
-  resolved "https://registry.yarnpkg.com/botframework-schema/-/botframework-schema-4.16.0.tgz#c471782bfd7c388fb18823d2bd1c910d4aadaddf"
-  integrity sha512-WdjmaRalazO7PT8K0BmEaDbIM1rvgPLuRFepsO6Pk8NVztj/zdm2mR5E450NfaKFV7ASLLtMtiMC3Dte/QgD1w==
+botframework-schema@4.17.0:
+  version "4.17.0"
+  resolved "https://registry.yarnpkg.com/botframework-schema/-/botframework-schema-4.17.0.tgz#2e838031968b390cfc80dd907213df99d6f8081b"
+  integrity sha512-kfgE+PgfRxUOAaFpBzGUVIlKEK2B24VSKa/qLbwi0ZjnxrOuwVgxgWSenv4ydI+wJBMPOZTwjCUtkL/JkF6PAA==
   dependencies:
     uuid "^8.3.2"
     zod "~1.11.17"
 
-botframework-streaming@4.16.0:
-  version "4.16.0"
-  resolved "https://registry.yarnpkg.com/botframework-streaming/-/botframework-streaming-4.16.0.tgz#e6378c8fc33d65cebcfedca25fc7120246303a7a"
-  integrity sha512-XKMnHfwqCW1Bdy2Gwv+Im74WR3pD4ZJedbezQExnf+QW2Znx6JVeWfBgcyd27ewAT0VOKmAf1YmzWN1KX2K1MQ==
+botframework-streaming@4.17.0:
+  version "4.17.0"
+  resolved "https://registry.yarnpkg.com/botframework-streaming/-/botframework-streaming-4.17.0.tgz#873eb1fa3b09d1331b27c2bdd767fcfe8fdeaa9e"
+  integrity sha512-jTRdec+4n/V0jLjzNw0l2U1ouskGZsAKG6M/vAMY2EZfXJtUB5SBp5JMJbSUi5GsXzMEiaTIE/Bu2axPoeHUyg==
   dependencies:
     "@types/node" "^10.17.27"
     "@types/ws" "^6.0.3"
